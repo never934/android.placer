@@ -11,6 +11,6 @@ class UpdateUserCityUseCase(
     private val userRepository: UserRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun updateUserCity(userId: String, city: City) : Flow<User> =
+    suspend fun updateUserCity(userId: String, city: City) : Flow<Result<User>> =
         userRepository.updateUserCity(userId, city).flowOn(dispatcher)
 }

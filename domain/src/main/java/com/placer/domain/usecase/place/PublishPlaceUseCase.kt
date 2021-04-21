@@ -10,6 +10,6 @@ class PublishPlaceUseCase(
     private val placeRepository: PlaceRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun publishPlace(place: Place) : Flow<Place> =
+    suspend fun publishPlace(place: Place) : Flow<Result<Place>> =
         placeRepository.publishPlace(place).flowOn(dispatcher)
 }

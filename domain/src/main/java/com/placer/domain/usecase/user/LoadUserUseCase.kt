@@ -10,6 +10,6 @@ class LoadUserUseCase(
     private val userRepository: UserRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun loadUser(userId: String) : Flow<User> =
+    suspend fun loadUser(userId: String) : Flow<Result<User>> =
         userRepository.loadUser(userId).flowOn(dispatcher)
 }

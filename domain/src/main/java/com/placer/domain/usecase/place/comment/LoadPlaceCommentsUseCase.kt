@@ -10,6 +10,6 @@ class LoadPlaceCommentsUseCase(
     private val placeCommentRepository: PlaceCommentRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun loadPlaceComments(placeId: String) : Flow<List<PlaceComment>> =
+    suspend fun loadPlaceComments(placeId: String) : Flow<Result<List<PlaceComment>>> =
         placeCommentRepository.loadPlaceComments(placeId).flowOn(dispatcher)
 }

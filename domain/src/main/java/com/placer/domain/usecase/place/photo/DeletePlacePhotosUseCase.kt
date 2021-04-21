@@ -10,6 +10,6 @@ class DeletePlacePhotosUseCase(
     private val placePhotoRepository: PlacePhotoRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun deletePlacePhotos(placeId: String, photoIds: List<String>) : Flow<Place> =
+    suspend fun deletePlacePhotos(placeId: String, photoIds: List<String>) : Flow<Result<Place>> =
         placePhotoRepository.deletePlacePhotos(placeId, photoIds).flowOn(dispatcher)
 }

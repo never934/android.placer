@@ -9,6 +9,6 @@ class DeletePlaceUseCase(
     private val placeRepository: PlaceRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun deletePlace(placeId: String) : Flow<Boolean> =
+    suspend fun deletePlace(placeId: String) : Flow<Result<Boolean>> =
         placeRepository.deletePlace(placeId).flowOn(dispatcher)
 }

@@ -10,6 +10,6 @@ class LoadPlacesUseCase(
     private val placeRepository: PlaceRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun loadPlaces() : Flow<List<Place>> =
+    suspend fun loadPlaces() : Flow<Result<List<Place>>> =
         placeRepository.loadPlaces().flowOn(dispatcher)
 }

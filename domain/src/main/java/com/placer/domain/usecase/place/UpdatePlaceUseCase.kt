@@ -10,6 +10,6 @@ class UpdatePlaceUseCase(
     private val placeRepository: PlaceRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun updatePlace(place: Place) : Flow<Place> =
+    suspend fun updatePlace(place: Place) : Flow<Result<Place>> =
         placeRepository.updatePlace(place).flowOn(dispatcher)
 }
