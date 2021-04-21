@@ -1,6 +1,6 @@
 package com.placer.domain.usecase.place.photo
 
-import com.placer.domain.entity.Place
+import com.placer.domain.entity.place.Place
 import com.placer.domain.repository.PlacePhotoRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

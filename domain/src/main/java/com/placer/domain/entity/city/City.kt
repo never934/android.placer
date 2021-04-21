@@ -1,4 +1,4 @@
-package com.placer.domain.entity
+package com.placer.domain.entity.city
 
 data class City(
     val city: String,

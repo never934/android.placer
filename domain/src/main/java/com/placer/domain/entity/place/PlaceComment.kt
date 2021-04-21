@@ -1,4 +1,6 @@
-package com.placer.domain.entity
+package com.placer.domain.entity.place
+
+import com.placer.domain.entity.user.User
 
 data class PlaceComment(
     val id: String,

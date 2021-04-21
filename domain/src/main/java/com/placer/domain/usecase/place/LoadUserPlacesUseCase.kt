@@ -1,6 +1,6 @@
 package com.placer.domain.usecase.place
 
-import com.placer.domain.entity.Place
+import com.placer.domain.entity.place.Place
 import com.placer.domain.repository.PlaceRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

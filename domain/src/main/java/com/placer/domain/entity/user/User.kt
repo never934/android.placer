@@ -1,4 +1,4 @@
-package com.placer.domain.entity
+package com.placer.domain.entity.user
 
 data class User(
     val id: String,

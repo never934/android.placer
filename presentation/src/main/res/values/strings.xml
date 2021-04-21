@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Placer</string>
+    <string name="days">%d days</string>
+    <string name="null_representation">Not entered</string>
 </resources>

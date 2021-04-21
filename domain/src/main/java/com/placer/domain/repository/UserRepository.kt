@@ -1,7 +1,7 @@
 package com.placer.domain.repository
 
-import com.placer.domain.entity.City
-import com.placer.domain.entity.User
+import com.placer.domain.entity.city.City
+import com.placer.domain.entity.user.User
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {

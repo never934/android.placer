@@ -1,6 +1,6 @@
 package com.placer.domain.repository
 
-import com.placer.domain.entity.Place
+import com.placer.domain.entity.place.Place
 import kotlinx.coroutines.flow.Flow
 
 interface PlacePhotoRepository {

@@ -1,6 +1,6 @@
 package com.placer.domain.repository
 
-import com.placer.domain.entity.PlaceComment
+import com.placer.domain.entity.place.PlaceComment
 import kotlinx.coroutines.flow.Flow
 
 interface PlaceCommentRepository {
