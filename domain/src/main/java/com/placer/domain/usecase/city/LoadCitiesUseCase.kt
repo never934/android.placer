@@ -10,6 +10,6 @@ class LoadCitiesUseCase(
     private val cityRepository: CityRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun loadCities() : Flow<Result<List<City>>> =
-        cityRepository.loadCities().flowOn(dispatcher)
+    suspend fun loadCities(input: String) : Flow<Result<List<City>>> =
+        cityRepository.loadCities(input).flowOn(dispatcher)
 }

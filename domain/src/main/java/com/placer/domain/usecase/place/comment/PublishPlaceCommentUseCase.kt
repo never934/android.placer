@@ -10,6 +10,6 @@ class PublishPlaceCommentUseCase(
     private val placeCommentRepository: PlaceCommentRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun publishPlaceComment(placeComment: PlaceComment) : Flow<Result<List<PlaceComment>>> =
-        placeCommentRepository.publishPlaceComment(placeComment).flowOn(dispatcher)
+    suspend fun publishPlaceComment(placeId: String, text: String) : Flow<Result<List<PlaceComment>>> =
+        placeCommentRepository.publishPlaceComment(placeId, text).flowOn(dispatcher)
 }

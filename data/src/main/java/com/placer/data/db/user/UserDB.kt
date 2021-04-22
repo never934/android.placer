@@ -2,6 +2,7 @@ package com.placer.data.db.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.placer.domain.entity.user.User
 
 @Entity
 data class UserDB(
@@ -17,3 +18,18 @@ data class UserDB(
     val avatarUrl: String?,
     val createdDate: Long
 )
+
+fun UserDB.toEntity() : User {
+    return User(
+        id = id,
+        name = name,
+        nickname = nickname,
+        placesCount = placesCount,
+        topPosition = topPosition,
+        cityLat = cityLat,
+        cityLng = cityLng,
+        cityName = cityName,
+        avatarUrl = avatarUrl,
+        createdDate = createdDate
+    )
+}

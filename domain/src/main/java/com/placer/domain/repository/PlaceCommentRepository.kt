@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlaceCommentRepository {
     suspend fun loadPlaceComments(placeId: String) : Flow<Result<List<PlaceComment>>>
-    suspend fun publishPlaceComment(comment: PlaceComment) : Flow<Result<List<PlaceComment>>>
+    suspend fun publishPlaceComment(placeId: String, text: String) : Flow<Result<List<PlaceComment>>>
 }

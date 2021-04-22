@@ -1,5 +1,7 @@
 package com.placer.data.api.response
 
+import com.placer.data.db.user.UserDB
+
 data class UserResponse(
     val id: String,
     val name: String,
@@ -12,3 +14,18 @@ data class UserResponse(
     val avatarUrl: String?,
     val createdDate: Long
 )
+
+fun UserResponse.toDB() : UserDB {
+    return UserDB(
+        id = id,
+        name = name,
+        nickname = nickname,
+        placesCount = placesCount,
+        topPosition = topPosition,
+        cityLat = cityLat,
+        cityLng = cityLng,
+        cityName = cityName,
+        avatarUrl = avatarUrl,
+        createdDate = createdDate
+    )
+}
