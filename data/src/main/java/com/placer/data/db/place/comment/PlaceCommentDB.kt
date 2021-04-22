@@ -2,6 +2,7 @@ package com.placer.data.db.place.comment
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.placer.data.db.user.UserDB
 import com.placer.domain.entity.user.User
 
 @Entity
@@ -11,5 +12,5 @@ data class PlaceCommentDB(
     val text: String,
     val placeId: String,
     val createdDate: Long,
-    val author: User
+    val author: UserDB
 )
