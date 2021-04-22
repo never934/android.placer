@@ -21,7 +21,7 @@ object PlaceMapper {
             author = author.toView(),
             commentsCount = commentsCount,
             topPosition = topPosition,
-            photoUrls = photoUrls,
+            photos = photos,
             createdDate = Date(createdDate).toView()
         )
     }

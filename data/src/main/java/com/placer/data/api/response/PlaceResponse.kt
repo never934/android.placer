@@ -1,8 +1,8 @@
-package com.placer.domain.entity.place
+package com.placer.data.api.response
 
 import com.placer.domain.entity.user.User
 
-data class Place(
+data class PlaceResponse(
     val id: String,
     val name: String,
     val description: String?,
@@ -13,6 +13,6 @@ data class Place(
     val author: User,
     val commentsCount: Long,
     val topPosition: Long,
-    val photos: List<PlacePhoto>,
+    val photos: List<PlacePhotoResponse>,
     val createdDate: Long
 )
