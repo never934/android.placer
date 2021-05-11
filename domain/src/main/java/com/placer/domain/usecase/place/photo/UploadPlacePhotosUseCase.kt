@@ -10,6 +10,6 @@ class UploadPlacePhotosUseCase(
     private val placePhotoRepository: PlacePhotoRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun uploadPlacePhotos(placeId: String, photos: List<ByteArray>) : Flow<Result<Place>> =
-        placePhotoRepository.uploadPlacePhoto(placeId, photos).flowOn(dispatcher)
+    suspend fun uploadPlacePhoto(placeId: String, photo: ByteArray) : Flow<Result<Place>> =
+        placePhotoRepository.uploadPlacePhoto(placeId, photo).flowOn(dispatcher)
 }
