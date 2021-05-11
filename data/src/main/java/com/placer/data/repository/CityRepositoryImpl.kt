@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import java.lang.Exception
 import javax.inject.Inject
 
 class CityRepositoryImpl @Inject internal constructor(
@@ -18,6 +19,6 @@ class CityRepositoryImpl @Inject internal constructor(
     override suspend fun loadCities(input: String): Flow<Result<List<City>>> =
         citiesApi.getCities(input)
             .map { Result.success(it.toEntities()) }
-            .catch { Result.failure<List<City>>(it) }
+            .catch { Result.failure<List<City>>(Exception("Error while loading cities")) }
             .flowOn(dispatcher)
 }

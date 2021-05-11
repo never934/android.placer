@@ -1,12 +1,15 @@
 package com.placer.data.db.place.comment
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface PlaceCommentDao {
+
+    @Transaction
+    suspend fun updatePlaceComments(placeId: String, comments: List<PlaceCommentDB>){
+        deleteAllCommentsFromPlace(placeId)
+        savePlaceComments(comments)
+    }
 
     @Query("SELECT * FROM placecommentdb where placeId = :placeId")
     suspend fun getPlaceComments(placeId: String): List<PlaceCommentDB>

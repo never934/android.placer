@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import java.lang.Exception
 import javax.inject.Inject
 
 class PlaceCommentRepositoryImpl @Inject internal constructor(
@@ -21,16 +22,16 @@ class PlaceCommentRepositoryImpl @Inject internal constructor(
 ) : PlaceCommentRepository {
     override suspend fun loadPlaceComments(placeId: String): Flow<Result<List<PlaceComment>>> =
         placeApi.getPlaceComments(placeId)
-            .map { commentsDao.savePlaceComments(it.toDB()) }
+            .map { commentsDao.updatePlaceComments(placeId, it.toDB()) }
             .map { Result.success(commentsDao.getPlaceComments(placeId).toEntities()) }
             .catch { Result.success(commentsDao.getPlaceComments(placeId).toEntities()) }
             .flowOn(dispatcher)
 
     override suspend fun publishPlaceComment(placeId: String, text: String): Flow<Result<List<PlaceComment>>> =
         placeApi.publishPlaceComments(placeId, listOf(PlaceCommentRequest(text)))
-            .map { commentsDao.savePlaceComments(it.toDB()) }
+            .map { commentsDao.updatePlaceComments(placeId, it.toDB()) }
             .map { Result.success(commentsDao.getPlaceComments(placeId).toEntities()) }
-            .catch { Result.success(commentsDao.getPlaceComments(placeId).toEntities()) }
+            .catch { Result.failure<List<PlaceComment>>(Exception("Error while publishing place comment")) }
             .flowOn(dispatcher)
 
 }

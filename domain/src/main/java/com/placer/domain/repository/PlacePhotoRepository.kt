@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlacePhotoRepository {
     suspend fun deletePlacePhotos(placeId: String, photoIds: List<String>) : Flow<Result<Place>>
-    suspend fun uploadPlacePhotos(placeId: String, photos: List<ByteArray>) : Flow<Result<Place>>
+    suspend fun uploadPlacePhoto(placeId: String, photo: ByteArray) : Flow<Result<Place>>
 }
