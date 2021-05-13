@@ -12,12 +12,16 @@ data class PlaceCommentResponse(
 
 fun List<PlaceCommentResponse>.toDB() : List<PlaceCommentDB> {
     return map {
-        PlaceCommentDB(
-            id = it.id,
-            placeId = it.placeId,
-            text = it.text,
-            createdDate = it.createdDate,
-            author = it.author.toDB()
-        )
+        it.toDB()
     }
+}
+
+fun PlaceCommentResponse.toDB() : PlaceCommentDB {
+    return PlaceCommentDB(
+        id = id,
+        placeId = placeId,
+        text = text,
+        createdDate = createdDate,
+        author = author.toDB()
+    )
 }

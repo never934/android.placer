@@ -50,7 +50,7 @@ class PlaceCommentDaoTest {
     @Test
     fun insertPlaceCommentsAndGetByPlaceId() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlaceComment(null)
+        val data = TestUtils.getRandomPlaceCommentDB(null)
         database.placeCommentDao().savePlaceComments(listOf(data))
 
         // When
@@ -68,7 +68,7 @@ class PlaceCommentDaoTest {
     @Test
     fun insertPlaceCommentsAndDeleteAllFromPlace() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlaceComment(null)
+        val data = TestUtils.getRandomPlaceCommentDB(null)
         database.placeCommentDao().savePlaceComments(listOf(data))
 
         // When
@@ -83,9 +83,9 @@ class PlaceCommentDaoTest {
     fun updatePlaceCommentsAndGet() = runBlocking {
         // Given
         val placeId = UUID.randomUUID().toString()
-        val data = TestUtils.getRandomPlaceComment(placeId)
-        val data2 = TestUtils.getRandomPlaceComment(placeId)
-        val data3 = TestUtils.getRandomPlaceComment(placeId)
+        val data = TestUtils.getRandomPlaceCommentDB(placeId)
+        val data2 = TestUtils.getRandomPlaceCommentDB(placeId)
+        val data3 = TestUtils.getRandomPlaceCommentDB(placeId)
         database.placeCommentDao().savePlaceComments(listOf(data, data2, data3))
 
         // When

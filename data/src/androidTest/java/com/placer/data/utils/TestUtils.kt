@@ -2,7 +2,6 @@ package com.placer.data.utils
 
 import com.placer.data.db.place.PlaceDB
 import com.placer.data.db.place.comment.PlaceCommentDB
-import com.placer.data.db.place.photo.PlacePhotoDB
 import com.placer.data.db.user.UserDB
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
@@ -24,7 +23,7 @@ internal object TestUtils {
         return ThreadLocalRandom.current().nextBoolean()
     }
 
-    fun getRandomUser(authorId: String?) : UserDB {
+    fun getRandomUserDB(authorId: String?) : UserDB {
         return UserDB(
             id = authorId ?: UUID.randomUUID().toString(),
             name = randomString(),
@@ -39,17 +38,17 @@ internal object TestUtils {
         )
     }
 
-    fun getRandomPlaceComment(placeId: String?) : PlaceCommentDB {
+    fun getRandomPlaceCommentDB(placeId: String?) : PlaceCommentDB {
         return PlaceCommentDB(
             id = UUID.randomUUID().toString(),
             text = randomString(),
             placeId = placeId ?: randomString(),
             createdDate = System.currentTimeMillis(),
-            author = getRandomUser(null)
+            author = getRandomUserDB(null)
         )
     }
 
-    fun getRandomPlace(authorId: String?) : PlaceDB {
+    fun getRandomPlaceDB(authorId: String?) : PlaceDB {
         return PlaceDB(
             id = UUID.randomUUID().toString(),
             name = randomString(),
@@ -58,7 +57,7 @@ internal object TestUtils {
             lng = randomDouble(),
             cityName = randomString(),
             published = randomBoolean(),
-            author = getRandomUser(authorId),
+            author = getRandomUserDB(authorId),
             commentsCount = randomLong(),
             topPosition = randomLong(),
             photos = listOf(),

@@ -47,9 +47,9 @@ class UserDaoTest {
     @Test
     fun updateUsersAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomUser(null)
-        val data2 = TestUtils.getRandomUser(null)
-        val data3 = TestUtils.getRandomUser(null)
+        val data = TestUtils.getRandomUserDB(null)
+        val data2 = TestUtils.getRandomUserDB(null)
+        val data3 = TestUtils.getRandomUserDB(null)
         database.userDao().saveUsers(listOf(data2, data3))
 
         // When
@@ -63,7 +63,7 @@ class UserDaoTest {
     @Test
     fun saveUsersAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomUser(null)
+        val data = TestUtils.getRandomUserDB(null)
         database.userDao().saveUsers(listOf(data))
 
         // When
@@ -77,7 +77,7 @@ class UserDaoTest {
     @Test
     fun saveUserAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomUser(null)
+        val data = TestUtils.getRandomUserDB(null)
         database.userDao().saveUser(data)
 
         // When
@@ -90,7 +90,7 @@ class UserDaoTest {
     @Test
     fun saveUsersAndDeleteAll() = runBlocking {
         // Given
-        val data = TestUtils.getRandomUser(null)
+        val data = TestUtils.getRandomUserDB(null)
         database.userDao().saveUser(data)
 
         // When

@@ -50,9 +50,9 @@ class PlaceDaoTest {
     @Test
     fun updatePlacesAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlace(null)
-        val data2 = TestUtils.getRandomPlace(null)
-        val data3 = TestUtils.getRandomPlace(null)
+        val data = TestUtils.getRandomPlaceDB(null)
+        val data2 = TestUtils.getRandomPlaceDB(null)
+        val data3 = TestUtils.getRandomPlaceDB(null)
         database.placeDao().savePlaces(listOf(data2, data3))
 
         // When
@@ -67,9 +67,9 @@ class PlaceDaoTest {
     fun updateUserPlacesAndGet() = runBlocking {
         // Given
         val userId = UUID.randomUUID().toString()
-        val data = TestUtils.getRandomPlace(userId)
-        val data2 = TestUtils.getRandomPlace(userId)
-        val data3 = TestUtils.getRandomPlace(userId)
+        val data = TestUtils.getRandomPlaceDB(userId)
+        val data2 = TestUtils.getRandomPlaceDB(userId)
+        val data3 = TestUtils.getRandomPlaceDB(userId)
         database.placeDao().savePlaces(listOf(data2, data3))
 
         // When
@@ -83,7 +83,7 @@ class PlaceDaoTest {
     @Test
     fun savePlacesAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlace(null)
+        val data = TestUtils.getRandomPlaceDB(null)
 
         // When
         database.placeDao().savePlaces(listOf(data))
@@ -97,7 +97,7 @@ class PlaceDaoTest {
     @Test
     fun savePlaceAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlace(null)
+        val data = TestUtils.getRandomPlaceDB(null)
         database.placeDao().savePlace(data)
 
         // When
@@ -110,7 +110,7 @@ class PlaceDaoTest {
     @Test
     fun deletePlacesAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlace(null)
+        val data = TestUtils.getRandomPlaceDB(null)
         database.placeDao().savePlace(data)
 
         // When
@@ -124,7 +124,7 @@ class PlaceDaoTest {
     @Test
     fun deletePlaceAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlace(null)
+        val data = TestUtils.getRandomPlaceDB(null)
         database.placeDao().savePlace(data)
 
         // When
@@ -138,7 +138,7 @@ class PlaceDaoTest {
     @Test
     fun updatePlaceAndGet() = runBlocking {
         // Given
-        val data = TestUtils.getRandomPlace(null)
+        val data = TestUtils.getRandomPlaceDB(null)
         val updatedPlace =
             PlaceDB(
                 id = data.id,
@@ -148,7 +148,7 @@ class PlaceDaoTest {
                 lng = TestUtils.randomDouble(),
                 cityName = TestUtils.randomString(),
                 published = TestUtils.randomBoolean(),
-                author = TestUtils.getRandomUser(null),
+                author = TestUtils.getRandomUserDB(null),
                 commentsCount = TestUtils.randomLong(),
                 topPosition = TestUtils.randomLong(),
                 photos = listOf(),

@@ -20,12 +20,16 @@ data class PlaceCommentDB(
 
 fun List<PlaceCommentDB>.toEntities() : List<PlaceComment> {
     return map {
-        PlaceComment(
-            id = it.id,
-            placeId = it.placeId,
-            text = it.text,
-            createdDate = it.createdDate,
-            author = it.author.toEntity()
-        )
+        it.toEntity()
     }
+}
+
+fun PlaceCommentDB.toEntity() : PlaceComment {
+    return PlaceComment(
+        id = id,
+        placeId = placeId,
+        text = text,
+        createdDate = createdDate,
+        author = author.toEntity()
+    )
 }
