@@ -6,9 +6,10 @@ import androidx.room.*
 interface PlaceCommentDao {
 
     @Transaction
-    suspend fun updatePlaceComments(placeId: String, comments: List<PlaceCommentDB>){
+    suspend fun updatePlaceComments(placeId: String, comments: List<PlaceCommentDB>) : List<PlaceCommentDB> {
         deleteAllCommentsFromPlace(placeId)
         savePlaceComments(comments)
+        return getPlaceComments(placeId)
     }
 
     @Query("SELECT * FROM placecommentdb where placeId = :placeId")
