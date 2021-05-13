@@ -17,7 +17,7 @@ import com.placer.domain.entity.place.PlacePhoto
 import com.placer.domain.entity.user.User
 
 @Entity
-class PlaceDB(
+data class PlaceDB(
     @PrimaryKey
     val id: String,
     val name: String,

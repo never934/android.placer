@@ -9,9 +9,10 @@ import com.placer.domain.entity.user.User
 interface PlaceDao {
 
     @Transaction
-    suspend fun updatePlaces(places: List<PlaceDB>) {
+    suspend fun updatePlaces(places: List<PlaceDB>) : List<PlaceDB> {
         deletePlaces()
         savePlaces(places)
+        return getPlaces()
     }
 
     @Transaction
