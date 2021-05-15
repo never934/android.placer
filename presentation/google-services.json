@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "250668237558",
+    "project_id": "placer-53eb0",
+    "storage_bucket": "placer-53eb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250668237558:android:7c688194f52fb62b7d62d7",
+        "android_client_info": {
+          "package_name": "com.placer.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250668237558-6qd7ft9791imvtpmclj5tg3a6ptmlrrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0d0tkbWB3917F6Z6I7plspgCYJIRuly0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250668237558-6qd7ft9791imvtpmclj5tg3a6ptmlrrk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

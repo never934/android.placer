@@ -1,5 +1,6 @@
 package com.placer.client.entity
 
+import android.content.Context
 import com.placer.client.AppClass
 import com.placer.client.R
 import com.placer.client.util.extensions.DateExtensions.toView
@@ -22,16 +23,16 @@ internal data class PlaceView(
     val createdDate: String
 )
 
-internal fun Place.toView() : PlaceView {
+internal fun Place.toView(context: Context) : PlaceView {
     return PlaceView(
         id = id,
         name = name,
         description = description,
         lat = lat,
         lng = lng,
-        cityName = cityName ?: AppClass.context.getString(R.string.null_representation),
+        cityName = cityName ?: context.getString(R.string.null_representation),
         published = published,
-        author = author.toView(),
+        author = author.toView(context),
         commentsCount = commentsCount,
         topPosition = topPosition,
         photos = photos,

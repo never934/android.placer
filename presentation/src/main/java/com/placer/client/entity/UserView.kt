@@ -1,5 +1,6 @@
 package com.placer.client.entity
 
+import android.content.Context
 import com.placer.client.util.extensions.DateExtensions.daysFromItRepresentation
 import com.placer.domain.entity.user.User
 import java.util.*
@@ -17,7 +18,7 @@ internal data class UserView(
     val createdDate: String
 )
 
-internal fun User.toView() : UserView {
+internal fun User.toView(context: Context) : UserView {
     return UserView(
         id = id,
         name = name,
@@ -28,6 +29,6 @@ internal fun User.toView() : UserView {
         cityLng = cityLng,
         cityName = cityName,
         avatarUrl = avatarUrl,
-        createdDate = Date(createdDate).daysFromItRepresentation()
+        createdDate = Date(createdDate).daysFromItRepresentation(context)
     )
 }
