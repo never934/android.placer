@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 interface AuthApi {
     @POST("v1/auth/signIn")
-    fun signIn(@Body request: AuthRequest) : Flow<AuthResponse>
+    suspend fun signIn(@Body request: AuthRequest) : AuthResponse
 }

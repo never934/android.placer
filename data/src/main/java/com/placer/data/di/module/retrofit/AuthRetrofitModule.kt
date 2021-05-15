@@ -45,7 +45,6 @@ class AuthRetrofitModule {
         httpClientBuilder.addInterceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
-                .addHeader(Constants.AUTHORIZATION, "Bearer " + "TOKEN") // TODO token
                 .addHeader(Constants.CONTENT_TYPE, "application/json")
                 .build()
             chain.proceed(request)

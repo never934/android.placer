@@ -7,7 +7,9 @@ class FirebaseUserLiveData : LiveData<String?>() {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
     private val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-        value = firebaseAuth.currentUser?.getIdToken(true)?.result?.token
+        if (firebaseAuth.currentUser?.getIdToken(true)?.isSuccessful == true) {
+            value = firebaseAuth.currentUser?.getIdToken(true)?.result?.token
+        }
     }
 
     override fun onActive() {

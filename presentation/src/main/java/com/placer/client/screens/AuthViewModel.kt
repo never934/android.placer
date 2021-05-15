@@ -1,7 +1,9 @@
 package com.placer.client.screens
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
+import com.google.firebase.auth.FirebaseAuth
 import com.placer.client.base.BaseViewModel
 import com.placer.client.util.FirebaseUserLiveData
 import com.placer.domain.usecase.auth.SignInUseCase
@@ -12,9 +14,8 @@ import javax.inject.Inject
 
 class AuthViewModel(private val signInUseCase: SignInUseCase) : BaseViewModel() {
 
-    val authenticationState: LiveData<String?> = FirebaseUserLiveData()
-
-    fun signIn(idToken: String){
+   fun signIn(idToken: String){
+        Log.e("viewModel","sign in request")
         viewModelScope.launch {
             val result = signInUseCase.signIn(idToken).first()
             if (result.isSuccess){
