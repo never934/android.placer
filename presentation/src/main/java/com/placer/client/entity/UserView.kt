@@ -1,6 +1,10 @@
 package com.placer.client.entity
 
-data class UserView(
+import com.placer.client.util.extensions.DateExtensions.daysFromItRepresentation
+import com.placer.domain.entity.user.User
+import java.util.*
+
+internal data class UserView(
     val id: String,
     val name: String,
     val nickname: String?,
@@ -12,3 +16,18 @@ data class UserView(
     val avatarUrl: String?,
     val createdDate: String
 )
+
+internal fun User.toView() : UserView {
+    return UserView(
+        id = id,
+        name = name,
+        nickname = nickname,
+        placesCount = placesCount,
+        topPosition = topPosition,
+        cityLat = cityLat,
+        cityLng = cityLng,
+        cityName = cityName,
+        avatarUrl = avatarUrl,
+        createdDate = Date(createdDate).daysFromItRepresentation()
+    )
+}
