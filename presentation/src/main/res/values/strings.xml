@@ -1,5 +1,113 @@
 <resources>
     <string name="app_name">Placer</string>
+
+    <!-- common !-->
+    <string name="common_ok">OK</string>
+
+    <!-- auth screen !-->
+    <string name="auth_sign_with_email">Sign in with email</string>
+    <string name="auth_sign_with_gmail">Sign in with google</string>
+
+    <!-- choose city fragment !-->
+    <string name="choose_city_app_bar">Choose your city</string>
+
+    <!-- map fragment !-->
+    <string name="map_places_filer_title">filter</string>
+    <string name="map_places_filer_all_label">all</string>
+    <string name="map_places_filer_my_label">my</string>
+    <string name="map_search_field_hint">Input text</string>
+    <string name="map_fab_btn_label">Add point</string>
+
+    <!-- point detail component !-->
+    <string name="place_detail_component_detail_button">Details</string>
+
+    <!-- navigation drawer !-->
+    <string name="nav_drawer_places_title">Places</string>
+    <string name="nav_drawer_top_title">Top</string>
+    <string name="nav_drawer_my_places_title">My places</string>
+    <string name="nav_drawer_settings_title">Settings</string>
+    <string name="nav_drawer_help_title">Help</string>
+    <string name="nav_drawer_exit_title">Exit</string>
+
+    <!-- server err screen !-->
+    <string name="server_err_title">Connection error</string>
+    <string name="server_err_body">Please, retry later</string>
+
+    <!-- data empty screen !-->
+    <string name="data_empty_title">Empty</string>
+    <string name="data_empty_body">Data is empty yet</string>
+
+    <!-- places fragment !-->
+    <string name="places_app_bar">Places</string>
+    <string name="places_first_tab">All</string>
+    <string name="places_second_tab">My</string>
+
+    <!-- place view fragment !-->
+    <string name="place_view_status_hint">Status</string>
+    <string name="place_view_description_hint">Description</string>
+    <string name="place_view_city_hint">City</string>
+    <string name="place_view_in_top_hint">In top</string>
+    <string name="place_view_comments_size_hint">Comments</string>
+    <string name="place_view_created_hint">Created</string>
+    <string name="place_view_comments_label">Comments:</string>
+    <string name="place_view_edit_field_hint">Input text</string>
+
+    <!-- choose place point fragment !-->
+    <string name="choose_place_point_app_bar">Choose point</string>
+    <string name="choose_place_point_next_btn">Next</string>
+
+    <!-- publish place fragment !-->
+    <string name="publish_place_app_bar">Create place</string>
+    <string name="publish_place_name_hint">Name</string>
+    <string name="publish_place_description_hint">Description</string>
+    <string name="publish_place_private_toggle_label">Publish place</string>
+    <string name="publish_place_create_button">Create</string>
+
+    <!-- update place fragment !-->
+    <string name="update_place_app_bar">Create place</string>
+    <string name="update_place_name_hint">Name</string>
+    <string name="update_place_description_hint">Description</string>
+    <string name="update_place_private_toggle_label">Publish place</string>
+    <string name="update_place_save_button">Save</string>
+    <string name="update_place_delete_button">Delete</string>
+
+    <!-- Place published fragment !-->
+    <string name="place_published_app_bar">Success!</string>
+    <string name="place_published_body">You created new place. Share it with your friends</string>
+    <string name="place_published_body_2">Places created: %s</string>
+
+    <!-- Top fragment !-->
+    <string name="top_app_bar">Top</string>
+    <string name="top_first_tab">Users</string>
+    <string name="top_second_tab">Places</string>
+
+    <!-- User fragment !-->
+    <string name="user_name_hint">Name</string>
+    <string name="user_places_hint">Places</string>
+    <string name="user_top_position_hint">Top position</string>
+    <string name="user_in_placer_hint">In placer</string>
+
+    <!-- Settings fragment !-->
+    <string name="settings_app_bar">Settings</string>
+    <string name="settings_edit_profile_label">Edit profile</string>
+    <string name="settings_push_notifications_toggle">Push notifications</string>
+
+    <!-- Edit profile fragment !-->
+    <string name="edit_profile_name_hint">Name</string>
+    <string name="edit_profile_nickname_hint">Nickname</string>
+    <string name="edit_profile_city_hint">City</string>
+    <string name="edit_profile_save_button">Save</string>
+
+    <!-- Help fragment !-->
+    <string name="help_app_bar">Help</string>
+    <string name="help_first_title">Welcome to Placer!</string>
+    <string name="help_first_body">In our app you can see interesting places of other users and post yours</string>
+    <string name="help_second_title">Privacy features</string>
+    <string name="help_second_body">Also, you can save private places, and other users will not see it in map and lists</string>
+    <string name="help_third_title">Tops and publishing</string>
+    <string name="help_third_body">See other places, post yours, disscuss it, promote your places in top rating, share it with friends in social networks  and enjoy! Good luck!</string>
+    <string name="help_start_button">Start</string>
+
     <string name="days">%d days</string>
     <string name="null_representation">Not entered</string>
 </resources>
