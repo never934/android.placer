@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.placer.client.MainActivity
 import com.placer.client.R
 import com.placer.client.databinding.FragmentMainMapBinding
+
 
 class MainMapFragment : Fragment() {
     override fun onCreateView(
@@ -17,6 +20,10 @@ class MainMapFragment : Fragment() {
         val binding: FragmentMainMapBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main_map, container, false
         )
+        (requireActivity() as AppCompatActivity?)?.supportActionBar?.hide()
+        binding.drawerButton.setOnClickListener {
+            (requireActivity() as MainActivity).openDrawer()
+        }
         return binding.root
     }
 }

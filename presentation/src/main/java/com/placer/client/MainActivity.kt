@@ -1,7 +1,7 @@
 package com.placer.client
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.placer.client.base.BaseActivity
 import com.placer.client.databinding.ActivityMainBinding
+
 
 class MainActivity : BaseActivity() {
 
@@ -26,6 +27,10 @@ class MainActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(this.findNavController(R.id.navHostFragment), drawerLayout)
+    }
+
+    fun openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START)
     }
 
     override fun initViewModel() {}
