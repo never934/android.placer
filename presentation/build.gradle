@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -78,4 +79,8 @@ dependencies {
     // firebase
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
     implementation "com.firebaseui:firebase-ui-auth:$firebase_auth_version"
+
+    // Navigation
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation_version"
 }

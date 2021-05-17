@@ -30,4 +30,10 @@
         <item name="android:textColor">@color/text_color</item>
     </style>
 
+    <style name="default_label">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
 </resources>

@@ -1,0 +1,22 @@
+package com.placer.client.screens
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.placer.client.R
+import com.placer.client.databinding.FragmentMainMapBinding
+
+class MainMapFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val binding: FragmentMainMapBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_main_map, container, false
+        )
+        return binding.root
+    }
+}

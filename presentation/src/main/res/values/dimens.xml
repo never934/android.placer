@@ -6,12 +6,15 @@
     <dimen name="big_margin">24dp</dimen>
     <dimen name="biggest_margin">32dp</dimen>
 
+    <dimen name="small_padding">8dp</dimen>
     <dimen name="normal_padding">14dp</dimen>
+    <dimen name="default_padding">16dp</dimen>
     
     <dimen name="biggest_text_size">36sp</dimen>
     <dimen name="app_bar_text_size">20sp</dimen>
     <dimen name="item_title_text_size">16sp</dimen>
     <dimen name="item_hint_text_size">14sp</dimen>
+    <dimen name="default_text_size">14sp</dimen>
     <dimen name="nav_drawer_item_text_size">14sp</dimen>
     <dimen name="button_text_size">14sp</dimen>
     <dimen name="value_text_size">12sp</dimen>

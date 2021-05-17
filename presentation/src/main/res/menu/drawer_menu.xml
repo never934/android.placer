@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/placesFragment"
+        android:icon="@drawable/ic_baseline_pin_drop_24"
+        android:title="@string/nav_drawer_places_title"
+        />
+    <item
+        android:id="@+id/topFragment"
+        android:icon="@drawable/ic_baseline_local_fire_department_24"
+        android:title="@string/nav_drawer_top_title"
+        />
+    <item
+        android:id="@+id/myPlacesFragment"
+        android:icon="@drawable/ic_baseline_place_24"
+        android:title="@string/nav_drawer_my_places_title"
+        />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/nav_drawer_settings_title"
+        />
+    <item
+        android:id="@+id/helpFragment"
+        android:icon="@drawable/ic_baseline_help_24"
+        android:title="@string/nav_drawer_help_title"
+        />
+    <item
+        android:id="@+id/exitFragment"
+        android:icon="@drawable/ic_baseline_cancel_24"
+        android:title="@string/nav_drawer_exit_title"
+        />
+</menu>

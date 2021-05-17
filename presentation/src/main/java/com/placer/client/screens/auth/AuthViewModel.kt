@@ -1,17 +1,11 @@
-package com.placer.client.screens
+package com.placer.client.screens.auth
 
-import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
-import com.google.firebase.auth.FirebaseAuth
 import com.placer.client.base.BaseViewModel
-import com.placer.client.util.FirebaseUserLiveData
 import com.placer.data.AppPrefs
 import com.placer.domain.usecase.auth.SignInUseCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class AuthViewModel(private val signInUseCase: SignInUseCase) : BaseViewModel() {
 

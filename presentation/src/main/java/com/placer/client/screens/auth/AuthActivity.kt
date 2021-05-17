@@ -1,4 +1,4 @@
-package com.placer.client.screens
+package com.placer.client.screens.auth
 
 import android.app.Activity
 import android.content.Intent
