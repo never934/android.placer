@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.placer.client.base.BaseViewModel
 import com.placer.client.util.FirebaseUserLiveData
+import com.placer.data.AppPrefs
 import com.placer.domain.usecase.auth.SignInUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
@@ -14,12 +15,18 @@ import javax.inject.Inject
 
 class AuthViewModel(private val signInUseCase: SignInUseCase) : BaseViewModel() {
 
+    private var _loginSuccessed: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loginSuccessed: LiveData<Boolean>
+    get() = _loginSuccessed
+
    fun signIn(idToken: String){
-        Log.e("viewModel","sign in request")
         viewModelScope.launch {
             val result = signInUseCase.signIn(idToken).first()
             if (result.isSuccess){
-                showSnackBar.value = "success login"
+                result.getOrNull()?.let {
+                    AppPrefs.saveServerToken(it)
+                    _loginSuccessed.value = true
+                }
             }else{
                 showSnackBar.value = result.exceptionOrNull()?.message
             }

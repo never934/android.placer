@@ -1,5 +1,6 @@
 package com.placer.data.di.module.retrofit
 
+import com.placer.data.AppPrefs
 import com.placer.data.Constants
 import dagger.Module
 import dagger.Provides
@@ -46,6 +47,7 @@ class ServerRetrofitModule {
             val original = chain.request()
             val request = original.newBuilder()
                 .addHeader(Constants.CONTENT_TYPE, "application/json")
+                .addHeader(Constants.AUTHORIZATION, AppPrefs.getServerToken())
                 .build()
             chain.proceed(request)
         }

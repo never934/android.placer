@@ -2,6 +2,7 @@ package com.placer.client
 
 import android.app.Application
 import android.content.Context
+import com.placer.data.DataBunchModule
 import com.placer.data.di.component.*
 import com.placer.data.di.module.api.AuthApiModule
 import com.placer.data.di.module.api.CitiesApiModule
@@ -27,6 +28,7 @@ class AppClass : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        DataBunchModule.initDataModule(this)
         appInstance = this
         setupAuthComponent()
         setupCityComponent()
@@ -100,5 +102,6 @@ class AppClass : Application() {
 
     companion object{
         lateinit var appInstance: AppClass
+        private set
     }
 }

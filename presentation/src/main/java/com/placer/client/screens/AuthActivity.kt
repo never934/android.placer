@@ -3,16 +3,17 @@ package com.placer.client.screens
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.placer.client.AppClass
+import com.placer.client.MainActivity
 import com.placer.client.R
 import com.placer.client.base.BaseActivity
 import com.placer.client.databinding.ActivityAuthBinding
+import com.placer.data.AppPrefs
 
 class AuthActivity: BaseActivity() {
 
@@ -23,7 +24,17 @@ class AuthActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
         binding.lifecycleOwner = this
-        launchSignInFlow()
+        supportActionBar?.hide()
+        viewModel.loginSuccessed.observe(this, {
+            if (it){
+                startMainActivity()
+            }
+        })
+        if (AppPrefs.getServerToken().isNotEmpty().not()){
+            startMainActivity()
+        }else{
+            launchSignInFlow()
+        }
     }
 
     private fun launchSignInFlow() {
@@ -44,6 +55,11 @@ class AuthActivity: BaseActivity() {
         )
     }
 
+    private fun startMainActivity(){
+        finish()
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(this,
             AuthViewModel.Factory(
@@ -58,8 +74,6 @@ class AuthActivity: BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SIGN_IN_RESULT_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Log.e("login","login ok")
-                Log.e("login", FirebaseAuth.getInstance().currentUser?.email ?: "null")
                 FirebaseAuth.getInstance().currentUser?.getIdToken(true)?.addOnSuccessListener {
                     viewModel.signIn(it.token ?: "")
                 }
