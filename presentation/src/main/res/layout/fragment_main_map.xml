@@ -6,6 +6,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <fragment
+            android:id="@+id/mapView"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageButton
             android:id="@+id/drawerButton"
             android:layout_width="wrap_content"
@@ -17,14 +27,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            style="@style/fab_button"
+        <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/fab_button"
+            android:drawableLeft="@drawable/ic_baseline_add_24"
             android:layout_marginBottom="@dimen/default_margin"
             android:text="@string/map_fab_btn_label"
-            android:drawableStart="@drawable/ic_baseline_add_24"
-            android:drawablePadding="@dimen/small_padding"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_primary">#FB0E0E</color>
-    <color name="color_accent">#70FFE815</color>
+    <color name="color_accent">#90FFE815</color>
     <color name="color_primary_light">#70FB0E0E</color>
     <color name="success_color">#0AD944</color>
     <color name="fail_color">#FB0E0E</color>

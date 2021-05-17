@@ -1,6 +1,8 @@
 package com.placer.client
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
