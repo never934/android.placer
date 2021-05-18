@@ -20,5 +20,6 @@ abstract class BaseActivity : AppCompatActivity() {
             Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
         })
     }
+
     abstract fun initViewModel()
 }

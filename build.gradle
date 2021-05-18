@@ -42,6 +42,7 @@ ext {
     firebase_auth_version = "5.0.0"
     play_services_version = "18.0.0"
     maps_version = "17.0.1"
+    glide_version = "4.10.0"
 }
 
 allprojects {

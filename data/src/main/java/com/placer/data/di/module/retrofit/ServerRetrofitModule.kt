@@ -47,7 +47,7 @@ class ServerRetrofitModule {
             val original = chain.request()
             val request = original.newBuilder()
                 .addHeader(Constants.CONTENT_TYPE, "application/json")
-                .addHeader(Constants.AUTHORIZATION, AppPrefs.getServerToken())
+                .addHeader(Constants.AUTHORIZATION, "Bearer ${AppPrefs.getServerToken()}")
                 .build()
             chain.proceed(request)
         }

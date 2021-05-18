@@ -23,16 +23,16 @@ internal data class PlaceView(
     val createdDate: String
 )
 
-internal fun Place.toView(context: Context) : PlaceView {
+internal fun Place.toView() : PlaceView {
     return PlaceView(
         id = id,
         name = name,
         description = description,
         lat = lat,
         lng = lng,
-        cityName = cityName ?: context.getString(R.string.null_representation),
+        cityName = cityName ?: AppClass.appInstance.applicationContext.getString(R.string.null_representation),
         published = published,
-        author = author.toView(context),
+        author = author.toView(),
         commentsCount = commentsCount,
         topPosition = topPosition,
         photos = photos,

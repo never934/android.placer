@@ -44,4 +44,37 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
+    <style name="item_title">
+        <item name="android:textSize">@dimen/item_title_text_size</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="item_hint">
+        <item name="android:textSize">@dimen/item_hint_text_size</item>
+        <item name="android:textColor">@color/hint_color</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="filter_label" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">@dimen/item_hint_text_size</item>
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:drawableLeft">@drawable/ic_baseline_filter_list_24</item>
+    </style>
+
+    <style name="roundedCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="filter_item_label">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
 </resources>

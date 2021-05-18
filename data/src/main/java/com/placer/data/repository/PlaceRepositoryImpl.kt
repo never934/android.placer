@@ -8,10 +8,7 @@ import com.placer.data.db.place.toEntity
 import com.placer.domain.entity.place.Place
 import com.placer.domain.repository.PlaceRepository
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class PlaceRepositoryImpl @Inject internal constructor(
@@ -19,12 +16,18 @@ class PlaceRepositoryImpl @Inject internal constructor(
     private val placeDao: PlaceDao,
     private val dispatcher: CoroutineDispatcher
 ) : PlaceRepository {
-    override suspend fun loadPlaces(): Flow<Result<List<Place>>> =
-        placeApi.getPlaces()
-            .map { placeDao.updatePlaces(it.map { placeResponse ->  placeResponse.toDB() }) }
-            .map { Result.success(placeDao.getPlaces().map { it.toEntity() }) }
-            .catch { Result.failure<List<Place>>(Exception("Error while loading places")) }
-            .flowOn(dispatcher)
+    override suspend fun loadPlaces(): Flow<Result<List<Place>>> = flow {
+        try {
+            val places = placeApi.getPlaces()
+            val daoPlaces =
+                placeDao.updatePlaces(places.map { placeResponse ->  placeResponse.toDB() })
+            emit(Result.success(daoPlaces.map { it.toEntity() }))
+        }catch (e: Exception){
+            emit(Result.success(placeDao.getPlaces().map { it.toEntity() }))
+        }
+    }
+        .catch { Result.failure<List<Place>>(Exception("Error while loading places")) }
+        .flowOn(dispatcher)
 
     override suspend fun publishPlace(place: Place): Flow<Result<Place>> =
         placeApi.publishPlace(place.toRequest())

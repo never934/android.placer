@@ -21,10 +21,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
+            android:padding="@dimen/default_padding"
+            android:layout_marginTop="@dimen/small_margin"
             android:src="@drawable/ic_baseline_menu_24"
             android:tint="@color/text_color"
-            android:padding="@dimen/default_padding"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mainField" />
+
+        <com.placer.client.customview.MainField
+            android:id="@+id/mainField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/drawerButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton

@@ -13,8 +13,8 @@ object DateExtensions {
         return SimpleDateFormat("dd MMMM yyyy").format(this)
     }
 
-    fun Date.daysFromItRepresentation(context: Context) : String {
+    fun Date.daysFromItRepresentation() : String {
         val days = (System.currentTimeMillis() - time)/86400000
-        return String.format(context.getString(R.string.days), days)
+        return String.format(AppClass.appInstance.applicationContext.getString(R.string.days), days)
     }
 }

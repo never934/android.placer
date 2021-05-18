@@ -17,7 +17,7 @@ interface PlaceApi {
     /** base operations **/
 
     @GET("v1/places")
-    fun getPlaces() : Flow<List<PlaceResponse>>
+    suspend fun getPlaces() : List<PlaceResponse>
 
     @POST("v1/places")
     fun publishPlace(@Body request: PlaceRequest) : Flow<PlaceResponse>

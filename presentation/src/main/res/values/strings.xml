@@ -12,9 +12,10 @@
     <string name="choose_city_app_bar">Choose your city</string>
 
     <!-- map fragment !-->
-    <string name="map_places_filer_title">filter</string>
-    <string name="map_places_filer_all_label">all</string>
-    <string name="map_places_filer_my_label">my</string>
+    <string name="map_places_filter_title">filter</string>
+    <string name="map_places_filter_close_label">close</string>
+    <string name="map_places_filter_all_label">ALL</string>
+    <string name="map_places_filter_my_label">MY</string>
     <string name="map_search_field_hint">Input text</string>
     <string name="map_fab_btn_label">Add point</string>
 

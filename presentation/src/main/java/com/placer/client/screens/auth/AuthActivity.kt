@@ -30,7 +30,7 @@ class AuthActivity: BaseActivity() {
                 startMainActivity()
             }
         })
-        if (AppPrefs.getServerToken().isNotEmpty().not()){
+        if (AppPrefs.getServerToken().isNotEmpty()){
             startMainActivity()
         }else{
             launchSignInFlow()

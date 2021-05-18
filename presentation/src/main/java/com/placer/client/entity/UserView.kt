@@ -18,7 +18,7 @@ internal data class UserView(
     val createdDate: String
 )
 
-internal fun User.toView(context: Context) : UserView {
+internal fun User.toView() : UserView {
     return UserView(
         id = id,
         name = name,
@@ -29,6 +29,6 @@ internal fun User.toView(context: Context) : UserView {
         cityLng = cityLng,
         cityName = cityName,
         avatarUrl = avatarUrl,
-        createdDate = Date(createdDate).daysFromItRepresentation(context)
+        createdDate = Date(createdDate).daysFromItRepresentation()
     )
 }

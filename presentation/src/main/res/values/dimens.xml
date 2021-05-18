@@ -6,6 +6,7 @@
     <dimen name="big_margin">24dp</dimen>
     <dimen name="biggest_margin">32dp</dimen>
 
+    <dimen name="smallest_padding">4dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="normal_padding">14dp</dimen>
     <dimen name="default_padding">16dp</dimen>

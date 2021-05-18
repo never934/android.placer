@@ -6,16 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.placer.client.AppClass
 import com.placer.client.MainActivity
 import com.placer.client.R
+import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentMainMapBinding
+import com.placer.client.interfaces.MainFieldListener
 
 
-class MainMapFragment : Fragment(), OnMapReadyCallback {
+class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener {
+
+    lateinit var viewModel: MainMapViewModel
+    lateinit var binding: FragmentMainMapBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +33,7 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
         val binding: FragmentMainMapBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main_map, container, false
         )
+        this.binding = binding
         (requireActivity() as AppCompatActivity?)?.supportActionBar?.hide()
         binding.drawerButton.setOnClickListener {
             (requireActivity() as MainActivity).openDrawer()
@@ -32,6 +43,54 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    override fun onMapReady(p0: GoogleMap) {
+    override fun initListeners(){
+        binding.mainField.setListener(this, this)
+        viewModel.searchPlaces.observe(this, {
+            binding.mainField.setPlaces(it)
+        })
     }
+
+    override fun onMapReady(map: GoogleMap) {
+        map.uiSettings.isCompassEnabled = false
+        viewModel.mapPlaces.observe(this, {
+            map.clear()
+            it.forEach { place ->
+                val marker = MarkerOptions()
+                    .position(LatLng(place.lat, place.lng))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker))
+                map.addMarker(marker)
+            }
+        })
+    }
+
+    override fun textInMainFieldChanged(text: String) {
+        viewModel.loadPlaces(text)
+    }
+
+    override fun mainFieldFocusChanged(hasFocus: Boolean) {
+        if (hasFocus){
+            binding.drawerButton.visibility = View.GONE
+        }else{
+            binding.drawerButton.visibility = View.VISIBLE
+        }
+    }
+
+    override fun showMyPoints() {
+
+    }
+
+    override fun showAllPoints() {
+
+    }
+
+    override fun initViewModel() {
+        viewModel = ViewModelProvider(this,
+            MainMapViewModel.Factory(
+                AppClass.appInstance.placeComponent.loadPlacesUseCase
+            )
+        )
+            .get(MainMapViewModel::class.java)
+        _viewModel = viewModel
+    }
+
 }

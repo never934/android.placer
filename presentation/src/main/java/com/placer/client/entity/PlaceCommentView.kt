@@ -13,12 +13,12 @@ internal data class PlaceCommentView(
     val author: UserView
 )
 
-internal fun PlaceComment.toView(context: Context) : PlaceCommentView {
+internal fun PlaceComment.toView() : PlaceCommentView {
     return PlaceCommentView(
         id = id,
         text = text,
         placeId = placeId,
         createdDate = Date(createdDate).toView(),
-        author = author.toView(context)
+        author = author.toView()
     )
 }
