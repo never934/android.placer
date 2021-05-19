@@ -1,6 +1,9 @@
 package com.placer.client.screens
 
 import androidx.lifecycle.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
@@ -15,8 +18,8 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
     get() = _searchPlaces.map { it.map { place -> place.toView() } }
 
     private var _mapPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())
-    internal val mapPlaces: LiveData<List<PlaceView>>
-    get() = _mapPlaces.map { it.map { place -> place.toView() } }
+    internal val mapPlaces: LiveData<List<Place>>
+    get() = _mapPlaces
 
     init {
         loadMapPlaces()

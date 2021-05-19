@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -19,6 +17,7 @@ import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentMainMapBinding
 import com.placer.client.interfaces.MainFieldListener
+import com.placer.client.util.InfoWindowAdapter
 
 
 class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener {
@@ -54,13 +53,20 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener {
         map.uiSettings.isCompassEnabled = false
         viewModel.mapPlaces.observe(this, {
             map.clear()
+            map.setInfoWindowAdapter(InfoWindowAdapter(requireActivity(), it))
             it.forEach { place ->
                 val marker = MarkerOptions()
                     .position(LatLng(place.lat, place.lng))
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker))
+                    .title(place.id)
+                marker.infoWindowAnchor(marker.infoWindowAnchorU, 0.5f)
                 map.addMarker(marker)
             }
         })
+        map.setOnMarkerClickListener {
+            it.showInfoWindow()
+            true
+        }
     }
 
     override fun textInMainFieldChanged(text: String) {

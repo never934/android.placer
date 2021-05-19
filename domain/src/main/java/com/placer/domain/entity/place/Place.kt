@@ -15,4 +15,12 @@ data class Place(
     val topPosition: Long,
     val photos: List<PlacePhoto>,
     val createdDate: Long
-)
+){
+    override fun hashCode(): Int {
+        return 7 * name.hashCode() * author.name.hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return this.id == (other as? Place)?.id
+    }
+}

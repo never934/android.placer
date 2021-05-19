@@ -1,5 +1,7 @@
 package com.placer.client
 
+import com.placer.client.util.CommonUtils
+
 object Constants {
     /** custom view **/
     const val SPARSE_STATE_KEY = "SPARSE_STATE_KEY"
@@ -12,4 +14,7 @@ object Constants {
     // filter groups
     const val MY_FILTER_GROUP = 0
     const val ALL_FILTER_GROUP = 1
+
+    // marker focus height
+    val MARKER_FOCUS_HEIGHT = CommonUtils.getScreenHeight()
 }
