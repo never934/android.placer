@@ -28,22 +28,27 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding?.let {
-            drawerLayout = it.drawerLayout
-            NavigationUI.setupActionBarWithNavController(this, this.findNavController(R.id.navHostFragment), drawerLayout)
-            appBarConfiguration = AppBarConfiguration(this.findNavController(R.id.navHostFragment).graph, drawerLayout)
-            NavigationUI.setupWithNavController(it.navView, this.findNavController(R.id.navHostFragment))
-            navHeaderBinding =
-                DataBindingUtil.inflate(layoutInflater, R.layout.nav_header, it.navView, false)
-            navHeaderBinding?.let { navHeaderBinding ->
-                navHeaderBinding.viewModel = viewModel
-                it.navView.addHeaderView(navHeaderBinding.root)
-            }
+            initDrawer(it)
+            initNavigation(it)
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(this.findNavController(R.id.navHostFragment), drawerLayout)
+    private fun initNavigation(binding: ActivityMainBinding) {
+        NavigationUI.setupActionBarWithNavController(this, this.findNavController(R.id.navHostFragment), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(this.findNavController(R.id.navHostFragment).graph, drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, this.findNavController(R.id.navHostFragment))
     }
+
+    private fun initDrawer(binding: ActivityMainBinding) {
+        drawerLayout = binding.drawerLayout
+        navHeaderBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.nav_header, binding.navView, false)
+        navHeaderBinding?.let { navHeaderBinding ->
+            navHeaderBinding.viewModel = viewModel
+            binding.navView.addHeaderView(navHeaderBinding.root)
+        }
+    }
+
 
     fun openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START)
@@ -53,6 +58,10 @@ class MainActivity : BaseActivity() {
         super.onDestroy()
         binding = null
         navHeaderBinding = null
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(this.findNavController(R.id.navHostFragment), drawerLayout)
     }
 
     override fun initViewModel() {

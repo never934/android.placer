@@ -49,6 +49,7 @@ class AuthActivity: BaseActivity() {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setTheme(R.style.AuthTheme)
                 .setAuthMethodPickerLayout(customLayout)
                 .build(),
             SIGN_IN_RESULT_CODE

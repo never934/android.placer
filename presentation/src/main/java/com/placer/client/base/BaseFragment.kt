@@ -3,6 +3,7 @@ package com.placer.client.base
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.placer.client.interfaces.PlacerFabStyle
 
 abstract class BaseFragment : Fragment() {
 

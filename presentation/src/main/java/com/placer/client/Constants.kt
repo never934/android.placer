@@ -17,4 +17,7 @@ object Constants {
 
     // marker focus height
     val MARKER_FOCUS_HEIGHT = CommonUtils.getScreenHeight()
+
+    const val GOOGLE_MAP_ANIMATION_DURATION = 1000
+    const val GOOGLE_MAP_INFO_WINDOW_V_ANCHOR = 0.5f
 }

@@ -9,6 +9,17 @@
         <item name="android:statusBarColor">@android:color/white</item>
     </style>
 
+    <style name="AuthTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_light</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+    </style>
+
     <style name="google_btn">
         <item name="android:background">@drawable/default_google_btn_background</item>
         <item name="android:drawableLeft">@drawable/ic_google_icon</item>
@@ -16,6 +27,7 @@
         <item name="android:layout_marginRight">@dimen/default_margin</item>
         <item name="android:padding">@dimen/normal_padding</item>
         <item name="android:textColor">@android:color/black</item>
+        <item name="backgroundTint">@null</item>
     </style>
 
     <style name="default_btn">
@@ -24,6 +36,7 @@
         <item name="android:layout_marginRight">@dimen/default_margin</item>
         <item name="android:padding">@dimen/normal_padding</item>
         <item name="android:textColor">@color/text_on_color</item>
+        <item name="backgroundTint">@null</item>
     </style>
 
     <style name="default_small_btn">
@@ -35,9 +48,10 @@
     </style>
 
     <style name="fab_button">
-        <item name="android:background">@drawable/fab_gradient</item>
         <item name="android:padding">@dimen/small_padding</item>
         <item name="android:textColor">@color/text_on_color</item>
+        <item name="backgroundTint">@null</item>
+        <item name="tint">@null</item>
     </style>
 
     <style name="main_title">
