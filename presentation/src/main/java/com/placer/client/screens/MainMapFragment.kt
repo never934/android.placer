@@ -17,35 +17,35 @@ import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentMainMapBinding
 import com.placer.client.interfaces.MainFieldListener
+import com.placer.client.util.CommonUtils
 import com.placer.client.util.InfoWindowAdapter
 
 
 class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener {
 
-    lateinit var viewModel: MainMapViewModel
-    lateinit var binding: FragmentMainMapBinding
+    private lateinit var viewModel: MainMapViewModel
+    private var binding: FragmentMainMapBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val binding: FragmentMainMapBinding = DataBindingUtil.inflate(
+    ): View? {
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main_map, container, false
         )
-        this.binding = binding
         (requireActivity() as AppCompatActivity?)?.supportActionBar?.hide()
-        binding.drawerButton.setOnClickListener {
+        binding?.drawerButton?.setOnClickListener {
             (requireActivity() as MainActivity).openDrawer()
         }
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        return binding.root
+        return binding?.root
     }
 
     override fun initListeners(){
-        binding.mainField.setListener(this, this)
+        binding?.mainField?.setListener(this, this)
         viewModel.searchPlaces.observe(this, {
-            binding.mainField.setPlaces(it)
+            binding?.mainField?.setPlaces(it)
         })
     }
 
@@ -57,7 +57,11 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener {
             it.forEach { place ->
                 val marker = MarkerOptions()
                     .position(LatLng(place.lat, place.lng))
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker))
+                    .icon(
+                        CommonUtils.bitmapDescriptorFromVector(
+                            requireContext(), R.drawable.ic_map_marker
+                        )
+                    )
                     .title(place.id)
                 marker.infoWindowAnchor(marker.infoWindowAnchorU, 0.5f)
                 map.addMarker(marker)
@@ -75,10 +79,15 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener {
 
     override fun mainFieldFocusChanged(hasFocus: Boolean) {
         if (hasFocus){
-            binding.drawerButton.visibility = View.GONE
+            binding?.drawerButton?.visibility = View.GONE
         }else{
-            binding.drawerButton.visibility = View.VISIBLE
+            binding?.drawerButton?.visibility = View.VISIBLE
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
     override fun showMyPoints() {

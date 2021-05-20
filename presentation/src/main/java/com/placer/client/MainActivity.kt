@@ -17,14 +17,17 @@ class MainActivity : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private var binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        drawerLayout = binding.drawerLayout
-        NavigationUI.setupActionBarWithNavController(this, this.findNavController(R.id.navHostFragment), drawerLayout)
-        appBarConfiguration = AppBarConfiguration(this.findNavController(R.id.navHostFragment).graph, drawerLayout)
-        NavigationUI.setupWithNavController(binding.navView, this.findNavController(R.id.navHostFragment))
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding?.let {
+            drawerLayout = it.drawerLayout
+            NavigationUI.setupActionBarWithNavController(this, this.findNavController(R.id.navHostFragment), drawerLayout)
+            appBarConfiguration = AppBarConfiguration(this.findNavController(R.id.navHostFragment).graph, drawerLayout)
+            NavigationUI.setupWithNavController(it.navView, this.findNavController(R.id.navHostFragment))
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -33,6 +36,11 @@ class MainActivity : BaseActivity() {
 
     fun openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
     override fun initViewModel() {}

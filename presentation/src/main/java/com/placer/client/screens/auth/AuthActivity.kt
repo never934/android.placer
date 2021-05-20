@@ -18,12 +18,12 @@ import com.placer.data.AppPrefs
 class AuthActivity: BaseActivity() {
 
     lateinit var viewModel: AuthViewModel
-    private lateinit var binding: ActivityAuthBinding
+    private var binding: ActivityAuthBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
-        binding.lifecycleOwner = this
+        binding?.lifecycleOwner = this
         supportActionBar?.hide()
         viewModel.loginSuccessed.observe(this, {
             if (it){
@@ -79,6 +79,11 @@ class AuthActivity: BaseActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
     companion object {

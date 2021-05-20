@@ -9,7 +9,7 @@
         <item name="android:statusBarColor">@android:color/white</item>
     </style>
 
-    <style name="google_btn" parent="AppTheme">
+    <style name="google_btn">
         <item name="android:background">@drawable/default_google_btn_background</item>
         <item name="android:drawableLeft">@drawable/ic_google_icon</item>
         <item name="android:layout_marginLeft">@dimen/default_margin</item>
@@ -18,7 +18,7 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="default_btn" parent="AppTheme">
+    <style name="default_btn">
         <item name="android:background">@drawable/default_gradient</item>
         <item name="android:layout_marginLeft">@dimen/default_margin</item>
         <item name="android:layout_marginRight">@dimen/default_margin</item>
