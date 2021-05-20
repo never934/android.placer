@@ -46,21 +46,28 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, P
     }
 
     override fun initListeners(){
-        binding?.mainField?.setListener(this, this)
-        binding?.drawerButton?.setOnClickListener {
-            (requireActivity() as MainActivity).openDrawer()
+        binding?.let { binding ->
+            binding.viewModel = viewModel
+            binding.mainField.setListener(this, this)
+            binding.drawerButton.setOnClickListener {
+                (requireActivity() as MainActivity).openDrawer()
+            }
+            viewModel.searchPlaces.observe(this, {
+                binding.mainField.setPlaces(it)
+            })
+            binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener {
+                viewModel.loadMapPlaces()
+            }
         }
-        viewModel.searchPlaces.observe(this, {
-            binding?.mainField?.setPlaces(it)
-        })
-        binding?.addButton?.backgroundTintList = null
-        binding?.addButton?.setBackgroundResource(R.drawable.fab_gradient)
+    }
+
+    override fun refreshStateChanged(state: Boolean) {
+        binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
     override fun onMapReady(map: GoogleMap) {
         map.uiSettings.isCompassEnabled = false
         viewModel.mapPlaces.observe(this, {
-            Log.e("map places observer", it.size.toString())
             map.clear()
             map.setInfoWindowAdapter(InfoWindowAdapter(requireActivity(), it))
             it.forEach { place ->

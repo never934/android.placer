@@ -31,4 +31,8 @@ class PlacesFragment : BaseFragment() {
     override fun initListeners() {
         TODO("Not yet implemented")
     }
+
+    override fun refreshStateChanged(state: Boolean) {
+        TODO("Not yet implemented")
+    }
 }

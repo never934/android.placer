@@ -8,6 +8,7 @@ import com.placer.client.util.Filters
 import com.placer.domain.entity.place.Place
 import com.placer.domain.usecase.place.LoadPlacesUseCase
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
 class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewModel() {
@@ -46,9 +47,11 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
         mapFilter.value = Filters::getMyPointsFilter
     }
 
-    private fun loadMapPlaces() {
+    fun loadMapPlaces() {
+        isRefreshing.value = true
         viewModelScope.launch {
-            val result = placesUseCase.loadPlaces().first()
+            val result = placesUseCase.loadPlaces().single()
+            isRefreshing.value = false
             if (result.isSuccess){
                 _mapPlaces.value = result.getOrNull()
             }else{

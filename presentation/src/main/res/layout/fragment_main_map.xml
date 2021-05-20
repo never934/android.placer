@@ -2,9 +2,16 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.placer.client.screens.MainMapViewModel" />
+    </data>
+    <com.placer.client.customview.BaseConstraintLayout
+        android:id="@+id/baseConstraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:isEnabledSwipeRefresh="@{false}">
 
         <fragment
             android:id="@+id/mapView"
@@ -49,5 +56,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.placer.client.customview.BaseConstraintLayout>
 </layout>

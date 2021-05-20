@@ -19,9 +19,13 @@ abstract class BaseFragment : Fragment() {
         _viewModel?.showSnackBar?.observe(this, {
             Snackbar.make(this.requireView(), it, Snackbar.LENGTH_LONG).show()
         })
+        _viewModel?.isRefreshing?.observe(this, {
+            refreshStateChanged(it)
+        })
         initListeners()
     }
 
     abstract fun initViewModel()
     abstract fun initListeners()
+    abstract fun refreshStateChanged(state: Boolean)
 }
