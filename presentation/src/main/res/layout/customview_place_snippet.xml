@@ -25,14 +25,15 @@
             android:layout_height="wrap_content"
             android:background="@drawable/map_place_card_background"
             android:orientation="vertical">
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/placePhotoView"
-                android:src="@drawable/ic_photo_placeholder"
-                app:strokeWidth="2dp"
-                app:strokeColor="#dac900"
+            <com.placer.client.customview.InfoWindowImageLayout
                 android:layout_width="250dp"
-                android:scaleType="centerCrop"
-                android:layout_height="70dp"/>
+                android:layout_height="70dp">
+                <ImageView
+                    android:id="@+id/placePhotoView"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.placer.client.customview.InfoWindowImageLayout>
             <TextView
                 android:id="@+id/nameView"
                 style="@style/item_title"

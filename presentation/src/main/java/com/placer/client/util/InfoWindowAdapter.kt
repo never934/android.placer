@@ -9,14 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CenterInside
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.google.android.material.imageview.ShapeableImageView
-import com.google.android.material.shape.CornerFamily
 import com.placer.client.AppClass
 import com.placer.client.R
 import com.placer.client.customview.CommentsCountView
@@ -35,7 +29,7 @@ class InfoWindowAdapter(private val myContext: FragmentActivity, private val pla
 
     override fun getInfoWindow(marker: Marker): View {
         val titleUi = view.findViewById(R.id.nameView) as TextView
-        val placePhotoView = view.findViewById(R.id.placePhotoView) as ShapeableImageView
+        val placePhotoView = view.findViewById(R.id.placePhotoView) as ImageView
         val commentsCountView = view.findViewById(R.id.commentsCountView) as CommentsCountView
         val placeId: String = marker.title
         val place = places.first{ it.id == placeId }
@@ -65,11 +59,6 @@ class InfoWindowAdapter(private val myContext: FragmentActivity, private val pla
                 ContextCompat.getDrawable(myContext, R.drawable.ic_photo_placeholder)
             )
         }
-        placePhotoView.shapeAppearanceModel = placePhotoView.getShapeAppearanceModel()
-            .toBuilder()
-            .setTopRightCorner(CornerFamily.ROUNDED,14f)
-            .setTopLeftCorner(CornerFamily.ROUNDED,14f)
-            .build()
         return view
     }
 
