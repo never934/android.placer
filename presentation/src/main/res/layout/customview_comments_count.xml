@@ -15,7 +15,6 @@
         style="@style/small_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="43"
         android:drawablePadding="@dimen/smallest_padding"
         android:layout_gravity="center"/>
 </LinearLayout>

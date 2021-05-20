@@ -12,4 +12,7 @@ class LoadUserUseCase(
 ) {
     suspend fun loadUser(userId: String) : Flow<Result<User>> =
         userRepository.loadUser(userId).flowOn(dispatcher)
+
+    suspend fun loadProfile() : Flow<Result<User>> =
+        userRepository.loadProfile().flowOn(dispatcher)
 }

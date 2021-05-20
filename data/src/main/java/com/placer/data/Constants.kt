@@ -13,4 +13,5 @@ internal object Constants {
         const val APP_PREFERENCES = "APP_PREFERENCES"
         //settings id's
         const val SERVER_TOKEN_ID_IN_SETTINGS = "SERVER_TOKEN_ID_IN_SETTINGS"
+        const val USER_ID_IN_SETTINGS = "USER_ID_IN_SETTINGS"
 }

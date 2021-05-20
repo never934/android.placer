@@ -16,4 +16,18 @@ object AppPrefs {
             .getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
             .getString(Constants.SERVER_TOKEN_ID_IN_SETTINGS, "") ?: ""
     }
+
+    fun saveUserId(userId: String){
+        DataBunchModule.getContext()
+            .getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
+            .edit()
+            .putString(Constants.USER_ID_IN_SETTINGS, userId)
+            .apply()
+    }
+
+    fun getUserId() : String {
+        return DataBunchModule.getContext()
+            .getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
+            .getString(Constants.USER_ID_IN_SETTINGS, "") ?: ""
+    }
 }

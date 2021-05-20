@@ -9,7 +9,7 @@ import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.placer.client.AppClass
-import com.placer.client.MainActivity
+import com.placer.client.screens.MainActivity
 import com.placer.client.R
 import com.placer.client.base.BaseActivity
 import com.placer.client.databinding.ActivityAuthBinding

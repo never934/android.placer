@@ -23,4 +23,7 @@ interface UserApi {
 
     @GET("v1/users/{userId}")
     fun getUser(@Path("userId")userId: String) : Flow<UserResponse>
+
+    @GET("v1/users/profile")
+    suspend fun getProfile() : UserResponse
 }

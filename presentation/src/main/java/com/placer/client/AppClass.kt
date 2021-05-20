@@ -2,6 +2,7 @@ package com.placer.client
 
 import android.app.Application
 import android.content.Context
+import com.google.android.gms.maps.MapsInitializer
 import com.placer.data.DataBunchModule
 import com.placer.data.di.component.*
 import com.placer.data.di.module.api.AuthApiModule
@@ -28,6 +29,7 @@ class AppClass : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MapsInitializer.initialize(this)
         DataBunchModule.initDataModule(this)
         appInstance = this
         setupAuthComponent()

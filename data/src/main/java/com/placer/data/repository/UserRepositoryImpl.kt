@@ -1,5 +1,6 @@
 package com.placer.data.repository
 
+import com.placer.data.AppPrefs
 import com.placer.data.api.UserApi
 import com.placer.data.api.request.ProfileUpdateRequest
 import com.placer.data.api.response.CityResponse
@@ -12,10 +13,7 @@ import com.placer.domain.entity.user.User
 import com.placer.domain.repository.PlaceRepository
 import com.placer.domain.repository.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject internal constructor(
@@ -37,6 +35,20 @@ class UserRepositoryImpl @Inject internal constructor(
             .catch { Result.success(userDao.getUser(userId).toEntity()) }
             .catch { Result.failure<User>(Exception("Error while loading user")) }
             .flowOn(dispatcher)
+
+    override suspend fun loadProfile(): Flow<Result<User>> =
+        flow {
+            try {
+                val user = userApi.getProfile()
+                val userDb = userDao.updateUser(user.id, user.toDB())
+                emit(Result.success(userDb.toEntity()))
+            }catch (e: Exception){
+                emit(Result.success(userDao.getUser(AppPrefs.getUserId()).toEntity()))
+            }
+        }
+            .catch { Result.failure<User>(Exception("Error while loading user")) }
+            .flowOn(dispatcher)
+
 
     override suspend fun updateUser(user: User): Flow<Result<User>> =
         userApi.updateProfile(ProfileUpdateRequest(user.name, user.nickname))
