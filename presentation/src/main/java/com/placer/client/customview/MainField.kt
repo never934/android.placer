@@ -41,10 +41,10 @@ class MainField @JvmOverloads constructor(
         )
 
     init {
-        init()
+        init(attrs)
     }
 
-    private fun init(){
+    private fun init(attrs: AttributeSet?){
         this.isClickable = true
         val view = View.inflate(context, R.layout.customview_main_field, this)
         editFieldView = view.findViewById(R.id.editFieldView)
@@ -61,6 +61,14 @@ class MainField @JvmOverloads constructor(
             filterRadioGroup.addView(radio.getFormatted())
         }
         filterRadioGroup.check(Constants.ALL_FILTER_GROUP)
+
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.MainField)
+        try {
+            val hint = ta.getString(R.styleable.MainField_hint)
+            hint?.let { editFieldView.hint = it }
+        } finally {
+            ta.recycle()
+        }
     }
 
     private fun setIconNormalState() {
@@ -137,6 +145,12 @@ class MainField @JvmOverloads constructor(
                 Constants.MY_FILTER_GROUP -> callback?.showMyPoints()
             }
             setFilterClosedState()
+        }
+    }
+
+    fun setHint(hint: String?){
+        hint?.let {
+            editFieldView.hint = it
         }
     }
 }
