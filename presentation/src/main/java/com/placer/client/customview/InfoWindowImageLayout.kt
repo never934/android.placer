@@ -31,7 +31,7 @@ class InfoWindowImageLayout : FrameLayout {
         val metrics: DisplayMetrics = context.resources.displayMetrics
         cornerRadius = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            resources.getDimensionPixelSize(R.dimen.place_info_window_round_layout_corner_radius).toFloat(),
+            resources.getDimension(R.dimen.place_info_window_round_layout_corner_radius),
             metrics
         )
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -60,9 +60,10 @@ class InfoWindowImageLayout : FrameLayout {
         paint.color = Color.WHITE
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+        val cornerRadiusPixelSize = resources.getDimensionPixelSize(R.dimen.place_info_window_round_layout_corner_radius).toFloat()
         val corners = floatArrayOf(
-            cornerRadius, cornerRadius,
-            cornerRadius, cornerRadius,
+            cornerRadiusPixelSize, cornerRadiusPixelSize,
+            cornerRadiusPixelSize, cornerRadiusPixelSize,
             0f, 0f,
             0f, 0f
         )
