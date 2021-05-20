@@ -1,10 +1,6 @@
 package com.placer.client.screens
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
@@ -44,12 +40,10 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
 
     fun showAllMapPoints(){
         mapFilter.value = Filters::getAllMapPointsFilter
-        Log.e("places all", mapPlaces.value?.size.toString())
     }
 
     fun showMyPoints(){
         mapFilter.value = Filters::getMyPointsFilter
-        Log.e("places my", mapPlaces.value?.size.toString())
     }
 
     private fun loadMapPlaces() {

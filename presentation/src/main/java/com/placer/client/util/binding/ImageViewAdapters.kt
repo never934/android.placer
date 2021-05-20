@@ -4,6 +4,7 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.placer.client.AppClass
 import com.placer.client.R
 
@@ -13,5 +14,6 @@ fun bindImageUrl(view: ImageView, url: String?) {
             .load(url)
             .error(ContextCompat.getDrawable(AppClass.appInstance.applicationContext, R.drawable.ic_baseline_account_circle_24))
             .circleCrop()
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
             .into(view)
 }

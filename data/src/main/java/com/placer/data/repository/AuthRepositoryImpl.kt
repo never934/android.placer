@@ -1,5 +1,6 @@
 package com.placer.data.repository
 
+import com.placer.data.AppPrefs
 import com.placer.data.api.AuthApi
 import com.placer.data.api.request.AuthRequest
 import com.placer.domain.repository.AuthRepository
@@ -15,10 +16,15 @@ class AuthRepositoryImpl @Inject internal constructor(
 
     override suspend fun signIn(firebaseToken: String): Flow<Result<String>> =
         flow{
-            emit(authApi.signIn(AuthRequest(firebaseToken)))
+            try {
+                val authResponse = authApi.signIn(AuthRequest(firebaseToken))
+                AppPrefs.saveServerToken(authResponse.token)
+                AppPrefs.saveUserId(authResponse.userId)
+                emit(Result.success(authResponse.userId))
+            }catch (e: Exception){
+                emit(Result.failure<String>(Exception("Error while auth")))
+            }
         }
-            .map { Result.success(it.token) }
-            .catch { Result.failure<String>(Exception("Error while auth")) }
             .flowOn(dispatcher)
 
 }

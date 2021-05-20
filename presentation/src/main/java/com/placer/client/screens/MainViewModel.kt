@@ -1,12 +1,11 @@
 package com.placer.client.screens
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.placer.client.base.BaseViewModel
 import com.placer.domain.entity.user.User
-import com.placer.domain.usecase.place.LoadPlacesUseCase
 import com.placer.domain.usecase.user.LoadUserUseCase
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val loadUserUseCase: LoadUserUseCase) : BaseViewModel() {
@@ -22,7 +21,6 @@ class MainViewModel(private val loadUserUseCase: LoadUserUseCase) : BaseViewMode
         viewModelScope.launch {
             val profileResult = loadUserUseCase.loadProfile().first()
             if (profileResult.isSuccess){
-                Log.e("profile", profileResult.getOrNull()?.name ?: "null")
                 _profile.value = profileResult.getOrNull()
             }else{
                 showSnackBar.value = profileResult.exceptionOrNull()?.message

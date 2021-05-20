@@ -13,13 +13,17 @@ class AuthViewModel(private val signInUseCase: SignInUseCase) : BaseViewModel() 
     val loginSuccessed: LiveData<Boolean>
     get() = _loginSuccessed
 
+    private var _userId: MutableLiveData<String> = MutableLiveData()
+    val userId: LiveData<String>
+    get() = _userId
+
    fun signIn(idToken: String){
         viewModelScope.launch {
             val result = signInUseCase.signIn(idToken).first()
             if (result.isSuccess){
                 result.getOrNull()?.let {
-                    AppPrefs.saveServerToken(it)
                     _loginSuccessed.value = true
+                    _userId.value = it
                 }
             }else{
                 showSnackBar.value = result.exceptionOrNull()?.message

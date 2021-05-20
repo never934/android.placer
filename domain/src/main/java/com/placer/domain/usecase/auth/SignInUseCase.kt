@@ -9,6 +9,6 @@ class SignInUseCase(
     private val authRepository: AuthRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun signIn(firebaseToken: String) : Flow<Result<String?>> =
+    suspend fun signIn(firebaseToken: String) : Flow<Result<String>> =
         authRepository.signIn(firebaseToken).flowOn(dispatcher)
 }

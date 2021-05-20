@@ -1,5 +1,6 @@
 package com.placer.data.repository
 
+import android.util.Log
 import com.placer.data.AppPrefs
 import com.placer.data.api.UserApi
 import com.placer.data.api.request.ProfileUpdateRequest

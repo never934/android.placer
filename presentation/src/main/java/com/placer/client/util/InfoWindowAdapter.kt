@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.placer.client.AppClass
@@ -40,18 +41,7 @@ class InfoWindowAdapter(private val myContext: FragmentActivity, private val pla
         if (place.photos.isNotEmpty()){
             runBlocking {
                 withContext(Dispatchers.IO) {
-                    val drawable = Glide
-                        .with(placePhotoView.context)
-                        .load(place.photos.first().url)
-                        .error(
-                            ContextCompat.getDrawable(
-                                AppClass.appInstance,
-                                R.drawable.ic_photo_placeholder
-                            )
-                        )
-                        .submit()
-                        .get()
-                    placePhotoView.setImageDrawable(drawable)
+                    placePhotoView.setImageDrawable(CommonUtils.loadDrawableFromUrl(placePhotoView.context, place.photos.first().url))
                 }
             }
         }else{
