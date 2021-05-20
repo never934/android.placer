@@ -43,10 +43,13 @@ class MainActivity : BaseActivity() {
         drawerLayout = binding.drawerLayout
         navHeaderBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.nav_header, binding.navView, false)
-        navHeaderBinding?.let { navHeaderBinding ->
-            navHeaderBinding.viewModel = viewModel
-            binding.navView.addHeaderView(navHeaderBinding.root)
-        }
+        viewModel.profile.observe(this, {
+                navHeaderBinding?.let { navHeaderBinding ->
+                    navHeaderBinding.profile = it
+                    binding.navView.addHeaderView(navHeaderBinding.root)
+                }
+            }
+        )
     }
 
 

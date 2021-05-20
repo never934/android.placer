@@ -2,6 +2,8 @@ package com.placer.client.screens
 
 import androidx.lifecycle.*
 import com.placer.client.base.BaseViewModel
+import com.placer.client.entity.UserView
+import com.placer.client.entity.toView
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUserUseCase
 import kotlinx.coroutines.flow.first
@@ -10,8 +12,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val loadUserUseCase: LoadUserUseCase) : BaseViewModel() {
     private var _profile: MutableLiveData<User> = MutableLiveData()
-    val profile: LiveData<User>
-    get() = _profile
+    internal val profile: LiveData<UserView>
+    get() = _profile.map { it.toView() }
 
     init {
         loadProfile()

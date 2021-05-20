@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="viewModel"
-            type="com.placer.client.screens.MainViewModel" />
+            name="profile"
+            type="com.placer.client.entity.UserView" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout 
     android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         android:layout_height="45dp"
         android:src="@drawable/ic_baseline_account_circle_24"
         android:layout_margin="@dimen/default_margin"
-        app:imageUrl="@{viewModel.profile.avatarUrl}"
+        app:imageUrl="@{profile.avatarUrl}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
-        android:text="@{viewModel.profile.name}"
+        android:text="@{profile.name}"
         app:layout_constraintBottom_toBottomOf="@+id/avatarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatarView"
