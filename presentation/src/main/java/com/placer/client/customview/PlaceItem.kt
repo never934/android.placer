@@ -24,6 +24,7 @@ class PlaceItem @JvmOverloads constructor(
     private lateinit var titleView: TextView
     private lateinit var hintView: TextView
     private lateinit var photoPreview: ShapeableImageView
+    private lateinit var commentsCountView: CommentsCountView
 
     init {
         init()
@@ -35,6 +36,7 @@ class PlaceItem @JvmOverloads constructor(
         titleView = view.findViewById(R.id.titleView)
         hintView = view.findViewById(R.id.hintView)
         photoPreview = view.findViewById(R.id.photoPreview)
+        commentsCountView = view.findViewById(R.id.commentsCountView)
     }
 
     internal fun setPlace(place: PlaceView){
@@ -44,5 +46,6 @@ class PlaceItem @JvmOverloads constructor(
             .load(place.photos.firstOrNull()?.url)
             .error(R.drawable.ic_photo_placeholder)
             .into(photoPreview)
+        commentsCountView.setCount(place.commentsCount)
     }
 }

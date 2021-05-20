@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="?android:attr/selectableItemBackground">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/photoPreview"
@@ -23,7 +23,7 @@
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/default_margin"
         app:layout_constraintBottom_toBottomOf="@+id/photoPreview"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/commentsCountView"
         app:layout_constraintStart_toEndOf="@+id/photoPreview"
         app:layout_constraintTop_toTopOf="@+id/photoPreview">
 
@@ -39,6 +39,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <com.placer.client.customview.CommentsCountView
+        android:id="@+id/commentsCountView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/big_padding"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldsContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fieldsContainer" />
 
     <View
         android:layout_width="0dp"
