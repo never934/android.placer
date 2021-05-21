@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
+import com.placer.data.AppPrefs
 import com.placer.domain.entity.place.Place
 import com.placer.domain.usecase.place.LoadPlacesUseCase
 import kotlinx.coroutines.flow.first
@@ -13,6 +14,10 @@ internal class PlaceViewViewModel(private val loadPlacesUseCase: LoadPlacesUseCa
     private var _place: MutableLiveData<Place> = MutableLiveData()
     val place: LiveData<PlaceView>
     get() = _place.map { it.toView() }
+
+    private var _clientIsPlaceAuthor: MutableLiveData<Boolean> = MutableLiveData()
+    val clientIsPlaceAuthor: LiveData<Boolean>
+    get() = _clientIsPlaceAuthor
 
     init {
         loadPlace()
@@ -24,6 +29,7 @@ internal class PlaceViewViewModel(private val loadPlacesUseCase: LoadPlacesUseCa
             val result = loadPlacesUseCase.loadPlaceById(placeId).first()
             if(result.isSuccess){
                 _place.value = result.getOrNull()
+                _clientIsPlaceAuthor.value = _place.value?.author?.id == AppPrefs.getUserId()
             }else{
                 showSnackBar.value = result.exceptionOrNull()?.message
             }

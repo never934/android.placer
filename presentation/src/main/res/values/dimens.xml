@@ -26,5 +26,6 @@
 
     <dimen name="marker_button_height">25dp</dimen>
     <dimen name="place_info_window_corner_radius">16dp</dimen>
+    <dimen name="comment_field_corner_radius">16dp</dimen>
     <dimen name="place_info_window_round_layout_corner_radius">13dp</dimen>
 </resources>

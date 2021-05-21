@@ -1,5 +1,6 @@
 package com.placer.client.util.binding
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import androidx.databinding.BindingAdapter
 import com.placer.client.customview.ViewField
@@ -17,4 +18,9 @@ internal fun bindIcon(view: ViewField, drawable: Drawable?) {
 @BindingAdapter("hint")
 internal fun bindHint(view: ViewField, hint: String?) {
     view.setHint(hint)
+}
+
+@BindingAdapter("contentColor")
+internal fun contentColor(view: ViewField, color: Int?) {
+    view.setContentColor(color)
 }

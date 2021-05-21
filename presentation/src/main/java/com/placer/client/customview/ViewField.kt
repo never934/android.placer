@@ -2,6 +2,7 @@ package com.placer.client.customview
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -34,6 +35,12 @@ internal class ViewField @JvmOverloads constructor(
             binding.hintView.text = hint
         } ?: run {
             binding.hintView.text = context.getString(R.string.null_representation)
+        }
+    }
+
+    fun setContentColor(color: Int?){
+        color?.let {
+            binding.contentView.setTextColor(it)
         }
     }
 

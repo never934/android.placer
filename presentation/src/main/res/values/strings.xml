@@ -45,6 +45,8 @@
 
     <!-- place view fragment !-->
     <string name="place_view_status_hint">Status</string>
+    <string name="place_view_status_published">Published</string>
+    <string name="place_view_status_not_published">Not published</string>
     <string name="place_view_description_hint">Description</string>
     <string name="place_view_city_hint">City</string>
     <string name="place_view_in_top_hint">In top</string>

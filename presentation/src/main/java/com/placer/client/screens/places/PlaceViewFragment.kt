@@ -55,6 +55,15 @@ class PlaceViewFragment : BaseFragment() {
         viewModel.place.observe(this, {
             binding?.place = it
         })
+        viewModel.clientIsPlaceAuthor.observe(this, {
+            if (it){
+                binding?.editIcon?.visibility = View.VISIBLE
+                binding?.publishedField?.visibility = View.VISIBLE
+            }else{
+                binding?.editIcon?.visibility = View.GONE
+                binding?.publishedField?.visibility = View.GONE
+            }
+        })
     }
 
     override fun refreshStateChanged(state: Boolean) {

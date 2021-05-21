@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/text_on_color" />
+        <corners android:topLeftRadius="@dimen/comment_field_corner_radius"
+            android:topRightRadius="@dimen/comment_field_corner_radius" />
+</shape>
