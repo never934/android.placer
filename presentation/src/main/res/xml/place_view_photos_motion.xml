@@ -7,7 +7,7 @@
         app:constraintSetEnd="@+id/end">
         <KeyFrameSet>
             <KeyAttribute
-                app:framePosition="40000"
+                app:framePosition="100"
                 app:motionTarget="@id/photosView"
                 android:alpha="0.2"/>
         </KeyFrameSet>

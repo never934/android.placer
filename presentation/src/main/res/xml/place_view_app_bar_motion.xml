@@ -7,7 +7,7 @@
         app:constraintSetEnd="@+id/end">
         <KeyFrameSet>
             <KeyAttribute
-                app:framePosition="40000"
+                app:framePosition="100"
                 app:motionTarget="@id/appBarLayout"
                 android:alpha="0.0"/>
         </KeyFrameSet>

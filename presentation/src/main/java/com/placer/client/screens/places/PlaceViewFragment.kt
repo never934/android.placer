@@ -1,6 +1,7 @@
 package com.placer.client.screens.places
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.customview.comments.CommentField
 import com.placer.client.databinding.FragmentPlaceViewBinding
+import com.placer.client.util.CommonUtils
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
 class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener {
@@ -51,8 +53,10 @@ class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener {
     override fun initListeners() {
         binding?.let { binding ->
             binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-                binding.motionLayout.progress = scrollY.toFloat()
-                binding.appBarMotionLayout.progress = scrollY.toFloat()
+                val motionProgress = CommonUtils.getMotionProgress(30f, scrollY.toFloat())
+                Log.e("progress", motionProgress.toString())
+                binding.motionLayout.progress = motionProgress
+                binding.appBarMotionLayout.progress = motionProgress
             }
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener { viewModel.loadPlace() }
             binding.commentField.initListener(this)

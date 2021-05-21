@@ -73,4 +73,16 @@ object CommonUtils {
             return ContextCompat.getDrawable(context, R.drawable.ic_photo_placeholder)
         }
     }
+
+    fun getMotionProgress(percentsOfScrollToEnd: Float, currentScroll: Float) : Float {
+        val percentsGone = (((currentScroll * 100)/getScreenHeight()))
+        if (percentsGone<=percentsOfScrollToEnd){
+            val oneMotionProgressPercent: Float = 1/percentsOfScrollToEnd
+            return percentsGone * oneMotionProgressPercent
+        }else if(percentsGone>percentsOfScrollToEnd){
+            return 1f
+        }else{
+            return 0f
+        }
+    }
 }
