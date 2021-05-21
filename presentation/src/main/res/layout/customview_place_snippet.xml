@@ -43,7 +43,7 @@
                 android:paddingHorizontal="@dimen/small_padding"
                 android:layout_gravity="start"
                 android:text="name"/>
-            <com.placer.client.customview.CommentsCountView
+            <com.placer.client.customview.comments.CommentsCountView
                 android:id="@+id/commentsCountView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

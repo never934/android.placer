@@ -8,6 +8,7 @@
     <color name="text_on_color">#FFFFFF</color>
     <color name="text_color">#000000</color>
     <color name="hint_color">#60000000</color>
+    <color name="comment_content_color">#90000000</color>
     <color name="divider_color">#12000000</color>
     <color name="comment_body_color">#80000000</color>
     <color name="background_color">#FFFFFF</color>

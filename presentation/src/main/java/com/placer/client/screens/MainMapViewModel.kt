@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
-class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewModel() {
+internal class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewModel() {
     private var _searchPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())
     internal val searchPlaces: LiveData<List<PlaceView>>
     get() = _searchPlaces.map { it.map { place -> place.toView() } }
@@ -22,6 +22,10 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
     get() = Transformations.switchMap(mapFilter){ filter ->
         MutableLiveData(_mapPlaces.value?.filter { filter(it) })
     }
+
+    private var _goToPlaceView: MutableLiveData<PlaceView?> = MutableLiveData()
+    internal val goToPlaceView: LiveData<PlaceView?>
+        get() = _goToPlaceView
 
     private var mapFilter: MutableLiveData<(place: Place) -> Boolean> = MutableLiveData()
 
@@ -46,6 +50,20 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
         mapFilter.value?.let {
             mapFilter.value = Filters::getMyPointsFilter
         }
+    }
+
+    fun placeClicked(place: PlaceView){
+        _goToPlaceView.value = place
+    }
+
+    fun placeClicked(placeId: String?){
+        placeId?.let {
+            _goToPlaceView.value = _mapPlaces.value?.first { it.id == placeId }?.toView()
+        }
+    }
+
+    fun navigatedToPlaceView(){
+        _goToPlaceView.value = null
     }
 
     fun loadMapPlaces() {

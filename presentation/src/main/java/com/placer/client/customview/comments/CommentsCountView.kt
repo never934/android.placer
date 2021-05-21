@@ -1,4 +1,4 @@
-package com.placer.client.customview
+package com.placer.client.customview.comments
 
 import android.content.Context
 import android.util.AttributeSet

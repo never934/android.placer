@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -16,13 +17,16 @@ import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentMainMapBinding
+import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
 import com.placer.client.interfaces.PlacerFabStyle
+import com.placer.client.navigation.PlaceViewTransaction
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.InfoWindowAdapter
+import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
 
-class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle {
+internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle, PlaceViewTransaction {
 
     private lateinit var viewModel: MainMapViewModel
     private var binding: FragmentMainMapBinding? = null
@@ -64,6 +68,12 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, P
                 viewModel.loadMapPlaces()
             }
         }
+        viewModel.goToPlaceView.observe(this, {
+            it?.let {
+                setPlaceViewFragment(it)
+                viewModel.navigatedToPlaceView()
+            }
+        })
     }
 
     override fun refreshStateChanged(state: Boolean) {
@@ -95,6 +105,9 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, P
             it.showInfoWindow()
             true
         }
+        map.setOnInfoWindowClickListener { marker ->
+            viewModel.placeClicked(marker.title)
+        }
     }
 
     override fun textInMainFieldChanged(text: String) {
@@ -122,6 +135,11 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, P
         viewModel.showAllMapPoints()
     }
 
+    override fun placeSelected(place: PlaceView) {
+        hideKeyBoard()
+        viewModel.placeClicked(place)
+    }
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(this,
             MainMapViewModel.Factory(
@@ -134,6 +152,10 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, P
 
     override fun initFabStyle() {
         initFabStyle(binding?.addButton)
+    }
+
+    override fun setPlaceViewFragment(place: PlaceView) {
+        findNavController().navigate(MainMapFragmentDirections.actionMainMapFragmentToPlaceViewFragment(place))
     }
 
 }

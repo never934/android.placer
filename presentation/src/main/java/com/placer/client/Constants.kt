@@ -8,7 +8,6 @@ object Constants {
     const val SUPER_STATE_KEY = "SUPER_STATE_KEY"
     val screenHeightPx = CommonUtils.getScreenHeight()
 
-
     // in ms
     const val DEFAULT_ANIMATION_DURATION = 500L
 

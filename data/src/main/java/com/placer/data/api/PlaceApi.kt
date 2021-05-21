@@ -34,10 +34,10 @@ interface PlaceApi {
     /** comments **/
 
     @GET("v1/places/{placeId}/comments")
-    fun getPlaceComments(@Path("placeId")placeId: String) : Flow<List<PlaceCommentResponse>>
+    suspend fun getPlaceComments(@Path("placeId")placeId: String) : List<PlaceCommentResponse>
 
     @POST("v1/places/{placeId}/comments")
-    fun publishPlaceComments(@Path("placeId")placeId: String, @Body comments: List<PlaceCommentRequest>) : Flow<List<PlaceCommentResponse>>
+    suspend fun publishPlaceComments(@Path("placeId")placeId: String, @Body comments: List<PlaceCommentRequest>) : List<PlaceCommentResponse>
 
     /** photos **/
 

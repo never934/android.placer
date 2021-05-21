@@ -8,13 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.placer.client.AppClass
 import com.placer.client.R
-import com.placer.client.customview.CommentsCountView
+import com.placer.client.customview.comments.CommentsCountView
 import com.placer.domain.entity.place.Place
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

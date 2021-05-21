@@ -2,6 +2,7 @@ package com.placer.client.entity
 
 import android.content.Context
 import com.placer.client.util.extensions.DateExtensions.toView
+import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceComment
 import java.util.*
 
@@ -18,7 +19,11 @@ internal fun PlaceComment.toView() : PlaceCommentView {
         id = id,
         text = text,
         placeId = placeId,
-        createdDate = Date(createdDate).toView(),
+        createdDate = Date(createdDate*1000).toView(),
         author = author.toView()
     )
+}
+
+internal fun List<PlaceComment>.toViews() : List<PlaceCommentView> {
+    return map { it.toView() }
 }

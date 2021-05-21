@@ -12,9 +12,11 @@ import com.google.android.material.appbar.AppBarLayout
 import com.placer.client.AppClass
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
+import com.placer.client.customview.comments.CommentField
 import com.placer.client.databinding.FragmentPlaceViewBinding
+import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
-class PlaceViewFragment : BaseFragment() {
+class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener {
 
     private var binding: FragmentPlaceViewBinding? = null
     private lateinit var viewModel: PlaceViewViewModel
@@ -37,6 +39,8 @@ class PlaceViewFragment : BaseFragment() {
         viewModel = ViewModelProvider(this,
             PlaceViewViewModel.Factory(
                 AppClass.appInstance.placeComponent.loadPlacesUseCase,
+                AppClass.appInstance.placeCommentComponent.loadPlaceCommentUseCase,
+                AppClass.appInstance.placeCommentComponent.publishPlaceCommentUseCase,
                 PlaceViewFragmentArgs.fromBundle(requireArguments()).place.id
             )
         )
@@ -51,9 +55,11 @@ class PlaceViewFragment : BaseFragment() {
                 binding.appBarMotionLayout.progress = scrollY.toFloat()
             }
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener { viewModel.loadPlace() }
+            binding.commentField.initListener(this)
         }
         viewModel.place.observe(this, {
             binding?.place = it
+            binding?.executePendingBindings()
         })
         viewModel.clientIsPlaceAuthor.observe(this, {
             if (it){
@@ -64,6 +70,9 @@ class PlaceViewFragment : BaseFragment() {
                 binding?.publishedField?.visibility = View.GONE
             }
         })
+        viewModel.placeComments.observe(this, {
+            binding?.commentsComponent?.setComments(it)
+        })
     }
 
     override fun refreshStateChanged(state: Boolean) {
@@ -73,5 +82,10 @@ class PlaceViewFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun commentSendClicked(text: String) {
+        hideKeyBoard()
+        viewModel.sendPlaceComment(text)
     }
 }

@@ -90,6 +90,18 @@
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
+    <style name="comment_content">
+        <item name="android:textSize">@dimen/item_hint_text_size</item>
+        <item name="android:textColor">@color/comment_content_color</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="help_label">
+        <item name="android:textSize">@dimen/item_title_text_size</item>
+        <item name="android:textColor">@color/hint_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
     <style name="filter_label" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textSize">@dimen/item_hint_text_size</item>
         <item name="android:textColor">@color/color_primary</item>

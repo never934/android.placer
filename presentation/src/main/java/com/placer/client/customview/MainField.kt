@@ -20,7 +20,7 @@ import com.placer.client.util.extensions.FragmentExtensions.showKeyBoard
 import com.placer.client.util.extensions.ViewExtensions.getFormatted
 import com.placer.domain.entity.place.Place
 
-class MainField @JvmOverloads constructor(
+internal class MainField @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -86,7 +86,7 @@ class MainField @JvmOverloads constructor(
             ContextCompat.getDrawable(context, R.drawable.ic_baseline_close_24)
         )
         iconView.setOnClickListener {
-            editFieldView.setText("")
+            editFieldView.text.clear()
             editFieldView.clearFocus()
             fragment?.hideKeyBoard()
         }
@@ -94,9 +94,14 @@ class MainField @JvmOverloads constructor(
 
     internal fun setPlaces(places: List<PlaceView>){
         placesContainer.removeAllViews()
-        places.forEach {
+        places.forEach { place ->
            val view = PlaceItem(context)
-           view.setPlace(it)
+           view.setPlace(place)
+           view.getRoot().setOnClickListener {
+               editFieldView.text.clear()
+               editFieldView.clearFocus()
+               callback?.placeSelected(place)
+           }
            placesContainer.addView(view)
         }
     }

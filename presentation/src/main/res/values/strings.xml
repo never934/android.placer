@@ -3,6 +3,7 @@
 
     <!-- common !-->
     <string name="common_ok">OK</string>
+    <string name="common_err_empty">You can`t send empty</string>
 
     <!-- auth screen !-->
     <string name="auth_sign_with_email">Sign in with email</string>
@@ -111,6 +112,9 @@
     <string name="help_third_title">Tops and publishing</string>
     <string name="help_third_body">See other places, post yours, disscuss it, promote your places in top rating, share it with friends in social networks  and enjoy! Good luck!</string>
     <string name="help_start_button">Start</string>
+
+    <!-- Comments component !-->
+    <string name="comments_empty_title">Is empty yet!</string>
 
     <string name="days">%d days</string>
     <string name="null_representation">Not entered</string>

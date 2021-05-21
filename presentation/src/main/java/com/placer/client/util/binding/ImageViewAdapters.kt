@@ -11,8 +11,8 @@ import com.placer.client.R
 import com.placer.client.entity.PlacePhotoView
 import com.placer.domain.entity.place.PlacePhoto
 
-@BindingAdapter("imageUrl")
-internal fun bindImageUrl(view: ImageView, url: String?) {
+@BindingAdapter("avatarUrl")
+internal fun bindAvatarUrl(view: ImageView, url: String?) {
         Glide.with(view.context)
             .load(url)
             .error(ContextCompat.getDrawable(view.context, R.drawable.ic_baseline_account_circle_24))

@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
@@ -54,7 +55,7 @@
                 app:text="@{place.cityName}" />
         </LinearLayout>
 
-        <com.placer.client.customview.CommentsCountView
+        <com.placer.client.customview.comments.CommentsCountView
             android:id="@+id/commentsCountView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
