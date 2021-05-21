@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="place"
+            type="com.placer.client.entity.PlaceView"/>
+    </data>
+
+    <com.placer.client.customview.BaseConstraintLayout
+        android:id="@+id/baseConstraint"
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layoutDescription="@xml/place_view_photos_motion">
+            <ImageView
+                android:id="@+id/photosView"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placePhotoPreview="@{place.photos}" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/cityField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:content="@{place.cityName}"
+                            app:hint="@{@string/place_view_city_hint}"
+                            app:icon="@{@drawable/ic_baseline_pin_drop_24}" />
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/descriptionField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:content="@{place.description}"
+                            app:hint="@{@string/place_view_description_hint}"
+                            app:icon="@{@drawable/ic_baseline_read_more_24}" />
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/inTopField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:content="@{place.topPosition}"
+                            app:hint="@{@string/place_view_in_top_hint}"
+                            app:icon="@{@drawable/ic_baseline_local_fire_department_24}" />
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/commentsField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:content="@{place.commentsCount}"
+                            app:hint="@{@string/place_view_comments_size_hint}"
+                            app:icon="@{@drawable/ic_baseline_forum_24}" />
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/createdDateField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:content="@{place.createdDate}"
+                            app:hint="@{@string/place_view_created_hint}"
+                            app:icon="@{@drawable/ic_baseline_insert_invitation_24}" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+
+                        <TextView
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/place_view_comments_label" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/appBarMotionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutDescription="@xml/place_view_app_bar_motion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/backArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/big_margin"
+                    android:src="@drawable/ic_baseline_arrow_back_24" />
+
+                <TextView
+                    android:id="@+id/titleView"
+                    style="@style/item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/text_on_color" />
+            </LinearLayout>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </com.placer.client.customview.BaseConstraintLayout>
+</layout>

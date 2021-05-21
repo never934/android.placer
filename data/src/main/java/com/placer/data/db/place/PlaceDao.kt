@@ -16,6 +16,12 @@ interface PlaceDao {
     }
 
     @Transaction
+    suspend fun updatePlace(place: PlaceDB) : PlaceDB {
+        savePlace(place)
+        return getPlace(place.id)
+    }
+
+    @Transaction
     suspend fun updateUserPlaces(userId: String, places: List<PlaceDB>) : List<PlaceDB> {
         val userOldPlaces = getPlaces().filter { it.author.id == userId }
         deletePlaces(userOldPlaces.toTypedArray())
@@ -43,7 +49,4 @@ interface PlaceDao {
 
     @Query("DELETE FROM placedb where id = :placeId")
     suspend fun deletePlace(placeId: String)
-
-    @Update
-    suspend fun updatePlace(place: PlaceDB)
 }

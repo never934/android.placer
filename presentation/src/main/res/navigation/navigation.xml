@@ -7,9 +7,25 @@
     <fragment
         android:id="@+id/mainMapFragment"
         android:name="com.placer.client.screens.MainMapFragment"
-        android:label="MainMapFragment" />
+        android:label="MainMapFragment" >
+        <action
+            android:id="@+id/action_mainMapFragment_to_placeViewFragment"
+            app:destination="@id/placeViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/placesFragment"
         android:name="com.placer.client.screens.places.PlacesFragment"
-        android:label="PlacesFragment" />
+        android:label="PlacesFragment" >
+        <action
+            android:id="@+id/action_placesFragment_to_placeViewFragment"
+            app:destination="@id/placeViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeViewFragment"
+        android:name="com.placer.client.screens.places.PlaceViewFragment"
+        android:label="PlaceViewFragment" >
+        <argument
+            android:name="place"
+            app:argType="com.placer.client.entity.PlaceView" />
+    </fragment>
 </navigation>

@@ -6,6 +6,7 @@ object Constants {
     /** custom view **/
     const val SPARSE_STATE_KEY = "SPARSE_STATE_KEY"
     const val SUPER_STATE_KEY = "SUPER_STATE_KEY"
+    val screenHeightPx = CommonUtils.getScreenHeight()
 
 
     // in ms

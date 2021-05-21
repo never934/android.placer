@@ -14,6 +14,10 @@ class FakePlaceRepository : PlaceRepository {
         emit(Result.success(places))
     }
 
+    override suspend fun loadPlacesFromCache(): Flow<Result<List<Place>>> = flow {
+        emit(Result.success(places))
+    }
+
     override suspend fun publishPlace(place: Place): Flow<Result<Place>>  = flow {
         if (error.not()){
             places.add(place)

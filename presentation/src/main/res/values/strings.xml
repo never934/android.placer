@@ -48,6 +48,7 @@
     <string name="place_view_description_hint">Description</string>
     <string name="place_view_city_hint">City</string>
     <string name="place_view_in_top_hint">In top</string>
+    <string name="place_view_in_top_content_format">#%d</string>
     <string name="place_view_comments_size_hint">Comments</string>
     <string name="place_view_created_hint">Created</string>
     <string name="place_view_comments_label">Comments:</string>

@@ -11,16 +11,21 @@ import com.placer.domain.usecase.place.LoadPlacesUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class PlacesViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewModel() {
+class PlacesViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewModel(){
 
     private var _places: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())
     internal val places: LiveData<List<PlaceView>>
-        get() = Transformations.switchMap(_placesFilter){ filter ->
-            MutableLiveData(_places.value?.filter { filter(it) }?.map { it.toView() })
-        }
+    get() = Transformations.switchMap(_placesFilter){ filter ->
+        MutableLiveData(_places.value?.filter { filter(it) }?.map { it.toView() })
+    }
+
+    private var _goToPlaceView: MutableLiveData<PlaceView?> = MutableLiveData()
+    internal val goToPlaceView: LiveData<PlaceView?>
+    get() = _goToPlaceView
 
     private var _placesFilter: MutableLiveData<(place: Place) -> Boolean> = MutableLiveData(Filters::getAllPointsFilter)
     private var _tabPosition: MutableLiveData<Int> = MutableLiveData(Constants.ALL_TAB_POSITION)
+
 
     init {
         loadPlaces()
@@ -53,12 +58,16 @@ class PlacesViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewMo
     }
 
     internal fun placeClicked(place: PlaceView){
-
+        _goToPlaceView.value = place
     }
 
     fun tabPositionChanged(position: Int){
         _tabPosition.value = position
         setFilter()
+    }
+
+    fun navigatedToPlaceView(){
+        _goToPlaceView.value = null
     }
 
     private fun setFilter(){

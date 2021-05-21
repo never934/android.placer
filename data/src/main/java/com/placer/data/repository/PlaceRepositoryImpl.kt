@@ -1,5 +1,6 @@
 package com.placer.data.repository
 
+import android.util.Log
 import com.placer.data.api.PlaceApi
 import com.placer.data.api.request.toRequest
 import com.placer.data.api.response.toDB
@@ -16,6 +17,17 @@ class PlaceRepositoryImpl @Inject internal constructor(
     private val placeDao: PlaceDao,
     private val dispatcher: CoroutineDispatcher
 ) : PlaceRepository {
+    override suspend fun loadPlaceById(placeId: String): Flow<Result<Place>> = flow {
+        try {
+            val place = placeApi.getPlaceById(placeId)
+            val daoPlace = placeDao.updatePlace(place.toDB())
+            emit(Result.success(daoPlace.toEntity()))
+        }catch (e: Exception){
+            Log.e("exception", e.message ?: "null")
+            emit(Result.success(placeDao.getPlace(placeId).toEntity()))
+        }
+    }
+
     override suspend fun loadPlaces(): Flow<Result<List<Place>>> = flow {
         try {
             val places = placeApi.getPlaces()

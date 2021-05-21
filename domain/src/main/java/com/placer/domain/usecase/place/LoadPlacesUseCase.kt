@@ -13,6 +13,9 @@ class LoadPlacesUseCase(
     suspend fun loadPlaces() : Flow<Result<List<Place>>> =
         placeRepository.loadPlaces().flowOn(dispatcher)
 
+    suspend fun loadPlaceById(placeId: String) : Flow<Result<Place>> =
+        placeRepository.loadPlaceById(placeId).flowOn(dispatcher)
+
     suspend fun loadPlacesBySearchFromCacheWithEmptyFilter(input: String) : Flow<Result<List<Place>>> =
         placeRepository.loadPlacesFromCache()
             .map {

@@ -19,6 +19,9 @@ interface PlaceApi {
     @GET("v1/places")
     suspend fun getPlaces() : List<PlaceResponse>
 
+    @GET("v1/places/{placeId}")
+    suspend fun getPlaceById(@Path("placeId")placeId: String) : PlaceResponse
+
     @POST("v1/places")
     fun publishPlace(@Body request: PlaceRequest) : Flow<PlaceResponse>
 

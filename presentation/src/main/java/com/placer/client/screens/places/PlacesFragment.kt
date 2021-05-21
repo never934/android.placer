@@ -9,15 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.placer.client.AppClass
 import com.placer.client.R
 import com.placer.client.adapters.PlacesAdapter
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentPlacesBinding
+import com.placer.client.entity.PlaceView
+import com.placer.client.navigation.PlaceViewTransaction
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
-class PlacesFragment : BaseFragment() {
+internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
 
     private lateinit var viewModel: PlacesViewModel
     private var binding: FragmentPlacesBinding? = null
@@ -89,6 +92,12 @@ class PlacesFragment : BaseFragment() {
         viewModel.places.observe(this, {
             adapter.submitList(it)
         })
+        viewModel.goToPlaceView.observe(this, {
+            it?.let {
+                setPlaceViewFragment(it)
+                viewModel.navigatedToPlaceView()
+            }
+        })
         binding?.let { binding ->
             binding.placesRecycler.adapter = adapter
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener { viewModel.loadPlaces() }
@@ -107,5 +116,9 @@ class PlacesFragment : BaseFragment() {
 
     override fun refreshStateChanged(state: Boolean) {
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
+    }
+
+    override fun setPlaceViewFragment(place: PlaceView) {
+        findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToPlaceViewFragment(place))
     }
 }

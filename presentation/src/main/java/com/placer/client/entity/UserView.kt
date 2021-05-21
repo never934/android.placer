@@ -1,10 +1,12 @@
 package com.placer.client.entity
 
-import android.content.Context
+import android.os.Parcelable
 import com.placer.client.util.extensions.DateExtensions.daysFromItRepresentation
 import com.placer.domain.entity.user.User
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 internal data class UserView(
     val id: String,
     val name: String,
@@ -16,7 +18,7 @@ internal data class UserView(
     val cityName: String,
     val avatarUrl: String?,
     val createdDate: String
-)
+) : Parcelable
 
 internal fun User.toView() : UserView {
     return UserView(

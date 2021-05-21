@@ -8,10 +8,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.imageview.ShapeableImageView
 import com.placer.client.AppClass
 import com.placer.client.R
+import com.placer.client.entity.PlacePhotoView
 import com.placer.domain.entity.place.PlacePhoto
 
 @BindingAdapter("imageUrl")
-fun bindImageUrl(view: ImageView, url: String?) {
+internal fun bindImageUrl(view: ImageView, url: String?) {
         Glide.with(view.context)
             .load(url)
             .error(ContextCompat.getDrawable(view.context, R.drawable.ic_baseline_account_circle_24))
@@ -21,8 +22,21 @@ fun bindImageUrl(view: ImageView, url: String?) {
 }
 
 @BindingAdapter("placePhotoPreview")
-fun bindPlacePhotoPreview(view: ShapeableImageView, photos: List<PlacePhoto>) {
-    if (photos.isNotEmpty()){
+internal fun bindPlacePhotoPreview(view: ShapeableImageView, photos: List<PlacePhotoView>?) {
+    if (photos?.isNullOrEmpty()?.not() == true){
+        Glide.with(view.context)
+            .load(photos.first().url)
+            .error(ContextCompat.getDrawable(view.context, R.drawable.ic_photo_placeholder))
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .into(view)
+    }else{
+        view.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_photo_placeholder))
+    }
+}
+
+@BindingAdapter("placePhotoPreview")
+internal fun bindPlacePhotoPreview(view: ImageView, photos: List<PlacePhotoView>?) {
+    if (photos?.isNullOrEmpty()?.not() == true){
         Glide.with(view.context)
             .load(photos.first().url)
             .error(ContextCompat.getDrawable(view.context, R.drawable.ic_photo_placeholder))

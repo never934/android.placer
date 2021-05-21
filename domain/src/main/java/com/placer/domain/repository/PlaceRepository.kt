@@ -4,6 +4,7 @@ import com.placer.domain.entity.place.Place
 import kotlinx.coroutines.flow.Flow
 
 interface PlaceRepository {
+    suspend fun loadPlaceById(placeId: String) : Flow<Result<Place>>
     suspend fun loadPlaces() : Flow<Result<List<Place>>>
     suspend fun loadPlacesFromCache() : Flow<Result<List<Place>>>
     suspend fun publishPlace(place: Place) : Flow<Result<Place>>
