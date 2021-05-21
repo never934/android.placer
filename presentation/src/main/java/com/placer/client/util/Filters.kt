@@ -4,7 +4,7 @@ import com.placer.data.AppPrefs
 import com.placer.domain.entity.place.Place
 
 object Filters {
-    fun getAllMapPointsFilter(place: Place) : Boolean {
+    fun getAllPointsFilter(place: Place) : Boolean {
         return true
     }
 

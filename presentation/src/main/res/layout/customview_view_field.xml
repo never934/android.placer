@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/iconView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/normal_padding"
+        android:layout_marginStart="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_baseline_local_fire_department_24"
+        tools:tint="@color/color_primary_light"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/iconView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconView"
+        app:layout_constraintTop_toTopOf="@+id/iconView">
+
+        <TextView
+            android:id="@+id/hintView"
+            style="@style/item_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iconView"
+            app:layout_constraintTop_toTopOf="@+id/iconView"
+            tools:text="In top" />
+
+        <TextView
+            android:id="@+id/contentView"
+            style="@style/item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="18 july 2020" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

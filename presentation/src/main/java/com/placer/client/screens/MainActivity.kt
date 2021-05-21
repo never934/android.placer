@@ -1,7 +1,9 @@
 package com.placer.client.screens
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -37,6 +39,7 @@ class MainActivity : BaseActivity() {
         NavigationUI.setupActionBarWithNavController(this, this.findNavController(R.id.navHostFragment), drawerLayout)
         appBarConfiguration = AppBarConfiguration(this.findNavController(R.id.navHostFragment).graph, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, this.findNavController(R.id.navHostFragment))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.background_color)))
     }
 
     private fun initDrawer(binding: ActivityMainBinding) {
@@ -51,7 +54,6 @@ class MainActivity : BaseActivity() {
             }
         )
     }
-
 
     fun openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START)

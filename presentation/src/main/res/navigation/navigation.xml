@@ -8,4 +8,8 @@
         android:id="@+id/mainMapFragment"
         android:name="com.placer.client.screens.MainMapFragment"
         android:label="MainMapFragment" />
+    <fragment
+        android:id="@+id/placesFragment"
+        android:name="com.placer.client.screens.places.PlacesFragment"
+        android:label="PlacesFragment" />
 </navigation>

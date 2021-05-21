@@ -1,6 +1,7 @@
 package com.placer.client.screens
 
 import androidx.lifecycle.*
+import com.placer.client.Constants
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
@@ -22,15 +23,11 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
         MutableLiveData(_mapPlaces.value?.filter { filter(it) })
     }
 
-    private var mapFilter: MutableLiveData<(place: Place) -> Boolean> = MutableLiveData(Filters::getAllMapPointsFilter)
-
-    init {
-        loadMapPlaces()
-    }
+    private var mapFilter: MutableLiveData<(place: Place) -> Boolean> = MutableLiveData()
 
     fun loadPlaces(input: String) {
         viewModelScope.launch {
-            val result = placesUseCase.loadPlacesBySearch(input).first()
+            val result = placesUseCase.loadPlacesBySearchFromCacheWithEmptyFilter(input).first()
             if(result.isSuccess){
                 _searchPlaces.value = result.getOrNull()
             }else{
@@ -40,11 +37,15 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
     }
 
     fun showAllMapPoints(){
-        mapFilter.value = Filters::getAllMapPointsFilter
+        mapFilter.value?.let {
+            mapFilter.value = Filters::getAllPointsFilter
+        }
     }
 
     fun showMyPoints(){
-        mapFilter.value = Filters::getMyPointsFilter
+        mapFilter.value?.let {
+            mapFilter.value = Filters::getMyPointsFilter
+        }
     }
 
     fun loadMapPlaces() {
@@ -57,6 +58,7 @@ class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewM
             }else{
                 showSnackBar.value = result.exceptionOrNull()?.message
             }
+            mapFilter.value = Filters::getAllPointsFilter
         }
     }
 

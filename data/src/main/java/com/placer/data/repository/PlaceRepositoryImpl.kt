@@ -29,6 +29,12 @@ class PlaceRepositoryImpl @Inject internal constructor(
         .catch { Result.failure<List<Place>>(Exception("Error while loading places")) }
         .flowOn(dispatcher)
 
+    override suspend fun loadPlacesFromCache(): Flow<Result<List<Place>>> = flow {
+        emit(Result.success(placeDao.getPlaces().map { it.toEntity() }))
+    }
+        .catch { Result.failure<List<Place>>(Exception("Error while loading places")) }
+        .flowOn(dispatcher)
+
     override suspend fun publishPlace(place: Place): Flow<Result<Place>> =
         placeApi.publishPlace(place.toRequest())
             .map {

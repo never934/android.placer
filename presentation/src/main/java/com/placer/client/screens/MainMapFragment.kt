@@ -40,6 +40,11 @@ class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, P
         return binding?.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadMapPlaces()
+    }
+
     private fun initMap(){
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(this)

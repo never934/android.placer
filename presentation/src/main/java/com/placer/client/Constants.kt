@@ -18,6 +18,10 @@ object Constants {
     // marker focus height
     val MARKER_FOCUS_HEIGHT = CommonUtils.getScreenHeight()
 
+    // places tabs
+    const val ALL_TAB_POSITION = 0
+    const val MY_TAB_POSITION = 1
+
     const val GOOGLE_MAP_ANIMATION_DURATION = 1000
     const val GOOGLE_MAP_INFO_WINDOW_V_ANCHOR = 0.5f
 }

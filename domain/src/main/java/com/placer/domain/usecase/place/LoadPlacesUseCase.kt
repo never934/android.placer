@@ -13,12 +13,23 @@ class LoadPlacesUseCase(
     suspend fun loadPlaces() : Flow<Result<List<Place>>> =
         placeRepository.loadPlaces().flowOn(dispatcher)
 
-    suspend fun loadPlacesBySearch(input: String) : Flow<Result<List<Place>>> =
-        placeRepository.loadPlaces()
+    suspend fun loadPlacesBySearchFromCacheWithEmptyFilter(input: String) : Flow<Result<List<Place>>> =
+        placeRepository.loadPlacesFromCache()
             .map {
                 Result.success(it.getOrNull()!!.filter { place ->
                     place.name.toUpperCase(Locale.ROOT)
                         .contains(input.toUpperCase(Locale.ROOT)) && input.isNotEmpty()
+                })
+            }
+            .catch { Result.failure<List<Place>>(Exception()) }
+            .flowOn(dispatcher)
+
+    suspend fun loadPlacesBySearchFromCache(input: String) : Flow<Result<List<Place>>> =
+        placeRepository.loadPlacesFromCache()
+            .map {
+                Result.success(it.getOrNull()!!.filter { place ->
+                    place.name.toUpperCase(Locale.ROOT)
+                        .contains(input.toUpperCase(Locale.ROOT)) || place.name.isEmpty()
                 })
             }
             .catch { Result.failure<List<Place>>(Exception()) }
