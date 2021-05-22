@@ -8,6 +8,7 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
@@ -22,7 +23,7 @@ import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
 internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
 
-    private lateinit var viewModel: PlacesViewModel
+    override val viewModel: PlacesViewModel by viewModels()
     private var binding: FragmentPlacesBinding? = null
     private var searchView: SearchView? = null
     private var queryTextListener: SearchView.OnQueryTextListener? = null
@@ -66,16 +67,6 @@ internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
         }
         searchView?.setOnQueryTextListener(queryTextListener)
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this,
-            PlacesViewModel.Factory(
-                AppClass.appInstance.placeComponent.loadPlacesUseCase
-            )
-        )
-            .get(PlacesViewModel::class.java)
-        _viewModel = viewModel
     }
 
     override fun onDestroy() {

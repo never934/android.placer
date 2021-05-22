@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
@@ -18,10 +19,12 @@ import com.placer.client.databinding.FragmentPlaceViewBinding
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
-class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener {
+internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener {
 
     private var binding: FragmentPlaceViewBinding? = null
-    private lateinit var viewModel: PlaceViewViewModel
+    override val viewModel: PlaceViewViewModel by viewModels{
+        PlaceViewViewModel.Factory(PlaceViewFragmentArgs.fromBundle(requireArguments()).place.id)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,24 +40,10 @@ class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener {
         return binding?.root
     }
 
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this,
-            PlaceViewViewModel.Factory(
-                AppClass.appInstance.placeComponent.loadPlacesUseCase,
-                AppClass.appInstance.placeCommentComponent.loadPlaceCommentUseCase,
-                AppClass.appInstance.placeCommentComponent.publishPlaceCommentUseCase,
-                PlaceViewFragmentArgs.fromBundle(requireArguments()).place.id
-            )
-        )
-            .get(PlaceViewViewModel::class.java)
-        _viewModel = viewModel
-    }
-
     override fun initListeners() {
         binding?.let { binding ->
             binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
                 val motionProgress = CommonUtils.getMotionProgress(30f, scrollY.toFloat())
-                Log.e("progress", motionProgress.toString())
                 binding.motionLayout.progress = motionProgress
                 binding.appBarMotionLayout.progress = motionProgress
             }

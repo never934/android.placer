@@ -3,6 +3,7 @@ package com.placer.client.screens.auth
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthMethodPickerLayout
@@ -17,7 +18,7 @@ import com.placer.data.AppPrefs
 
 class AuthActivity: BaseActivity() {
 
-    lateinit var viewModel: AuthViewModel
+    override val viewModel: AuthViewModel by viewModels()
     private var binding: ActivityAuthBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,16 +60,6 @@ class AuthActivity: BaseActivity() {
     private fun startMainActivity(){
         finish()
         startActivity(Intent(this, MainActivity::class.java))
-    }
-
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this,
-            AuthViewModel.Factory(
-                AppClass.appInstance.authComponent.signInUseCase
-            )
-        )
-            .get(AuthViewModel::class.java)
-        _viewModel = viewModel
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

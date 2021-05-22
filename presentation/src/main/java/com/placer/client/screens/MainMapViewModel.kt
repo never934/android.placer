@@ -1,6 +1,7 @@
 package com.placer.client.screens
 
 import androidx.lifecycle.*
+import com.placer.client.AppClass
 import com.placer.client.Constants
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
@@ -11,8 +12,12 @@ import com.placer.domain.usecase.place.LoadPlacesUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-internal class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : BaseViewModel() {
+internal class MainMapViewModel constructor(
+    private val placesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase
+    ) : BaseViewModel() {
+
     private var _searchPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())
     internal val searchPlaces: LiveData<List<PlaceView>>
     get() = _searchPlaces.map { it.map { place -> place.toView() } }
@@ -79,7 +84,7 @@ internal class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : 
             mapFilter.value = Filters::getAllPointsFilter
         }
     }
-
+/*
     class Factory(private val placesUseCase: LoadPlacesUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainMapViewModel::class.java)) {
@@ -89,4 +94,5 @@ internal class MainMapViewModel(private val placesUseCase: LoadPlacesUseCase) : 
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
+ */
 }

@@ -1,6 +1,7 @@
 package com.placer.client.screens
 
 import androidx.lifecycle.*
+import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val loadUserUseCase: LoadUserUseCase) : BaseViewModel() {
+class MainViewModel(private val loadUserUseCase: LoadUserUseCase = AppClass.appInstance.userComponent.loadUserUseCase) : BaseViewModel() {
     private var _profile: MutableLiveData<User> = MutableLiveData()
     internal val profile: LiveData<UserView>
     get() = _profile.map { it.toView() }
@@ -27,16 +28,6 @@ class MainViewModel(private val loadUserUseCase: LoadUserUseCase) : BaseViewMode
             }else{
                 showSnackBar.value = profileResult.exceptionOrNull()?.message
             }
-        }
-    }
-
-    class Factory(private val loadUserUseCase: LoadUserUseCase) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MainViewModel(loadUserUseCase) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
 }

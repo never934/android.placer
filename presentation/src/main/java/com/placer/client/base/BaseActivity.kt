@@ -7,19 +7,12 @@ import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    var _viewModel: BaseViewModel? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initViewModel()
-    }
+    abstract val viewModel: BaseViewModel
 
     override fun onStart() {
         super.onStart()
-        _viewModel?.showSnackBar?.observe(this, {
+        viewModel.showSnackBar.observe(this, {
             Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
         })
     }
-
-    abstract fun initViewModel()
 }

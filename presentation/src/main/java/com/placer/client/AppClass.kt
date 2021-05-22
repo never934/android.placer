@@ -1,7 +1,6 @@
 package com.placer.client
 
 import android.app.Application
-import android.content.Context
 import com.google.android.gms.maps.MapsInitializer
 import com.placer.data.DataBunchModule
 import com.placer.data.di.component.*
@@ -18,7 +17,7 @@ import com.placer.data.di.module.retrofit.ServerRetrofitModule
 import com.placer.data.di.module.room.RoomModule
 import com.placer.data.di.module.usecase.*
 
-class AppClass : Application() {
+internal class AppClass : Application() {
 
     lateinit var authComponent: AuthComponent
     lateinit var cityComponent: CityComponent

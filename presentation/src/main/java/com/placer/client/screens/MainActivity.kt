@@ -3,6 +3,7 @@ package com.placer.client.screens
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -20,9 +21,9 @@ import com.placer.client.databinding.NavHeaderBinding
 
 class MainActivity : BaseActivity() {
 
+    override val viewModel: MainViewModel by viewModels()
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var viewModel: MainViewModel
     private var binding: ActivityMainBinding? = null
     private var navHeaderBinding: NavHeaderBinding? = null
 
@@ -67,15 +68,5 @@ class MainActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(this.findNavController(R.id.navHostFragment), drawerLayout)
-    }
-
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this,
-            MainViewModel.Factory(
-                AppClass.appInstance.userComponent.loadUserUseCase
-            )
-        )
-            .get(MainViewModel::class.java)
-        _viewModel = viewModel
     }
 }

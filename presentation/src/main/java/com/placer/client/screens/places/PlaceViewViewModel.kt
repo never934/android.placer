@@ -1,6 +1,7 @@
 package com.placer.client.screens.places
 
 import androidx.lifecycle.*
+import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceCommentView
 import com.placer.client.entity.PlaceView
@@ -16,12 +17,19 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class PlaceViewViewModel(
-    private val loadPlacesUseCase: LoadPlacesUseCase,
-    private val loadPlaceCommentsUseCase: LoadPlaceCommentsUseCase,
-    private val publishPlaceCommentUseCase: PublishPlaceCommentUseCase,
-    private val placeId: String
+    private val loadPlacesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase,
+    private val loadPlaceCommentsUseCase: LoadPlaceCommentsUseCase = AppClass.appInstance.placeCommentComponent.loadPlaceCommentUseCase,
+    private val publishPlaceCommentUseCase: PublishPlaceCommentUseCase = AppClass.appInstance.placeCommentComponent.publishPlaceCommentUseCase,
+    private var placeId: String = ""
     ) : BaseViewModel()
 {
+
+    constructor(placeId: String) : this(){
+        this.placeId = placeId
+        loadPlace()
+        loadPlaceComments()
+    }
+
     private var _place: MutableLiveData<Place> = MutableLiveData()
     val place: LiveData<PlaceView>
     get() = _place.map { it.toView() }
@@ -33,11 +41,6 @@ internal class PlaceViewViewModel(
     private var _clientIsPlaceAuthor: MutableLiveData<Boolean> = MutableLiveData()
     val clientIsPlaceAuthor: LiveData<Boolean>
     get() = _clientIsPlaceAuthor
-
-    init {
-        loadPlace()
-        loadPlaceComments()
-    }
 
     fun loadPlace() {
         isRefreshing.value = true
@@ -77,15 +80,12 @@ internal class PlaceViewViewModel(
     }
 
     class Factory(
-        private val placesUseCase: LoadPlacesUseCase,
-        private val loadPlaceCommentsUseCase: LoadPlaceCommentsUseCase,
-        private val publishPlaceCommentUseCase: PublishPlaceCommentUseCase,
         private val placeId: String
         ) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(PlaceViewViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return PlaceViewViewModel(placesUseCase, loadPlaceCommentsUseCase, publishPlaceCommentUseCase, placeId) as T
+                return PlaceViewViewModel(placeId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

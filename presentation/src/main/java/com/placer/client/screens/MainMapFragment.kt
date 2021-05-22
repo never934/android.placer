@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.*
@@ -16,6 +17,7 @@ import com.placer.client.AppClass
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
+import com.placer.client.base.BaseViewModel
 import com.placer.client.databinding.FragmentMainMapBinding
 import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
@@ -28,7 +30,7 @@ import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
 internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle, PlaceViewTransaction {
 
-    private lateinit var viewModel: MainMapViewModel
+    override val viewModel: MainMapViewModel by viewModels()
     private var binding: FragmentMainMapBinding? = null
 
     override fun onCreateView(
@@ -138,16 +140,6 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
     override fun placeSelected(place: PlaceView) {
         hideKeyBoard()
         viewModel.placeClicked(place)
-    }
-
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this,
-            MainMapViewModel.Factory(
-                AppClass.appInstance.placeComponent.loadPlacesUseCase
-            )
-        )
-            .get(MainMapViewModel::class.java)
-        _viewModel = viewModel
     }
 
     override fun initFabStyle() {
