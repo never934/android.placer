@@ -21,7 +21,8 @@
             app:layoutDescription="@xml/place_view_photos_motion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:animateLayoutChanges="true">
 
             <ImageView
                 android:id="@+id/photosView"
@@ -57,62 +58,68 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="12dp">
                     <LinearLayout
-                        android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin"
                         android:orientation="vertical">
-
-                        <com.placer.client.customview.ViewField
-                            android:id="@+id/publishedField"
+                        <LinearLayout
+                            android:id="@+id/placeInfoLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            app:contentColor="@{place.published ? @color/success_color : @color/fail_color}"
-                            app:content="@{place.published ? @string/place_view_status_published : @string/place_view_status_not_published}"
-                            app:hint="@{@string/place_view_status_hint}"
-                            app:icon="@{@drawable/ic_baseline_public_24}" />
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:visibility="invisible"
+                            android:animateLayoutChanges="true"
+                            android:orientation="vertical">
 
-                        <com.placer.client.customview.ViewField
-                            android:id="@+id/cityField"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:content="@{place.cityName}"
-                            app:hint="@{@string/place_view_city_hint}"
-                            app:icon="@{@drawable/ic_baseline_pin_drop_24}" />
+                            <com.placer.client.customview.ViewField
+                                android:id="@+id/publishedField"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                app:contentColor="@{place.published ? @color/success_color : @color/fail_color}"
+                                app:content="@{place.published ? @string/place_view_status_published : @string/place_view_status_not_published}"
+                                app:hint="@{@string/place_view_status_hint}"
+                                app:icon="@{@drawable/ic_baseline_public_24}" />
 
-                        <com.placer.client.customview.ViewField
-                            android:id="@+id/descriptionField"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:content="@{place.description}"
-                            app:hint="@{@string/place_view_description_hint}"
-                            app:icon="@{@drawable/ic_baseline_read_more_24}" />
+                            <com.placer.client.customview.ViewField
+                                android:id="@+id/cityField"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:content="@{place.cityName}"
+                                app:hint="@{@string/place_view_city_hint}"
+                                app:icon="@{@drawable/ic_baseline_pin_drop_24}" />
 
-                        <com.placer.client.customview.ViewField
-                            android:id="@+id/inTopField"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:content="@{place.topPosition}"
-                            app:hint="@{@string/place_view_in_top_hint}"
-                            app:icon="@{@drawable/ic_baseline_local_fire_department_24}" />
+                            <com.placer.client.customview.ViewField
+                                android:id="@+id/descriptionField"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:content="@{place.description}"
+                                app:hint="@{@string/place_view_description_hint}"
+                                app:icon="@{@drawable/ic_baseline_read_more_24}" />
 
-                        <com.placer.client.customview.ViewField
-                            android:id="@+id/commentsField"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:content="@{place.commentsCount}"
-                            app:hint="@{@string/place_view_comments_size_hint}"
-                            app:icon="@{@drawable/ic_baseline_forum_24}" />
+                            <com.placer.client.customview.ViewField
+                                android:id="@+id/inTopField"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:content="@{place.topPosition}"
+                                app:hint="@{@string/place_view_in_top_hint}"
+                                app:icon="@{@drawable/ic_baseline_local_fire_department_24}" />
 
-                        <com.placer.client.customview.ViewField
-                            android:id="@+id/createdDateField"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:content="@{place.createdDate}"
-                            app:hint="@{@string/place_view_created_hint}"
-                            app:icon="@{@drawable/ic_baseline_insert_invitation_24}" />
+                            <com.placer.client.customview.ViewField
+                                android:id="@+id/commentsField"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:content="@{place.commentsCount}"
+                                app:hint="@{@string/place_view_comments_size_hint}"
+                                app:icon="@{@drawable/ic_baseline_forum_24}" />
 
+                            <com.placer.client.customview.ViewField
+                                android:id="@+id/createdDateField"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:content="@{place.createdDate}"
+                                app:hint="@{@string/place_view_created_hint}"
+                                app:icon="@{@drawable/ic_baseline_insert_invitation_24}" />
+                        </LinearLayout>
                         <TextView
                             style="@style/headline"
                             android:layout_width="match_parent"

@@ -52,6 +52,7 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
         }
         viewModel.place.observe(this, {
             binding?.place = it
+            binding?.placeInfoLayout?.visibility = View.VISIBLE
             binding?.executePendingBindings()
         })
         viewModel.clientIsPlaceAuthor.observe(this, {
