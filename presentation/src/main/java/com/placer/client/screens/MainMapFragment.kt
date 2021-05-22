@@ -8,21 +8,20 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.placer.client.AppClass
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
-import com.placer.client.base.BaseViewModel
 import com.placer.client.databinding.FragmentMainMapBinding
 import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
 import com.placer.client.interfaces.PlacerFabStyle
 import com.placer.client.navigation.PlaceViewTransaction
+import com.placer.client.screens.places.PlaceViewFragmentArgs
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.InfoWindowAdapter
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
@@ -85,30 +84,54 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
     override fun onMapReady(map: GoogleMap) {
         map.uiSettings.isCompassEnabled = false
         viewModel.mapPlaces.observe(this, {
-            map.clear()
+            clearMap(map)
             map.setInfoWindowAdapter(InfoWindowAdapter(requireActivity(), it))
+            val markers: ArrayList<Marker> = arrayListOf()
             it.forEach { place ->
-                val marker = MarkerOptions()
+                val markerOptions = MarkerOptions()
                     .position(LatLng(place.lat, place.lng))
                     .icon(CommonUtils.bitmapDescriptorFromVector(requireContext(), R.drawable.ic_map_marker))
                     .title(place.id)
-                marker.infoWindowAnchor(marker.infoWindowAnchorU, Constants.GOOGLE_MAP_INFO_WINDOW_V_ANCHOR)
-                map.addMarker(marker)
+                markerOptions.infoWindowAnchor(markerOptions.infoWindowAnchorU, Constants.GOOGLE_MAP_INFO_WINDOW_V_ANCHOR)
+                val marker = map.addMarker(markerOptions)
+                markers.add(marker)
             }
+            viewModel.updateMapMarkers(markers)
+            executeInitPlace(map)
         })
         map.setOnMarkerClickListener {
-            map.animateCamera(
-                CameraUpdateFactory.newLatLng(
-                    CommonUtils.getMapFocusPoint(map, requireView(), it)
-                ),
-                Constants.GOOGLE_MAP_ANIMATION_DURATION,
-                null
-            )
-            it.showInfoWindow()
+            openMarker(map, it)
             true
         }
         map.setOnInfoWindowClickListener { marker ->
             viewModel.placeClicked(marker.title)
+        }
+    }
+
+    private fun clearMap(map: GoogleMap){
+        map.clear()
+        viewModel.updateMapMarkers(arrayListOf())
+    }
+
+    private fun executeInitPlace(map: GoogleMap){
+        if (arguments != null){
+            val initPlace = PlaceViewFragmentArgs.fromBundle(requireArguments()).place
+            val initMarker = viewModel.mapMarkers.firstOrNull{ it.title == initPlace.id }
+            openMarker(map, initMarker)
+            arguments = null
+        }
+    }
+
+    private fun openMarker(map: GoogleMap, marker: Marker?) {
+        marker?.let {
+            map.animateCamera(
+                CameraUpdateFactory.newLatLng(
+                    CommonUtils.getMapFocusPoint(map, requireView(), marker)
+                ),
+                Constants.GOOGLE_MAP_ANIMATION_DURATION,
+                null
+            )
+            marker.showInfoWindow()
         }
     }
 

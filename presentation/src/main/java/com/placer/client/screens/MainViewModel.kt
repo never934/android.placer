@@ -5,6 +5,7 @@ import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
+import com.placer.data.AppPrefs
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUserUseCase
 import kotlinx.coroutines.flow.first
@@ -15,6 +16,10 @@ class MainViewModel(private val loadUserUseCase: LoadUserUseCase = AppClass.appI
     private var _profile: MutableLiveData<User> = MutableLiveData()
     internal val profile: LiveData<UserView>
     get() = _profile.map { it.toView() }
+
+    private var _exitExecute: MutableLiveData<Boolean> = MutableLiveData()
+    internal val exitExecute: LiveData<Boolean>
+    get() = _exitExecute
 
     init {
         loadProfile()
@@ -29,5 +34,15 @@ class MainViewModel(private val loadUserUseCase: LoadUserUseCase = AppClass.appI
                 showSnackBar.value = profileResult.exceptionOrNull()?.message
             }
         }
+    }
+
+    fun exit(){
+        AppPrefs.saveUserId("")
+        AppPrefs.saveServerToken("")
+        _exitExecute.value = true
+    }
+
+    fun exitDone(){
+        _exitExecute.value = false
     }
 }

@@ -16,10 +16,12 @@ import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.customview.comments.CommentField
 import com.placer.client.databinding.FragmentPlaceViewBinding
+import com.placer.client.entity.PlaceView
+import com.placer.client.navigation.MainMapTransaction
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
-internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener {
+internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener, MainMapTransaction {
 
     private var binding: FragmentPlaceViewBinding? = null
     override val viewModel: PlaceViewViewModel by viewModels{
@@ -49,6 +51,7 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
             }
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener { viewModel.loadPlace() }
             binding.commentField.initListener(this)
+            binding.showPlaceOnMapBtn.getButton().setOnClickListener { viewModel.showPlaceOnMap() }
         }
         viewModel.place.observe(this, {
             binding?.place = it
@@ -67,6 +70,12 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
         viewModel.placeComments.observe(this, {
             binding?.commentsComponent?.setComments(it)
         })
+        viewModel.showPlaceOnMapExecute.observe(this, {
+            if (it != null){
+                setMainMapFragment(it)
+                viewModel.showPlaceOnExecuted()
+            }
+        })
     }
 
     override fun refreshStateChanged(state: Boolean) {
@@ -81,5 +90,9 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
     override fun commentSendClicked(text: String) {
         hideKeyBoard()
         viewModel.sendPlaceComment(text)
+    }
+
+    override fun setMainMapFragment(place: PlaceView) {
+        findNavController().navigate(PlaceViewFragmentDirections.actionPlaceViewFragmentToMainMapFragment(place))
     }
 }

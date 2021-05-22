@@ -16,7 +16,7 @@
         android:title="@string/nav_drawer_help_title"
         />
     <item
-        android:id="@+id/exitFragment"
+        android:id="@+id/exitButton"
         android:icon="@drawable/ic_baseline_cancel_24"
         android:title="@string/nav_drawer_exit_title"
         />

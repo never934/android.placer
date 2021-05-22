@@ -2,24 +2,23 @@ package com.placer.client.screens
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.placer.client.AppClass
+import com.google.android.material.navigation.NavigationView
 import com.placer.client.R
 import com.placer.client.base.BaseActivity
 import com.placer.client.databinding.ActivityMainBinding
 import com.placer.client.databinding.NavHeaderBinding
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override val viewModel: MainViewModel by viewModels()
     private lateinit var drawerLayout: DrawerLayout
@@ -41,6 +40,13 @@ class MainActivity : BaseActivity() {
         appBarConfiguration = AppBarConfiguration(this.findNavController(R.id.navHostFragment).graph, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, this.findNavController(R.id.navHostFragment))
         supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.background_color)))
+        binding.navView.setNavigationItemSelectedListener(this)
+        viewModel.exitExecute.observe(this, {
+            if (it){
+                viewModel.exitDone()
+                finishAffinity()
+            }
+        })
     }
 
     private fun initDrawer(binding: ActivityMainBinding) {
@@ -68,5 +74,24 @@ class MainActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(this.findNavController(R.id.navHostFragment), drawerLayout)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.exitButton){
+            viewModel.exit()
+        }
+        if (item.itemId == R.id.placesFragment){
+            findNavController(R.id.navHostFragment).navigate(R.id.placesFragment)
+            drawerLayout.closeDrawers()
+        }
+        if (item.itemId == R.id.topFragment){
+            findNavController(R.id.navHostFragment).navigate(R.id.topFragment)
+            drawerLayout.closeDrawers()
+        }
+        if (item.itemId == R.id.helpFragment){
+            findNavController(R.id.navHostFragment).navigate(R.id.helpFragment)
+            drawerLayout.closeDrawers()
+        }
+        return false
     }
 }

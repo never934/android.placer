@@ -119,6 +119,13 @@
                                 app:content="@{place.createdDate}"
                                 app:hint="@{@string/place_view_created_hint}"
                                 app:icon="@{@drawable/ic_baseline_insert_invitation_24}" />
+
+                            <com.placer.client.customview.TextButton
+                                android:id="@+id/showPlaceOnMapBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:icon="@{@drawable/ic_baseline_map_24}"
+                                app:text="@{@string/place_view_show_place_on_map_btn}"/>
                         </LinearLayout>
                         <TextView
                             style="@style/headline"

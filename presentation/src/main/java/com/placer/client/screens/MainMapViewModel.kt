@@ -1,6 +1,8 @@
 package com.placer.client.screens
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.google.android.gms.maps.model.Marker
 import com.placer.client.AppClass
 import com.placer.client.Constants
 import com.placer.client.base.BaseViewModel
@@ -23,14 +25,18 @@ internal class MainMapViewModel constructor(
     get() = _searchPlaces.map { it.map { place -> place.toView() } }
 
     private var _mapPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())
-    internal val mapPlaces: LiveData<List<Place>>
+    val mapPlaces: LiveData<List<Place>>
     get() = Transformations.switchMap(mapFilter){ filter ->
         MutableLiveData(_mapPlaces.value?.filter { filter(it) })
     }
 
+    private var _mapMarkers: ArrayList<Marker> = arrayListOf()
+    val mapMarkers: List<Marker>
+    get() = _mapMarkers
+
     private var _goToPlaceView: MutableLiveData<PlaceView?> = MutableLiveData()
-    internal val goToPlaceView: LiveData<PlaceView?>
-        get() = _goToPlaceView
+    val goToPlaceView: LiveData<PlaceView?>
+    get() = _goToPlaceView
 
     private var mapFilter: MutableLiveData<(place: Place) -> Boolean> = MutableLiveData()
 
@@ -84,15 +90,9 @@ internal class MainMapViewModel constructor(
             mapFilter.value = Filters::getAllPointsFilter
         }
     }
-/*
-    class Factory(private val placesUseCase: LoadPlacesUseCase) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MainMapViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MainMapViewModel(placesUseCase) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
-        }
+
+    fun updateMapMarkers(markers: List<Marker>){
+        _mapMarkers.clear()
+        _mapMarkers.addAll(markers)
     }
- */
 }

@@ -69,6 +69,8 @@ class AuthActivity: BaseActivity() {
                 FirebaseAuth.getInstance().currentUser?.getIdToken(true)?.addOnSuccessListener {
                     viewModel.signIn(it.token ?: "")
                 }
+            }else{
+                finishAffinity()
             }
         }
     }

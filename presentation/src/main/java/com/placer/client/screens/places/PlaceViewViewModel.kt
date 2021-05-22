@@ -42,6 +42,10 @@ internal class PlaceViewViewModel(
     val clientIsPlaceAuthor: LiveData<Boolean>
     get() = _clientIsPlaceAuthor
 
+    private var _showPlaceOnMapExecute: MutableLiveData<PlaceView> = MutableLiveData()
+    val showPlaceOnMapExecute: LiveData<PlaceView>
+    get() = _showPlaceOnMapExecute
+
     fun loadPlace() {
         isRefreshing.value = true
         viewModelScope.launch {
@@ -77,6 +81,14 @@ internal class PlaceViewViewModel(
                 showSnackBar.value = result.exceptionOrNull()?.message
             }
         }
+    }
+
+    fun showPlaceOnMap(){
+        _showPlaceOnMapExecute.value = _place.value?.toView()
+    }
+
+    fun showPlaceOnExecuted(){
+        _showPlaceOnMapExecute.value = null
     }
 
     class Factory(
