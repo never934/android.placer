@@ -1,10 +1,8 @@
 package com.placer.client.screens
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.google.android.gms.maps.model.Marker
 import com.placer.client.AppClass
-import com.placer.client.Constants
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
@@ -14,7 +12,6 @@ import com.placer.domain.usecase.place.LoadPlacesUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 internal class MainMapViewModel constructor(
     private val placesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase
@@ -42,7 +39,7 @@ internal class MainMapViewModel constructor(
 
     fun loadPlaces(input: String) {
         viewModelScope.launch {
-            val result = placesUseCase.loadPlacesBySearchFromCacheWithEmptyFilter(input).first()
+            val result = placesUseCase.loadPlacesByInputFromCacheWithEmptyFilter(input).first()
             if(result.isSuccess){
                 _searchPlaces.value = result.getOrNull()
             }else{

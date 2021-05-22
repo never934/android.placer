@@ -42,3 +42,7 @@ internal fun Place.toView() : PlaceView {
         createdDate = Date(createdDate*1000).toView()
     )
 }
+
+internal fun List<Place>.toViews() : List<PlaceView> {
+    return map { it.toView() }
+}

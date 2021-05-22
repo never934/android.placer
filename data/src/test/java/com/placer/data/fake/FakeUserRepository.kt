@@ -15,12 +15,20 @@ class FakeUserRepository(private val _users: List<User>) : UserRepository {
         emit(Result.success(users))
     }
 
+    override suspend fun loadUsersFromCache(): Flow<Result<List<User>>> = flow {
+        emit(Result.success(users))
+    }
+
     override suspend fun loadUser(userId: String): Flow<Result<User>>  = flow {
         if(error.not()){
             emit(Result.success(users.first { it.id == userId }))
         }else{
             emit(Result.failure<User>(Exception("Error while loading user")))
         }
+    }
+
+    override suspend fun loadProfile(): Flow<Result<User>> {
+        // server logic (data val from backend)
     }
 
     override suspend fun updateUser(user: User): Flow<Result<User>>  = flow {

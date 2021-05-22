@@ -12,7 +12,7 @@ import com.placer.client.base.BaseFragment
 import com.placer.client.base.BaseViewModel
 import com.placer.client.databinding.FragmentTopBinding
 
-class TopFragment : BaseFragment() {
+internal class TopFragment : BaseFragment() {
 
     override val viewModel: TopViewModel by viewModels()
     private lateinit var binding: FragmentTopBinding

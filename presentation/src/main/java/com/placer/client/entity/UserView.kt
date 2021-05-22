@@ -11,7 +11,7 @@ internal data class UserView(
     val id: String,
     val name: String,
     val nickname: String?,
-    val placesCount: Long,
+    val placesCount: String,
     val topPosition: Long,
     val cityLat: Double,
     val cityLng: Double,
@@ -25,7 +25,7 @@ internal fun User.toView() : UserView {
         id = id,
         name = name,
         nickname = nickname,
-        placesCount = placesCount,
+        placesCount = placesCount.toString(),
         topPosition = topPosition,
         cityLat = cityLat,
         cityLng = cityLng,
@@ -33,4 +33,8 @@ internal fun User.toView() : UserView {
         avatarUrl = avatarUrl,
         createdDate = Date(createdDate).daysFromItRepresentation()
     )
+}
+
+internal fun List<User>.toViews() : List<UserView> {
+    return map { it.toView() }
 }

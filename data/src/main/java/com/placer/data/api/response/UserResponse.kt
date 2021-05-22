@@ -29,3 +29,7 @@ fun UserResponse.toDB() : UserDB {
         createdDate = createdDate
     )
 }
+
+fun List<UserResponse>.toDB() : List<UserDB> {
+    return map { it.toDB() }
+}

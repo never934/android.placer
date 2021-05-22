@@ -4,29 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="place"
-            type="com.placer.client.entity.PlaceView" />
-        <variable
-            name="clickListener"
-            type="com.placer.client.adapters.PlacesAdapter.PlaceClickListener" />
+            name="user"
+            type="com.placer.client.entity.UserView" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{() -> clickListener.onClick(place)}">
+        android:background="?android:attr/selectableItemBackground">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/photoPreview"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
+        <ImageView
+            android:id="@+id/avatarView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="centerCrop"
+            app:avatarUrl="@{user.avatarUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:placePhotoPreview="@{place.photos}"
             app:shapeAppearanceOverlay="@style/roundedCorners" />
 
         <LinearLayout
@@ -35,33 +31,33 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/default_margin"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/photoPreview"
-            app:layout_constraintEnd_toStartOf="@+id/commentsCountView"
-            app:layout_constraintStart_toEndOf="@+id/photoPreview"
-            app:layout_constraintTop_toTopOf="@+id/photoPreview">
+            app:layout_constraintBottom_toBottomOf="@+id/avatarView"
+            app:layout_constraintEnd_toStartOf="@+id/placesCountView"
+            app:layout_constraintStart_toEndOf="@+id/avatarView"
+            app:layout_constraintTop_toTopOf="@+id/avatarView">
 
             <TextView
                 android:id="@+id/titleView"
                 style="@style/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:text="@{place.name}" />
+                app:text="@{user.nickname != null ? user.nickname : user.name}" />
 
             <TextView
                 android:id="@+id/hintView"
                 style="@style/item_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:text="@{place.cityName}" />
+                app:text="@{@string/common_user_top_format(user.topPosition)}" />
         </LinearLayout>
 
         <com.placer.client.customview.comments.CountView
-            android:id="@+id/commentsCountView"
+            android:id="@+id/placesCountView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="@dimen/big_padding"
-            app:count="@{place.commentsCount}"
-            app:icon="@drawable/ic_baseline_forum_24"
+            app:count="@{user.placesCount}"
+            app:icon="@{@drawable/ic_baseline_place_24}"
             app:layout_constraintBottom_toBottomOf="@+id/fieldsContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fieldsContainer" />
@@ -72,7 +68,7 @@
             android:layout_marginTop="@dimen/small_margin"
             android:background="@color/divider_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/photoPreview"
-            app:layout_constraintTop_toBottomOf="@+id/photoPreview" />
+            app:layout_constraintStart_toStartOf="@+id/avatarView"
+            app:layout_constraintTop_toBottomOf="@+id/avatarView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

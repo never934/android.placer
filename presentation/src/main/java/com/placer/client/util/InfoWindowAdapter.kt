@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.placer.client.R
-import com.placer.client.customview.comments.CommentsCountView
+import com.placer.client.customview.comments.CountView
 import com.placer.domain.entity.place.Place
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -28,7 +28,7 @@ class InfoWindowAdapter(private val myContext: FragmentActivity, private val pla
     override fun getInfoWindow(marker: Marker): View {
         val titleUi = view.findViewById(R.id.nameView) as TextView
         val placePhotoView = view.findViewById(R.id.placePhotoView) as ImageView
-        val commentsCountView = view.findViewById(R.id.commentsCountView) as CommentsCountView
+        val commentsCountView = view.findViewById(R.id.commentsCountView) as CountView
         val placeId: String = marker.title
         val place = places.first{ it.id == placeId }
 

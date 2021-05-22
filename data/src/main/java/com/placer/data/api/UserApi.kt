@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface UserApi {
     @GET("v1/users")
-    fun getUsers() : Flow<List<UserResponse>>
+    suspend fun getUsers() : List<UserResponse>
 
     @PUT("v1/users/profile")
     fun updateProfile(@Body request: ProfileUpdateRequest) : Flow<UserResponse>

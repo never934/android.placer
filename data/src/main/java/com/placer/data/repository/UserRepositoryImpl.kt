@@ -7,6 +7,7 @@ import com.placer.data.api.request.ProfileUpdateRequest
 import com.placer.data.api.response.CityResponse
 import com.placer.data.api.response.toDB
 import com.placer.data.db.user.UserDao
+import com.placer.data.db.user.toEntities
 import com.placer.data.db.user.toEntity
 import com.placer.data.utils.Extensions.toMultipartPhoto
 import com.placer.domain.entity.city.City
@@ -22,12 +23,21 @@ class UserRepositoryImpl @Inject internal constructor(
     private val userDao: UserDao,
     private val dispatcher: CoroutineDispatcher
 ) : UserRepository {
-    override suspend fun loadUsers(): Flow<Result<List<User>>> =
-        userApi.getUsers()
-            .map { userDao.updateUsers(it.map { userResponse -> userResponse.toDB() }) }
-            .map { Result.success(it.map { userDB -> userDB.toEntity() }) }
-            .catch { Result.success(userDao.getUsers().map { userDB -> userDB.toEntity() }) }
-            .flowOn(dispatcher)
+    override suspend fun loadUsers(): Flow<Result<List<User>>> = flow {
+        try {
+            val users = userApi.getUsers()
+            val daoUsers = userDao.updateUsers(users.toDB())
+            emit(Result.success(daoUsers.toEntities()))
+        }catch (e: Exception){
+            emit(Result.success(userDao.getUsers().toEntities()))
+        }
+    }
+        .flowOn(dispatcher)
+
+    override suspend fun loadUsersFromCache(): Flow<Result<List<User>>> = flow {
+        emit(Result.success(userDao.getUsers().toEntities()))
+    }
+        .flowOn(dispatcher)
 
     override suspend fun loadUser(userId: String): Flow<Result<User>> =
         userApi.getUser(userId)

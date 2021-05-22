@@ -16,25 +16,45 @@ class LoadPlacesUseCase(
     suspend fun loadPlaceById(placeId: String) : Flow<Result<Place>> =
         placeRepository.loadPlaceById(placeId).flowOn(dispatcher)
 
-    suspend fun loadPlacesBySearchFromCacheWithEmptyFilter(input: String) : Flow<Result<List<Place>>> =
+    suspend fun loadPlacesByInputFromCacheWithEmptyFilter(input: String) : Flow<Result<List<Place>>> =
         placeRepository.loadPlacesFromCache()
             .map {
-                Result.success(it.getOrNull()!!.filter { place ->
-                    place.name.toUpperCase(Locale.ROOT)
-                        .contains(input.toUpperCase(Locale.ROOT)) && input.isNotEmpty()
-                })
+                it.getOrNull()?.let { list ->
+                    Result.success(list.filter { place ->
+                        place.name.toUpperCase(Locale.ROOT)
+                            .contains(input.toUpperCase(Locale.ROOT)) && input.isNotEmpty()
+                    })
+                } ?: run {
+                    it
+                }
             }
-            .catch { Result.failure<List<Place>>(Exception()) }
             .flowOn(dispatcher)
 
-    suspend fun loadPlacesBySearchFromCache(input: String) : Flow<Result<List<Place>>> =
+    suspend fun loadPlacesByInputFromCache(input: String) : Flow<Result<List<Place>>> =
         placeRepository.loadPlacesFromCache()
             .map {
-                Result.success(it.getOrNull()!!.filter { place ->
-                    place.name.toUpperCase(Locale.ROOT)
-                        .contains(input.toUpperCase(Locale.ROOT)) || place.name.isEmpty()
-                })
+                it.getOrNull()?.let { list ->
+                    Result.success(list.filter { place ->
+                        place.name.toUpperCase(Locale.ROOT)
+                            .contains(input.toUpperCase(Locale.ROOT)) || place.name.isEmpty()
+                    })
+                } ?: run {
+                    it
+                }
             }
-            .catch { Result.failure<List<Place>>(Exception()) }
+            .flowOn(dispatcher)
+
+    suspend fun loadPlacesByInputForTop(input: String) : Flow<Result<List<Place>>> =
+        placeRepository.loadPlacesFromCache()
+            .map {
+                it.getOrNull()?.let { list ->
+                    Result.success(list.filter { place ->
+                        place.name.toUpperCase(Locale.ROOT)
+                            .contains(input.toUpperCase(Locale.ROOT)) || place.name.isEmpty()
+                    }.sortedBy { place -> place.topPosition }.reversed())
+                } ?: run {
+                    it
+                }
+            }
             .flowOn(dispatcher)
 }

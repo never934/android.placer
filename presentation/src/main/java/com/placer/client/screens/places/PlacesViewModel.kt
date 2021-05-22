@@ -48,7 +48,7 @@ class PlacesViewModel(private val placesUseCase: LoadPlacesUseCase = AppClass.ap
 
     fun loadPlacesByInput(input: String) {
         viewModelScope.launch {
-            val result = placesUseCase.loadPlacesBySearchFromCache(input).first()
+            val result = placesUseCase.loadPlacesByInputFromCache(input).first()
             if (result.isSuccess){
                 _places.value = result.getOrNull()
             }else{

@@ -33,3 +33,7 @@ fun UserDB.toEntity() : User {
         createdDate = createdDate
     )
 }
+
+fun List<UserDB>.toEntities() : List<User> {
+    return map { it.toEntity() }
+}
