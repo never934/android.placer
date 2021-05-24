@@ -6,9 +6,14 @@
         android:title="@string/nav_drawer_places_title"
         />
     <item
-        android:id="@+id/topFragment"
+        android:id="@+id/usersTopFragment"
+        android:icon="@drawable/ic_baseline_emoji_emotions_24"
+        android:title="@string/nav_drawer_top_users_title"
+        />
+    <item
+        android:id="@+id/placesTopFragment"
         android:icon="@drawable/ic_baseline_local_fire_department_24"
-        android:title="@string/nav_drawer_top_title"
+        android:title="@string/nav_drawer_top_places_title"
         />
     <item
         android:id="@+id/helpFragment"

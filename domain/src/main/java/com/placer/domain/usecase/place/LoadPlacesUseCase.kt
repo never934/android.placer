@@ -51,7 +51,18 @@ class LoadPlacesUseCase(
                     Result.success(list.filter { place ->
                         place.name.toUpperCase(Locale.ROOT)
                             .contains(input.toUpperCase(Locale.ROOT)) || place.name.isEmpty()
-                    }.sortedBy { place -> place.topPosition }.reversed())
+                    }.sortedBy { place -> place.topPosition })
+                } ?: run {
+                    it
+                }
+            }
+            .flowOn(dispatcher)
+
+    suspend fun loadPlacesForTop() : Flow<Result<List<Place>>> =
+        placeRepository.loadPlacesFromCache()
+            .map {
+                it.getOrNull()?.let { list ->
+                    Result.success(list.sortedBy { place -> place.topPosition })
                 } ?: run {
                     it
                 }

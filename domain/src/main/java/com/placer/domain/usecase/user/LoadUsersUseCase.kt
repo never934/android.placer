@@ -25,10 +25,21 @@ class LoadUsersUseCase(
                         (user.nickname?.toUpperCase(Locale.getDefault())?.contains(input.toUpperCase(Locale.getDefault())) ?: false) ||
                         user.name.toUpperCase(Locale.getDefault()).contains(input.toUpperCase(Locale.getDefault())) ||
                         input.isEmpty()
-                    }.sortedBy { user -> user.topPosition }.reversed()
+                    }.sortedBy { user -> user.topPosition }
                 )
             } ?: run {
                 it
             }
-        }
+        }.flowOn(dispatcher)
+
+    suspend fun loadUsersForTop(): Flow<Result<List<User>>> =
+        userRepository.loadUsers().map {
+            it.getOrNull()?.let { list ->
+                Result.success(
+                    list.sortedBy { user -> user.topPosition }
+                )
+            } ?: run {
+                it
+            }
+        }.flowOn(dispatcher)
 }

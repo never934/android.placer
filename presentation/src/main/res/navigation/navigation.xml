@@ -42,11 +42,15 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/topFragment"
-        android:name="com.placer.client.screens.top.TopFragment"
-        android:label="@string/top_app_bar" />
-    <fragment
         android:id="@+id/helpFragment"
         android:name="com.placer.client.screens.help.HelpFragment"
         android:label="@string/help_app_bar" />
+    <fragment
+        android:id="@+id/placesTopFragment"
+        android:name="com.placer.client.screens.top.PlacesTopFragment"
+        android:label="@string/top_places_app_bar" />
+    <fragment
+        android:id="@+id/usersTopFragment"
+        android:name="com.placer.client.screens.top.UsersTopFragment"
+        android:label="@string/top_users_app_bar" />
 </navigation>

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.placer.client.R
-import com.placer.client.adapters.PlacesAdapter
 import com.placer.client.base.BaseCustomView
 import com.placer.client.databinding.CustomviewPlaceItemBinding
 import com.placer.client.entity.PlaceView

@@ -6,12 +6,16 @@
         <variable
             name="user"
             type="com.placer.client.entity.UserView" />
+        <variable
+            name="clickListener"
+            type="com.placer.client.adapters.users.UserClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(user)}"
         android:background="?android:attr/selectableItemBackground">
 
         <ImageView

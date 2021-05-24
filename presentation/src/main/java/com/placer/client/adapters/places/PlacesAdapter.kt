@@ -1,8 +1,7 @@
-package com.placer.client.adapters
+package com.placer.client.adapters.places
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.placer.client.databinding.CustomviewPlaceItemBinding
@@ -33,19 +32,5 @@ internal class PlacesAdapter(private val clickListener: PlaceClickListener) : Li
                 return ViewHolder(binding)
             }
         }
-    }
-
-    internal class PlacesDiffCallback : DiffUtil.ItemCallback<PlaceView>() {
-        override fun areItemsTheSame(oldItem: PlaceView, newItem: PlaceView): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: PlaceView, newItem: PlaceView): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-    internal class PlaceClickListener(val clickListener: (place: PlaceView) -> Unit) {
-        fun onClick(place: PlaceView) = clickListener(place)
     }
 }

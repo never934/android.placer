@@ -8,7 +8,7 @@
             type="com.placer.client.entity.PlaceView" />
         <variable
             name="clickListener"
-            type="com.placer.client.adapters.PlacesAdapter.PlaceClickListener" />
+            type="com.placer.client.adapters.places.PlaceClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:paddingEnd="@dimen/big_padding"
             app:count="@{place.commentsCount}"
-            app:icon="@drawable/ic_baseline_forum_24"
+            app:icon="@{@drawable/ic_baseline_forum_24}"
             app:layout_constraintBottom_toBottomOf="@+id/fieldsContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fieldsContainer" />

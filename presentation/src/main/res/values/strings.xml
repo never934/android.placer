@@ -26,7 +26,8 @@
 
     <!-- navigation drawer !-->
     <string name="nav_drawer_places_title">Places</string>
-    <string name="nav_drawer_top_title">Top</string>
+    <string name="nav_drawer_top_users_title">Top users</string>
+    <string name="nav_drawer_top_places_title">Top places</string>
     <string name="nav_drawer_my_places_title">My places</string>
     <string name="nav_drawer_settings_title">Settings</string>
     <string name="nav_drawer_help_title">Help</string>
@@ -83,10 +84,11 @@
     <string name="place_published_body">You created new place. Share it with your friends</string>
     <string name="place_published_body_2">Places created: %s</string>
 
-    <!-- Top fragment !-->
-    <string name="top_app_bar">Top</string>
-    <string name="top_first_tab">Users</string>
-    <string name="top_second_tab">Places</string>
+    <!-- Top users fragment !-->
+    <string name="top_users_app_bar">Top users</string>
+
+    <!-- Top places fragment !-->
+    <string name="top_places_app_bar">Top places</string>
 
     <!-- User fragment !-->
     <string name="user_name_hint">Name</string>

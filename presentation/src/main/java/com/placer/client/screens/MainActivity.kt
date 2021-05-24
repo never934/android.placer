@@ -84,8 +84,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             findNavController(R.id.navHostFragment).navigate(R.id.placesFragment)
             drawerLayout.closeDrawers()
         }
-        if (item.itemId == R.id.topFragment){
-            findNavController(R.id.navHostFragment).navigate(R.id.topFragment)
+        if (item.itemId == R.id.usersTopFragment){
+            findNavController(R.id.navHostFragment).navigate(R.id.usersTopFragment)
+            drawerLayout.closeDrawers()
+        }
+        if (item.itemId == R.id.placesTopFragment){
+            findNavController(R.id.navHostFragment).navigate(R.id.placesTopFragment)
             drawerLayout.closeDrawers()
         }
         if (item.itemId == R.id.helpFragment){

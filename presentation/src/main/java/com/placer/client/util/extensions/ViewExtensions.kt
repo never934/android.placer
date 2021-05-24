@@ -2,6 +2,7 @@ package com.placer.client.util.extensions
 
 import android.graphics.Typeface
 import android.widget.RadioButton
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import com.placer.client.AppClass
 import com.placer.client.R
@@ -21,5 +22,11 @@ object ViewExtensions {
             resources.getDimension(R.dimen.small_margin).toInt()
         )
         return this
+    }
+
+    fun SearchView.close() {
+        this.setQuery("", false)
+        this.clearFocus()
+        this.isIconified = true
     }
 }
