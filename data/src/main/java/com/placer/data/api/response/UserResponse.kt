@@ -12,6 +12,7 @@ data class UserResponse(
     val cityLng: Double,
     val cityName: String,
     val avatarUrl: String?,
+    val registrated: Boolean,
     val createdDate: Long
 )
 
@@ -26,6 +27,7 @@ fun UserResponse.toDB() : UserDB {
         cityLng = cityLng,
         cityName = cityName,
         avatarUrl = avatarUrl,
+        registrated = registrated,
         createdDate = createdDate
     )
 }

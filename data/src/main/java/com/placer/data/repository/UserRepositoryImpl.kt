@@ -64,24 +64,36 @@ class UserRepositoryImpl @Inject internal constructor(
             .flowOn(dispatcher)
 
 
-    override suspend fun updateUser(user: User): Flow<Result<User>> =
-        userApi.updateProfile(ProfileUpdateRequest(user.name, user.nickname))
-            .map { userDao.updateUser(it.id, it.toDB()) }
-            .map { Result.success(it.toEntity()) }
-            .map { Result.failure<User>(Exception("Error while user updating")) }
-            .flowOn(dispatcher)
+    override suspend fun updateUser(user: User): Flow<Result<User>> = flow {
+        try {
+            val userResponse = userApi.updateProfile(ProfileUpdateRequest(user.name, user.nickname))
+            val daoUser = userDao.updateUser(user.id, userResponse.toDB())
+            emit(Result.success(daoUser.toEntity()))
+        }catch (e: Exception){
+            emit(Result.success(userDao.getUser(user.id).toEntity()))
+        }
+    }
+        .flowOn(dispatcher)
 
-    override suspend fun updateUserCity(userId: String, city: City): Flow<Result<User>> =
-        userApi.updateProfileCity(CityResponse(city.city, city.latitude, city.longitude))
-            .map { userDao.updateUser(it.id, it.toDB()) }
-            .map { Result.success(it.toEntity()) }
-            .map { Result.failure<User>(Exception("Error while user city updating")) }
-            .flowOn(dispatcher)
+    override suspend fun updateUserCity(userId: String, city: City): Flow<Result<User>> = flow{
+        try {
+            val user = userApi.updateProfileCity(CityResponse(city.city, city.country, city.latitude, city.longitude))
+            val daoUser = userDao.updateUser(user.id, user.toDB())
+            emit(Result.success(daoUser.toEntity()))
+        }catch (e: Exception){
+            emit(Result.success(userDao.getUser(userId).toEntity()))
+        }
+    }
+        .flowOn(dispatcher)
 
-    override suspend fun updateUserAvatar(userId: String, avatar: ByteArray): Flow<Result<User>> =
-        userApi.updateProfileAvatar(avatar.toMultipartPhoto("file"))
-            .map { userDao.updateUser(it.id, it.toDB()) }
-            .map { Result.success(it.toEntity()) }
-            .map { Result.failure<User>(Exception("Error while user avatar updating")) }
-            .flowOn(dispatcher)
+    override suspend fun updateUserAvatar(userId: String, avatar: ByteArray): Flow<Result<User>> = flow {
+        try {
+            val user = userApi.updateProfileAvatar(avatar.toMultipartPhoto("file"))
+            val daoUser = userDao.updateUser(user.id, user.toDB())
+            emit(Result.success(daoUser.toEntity()))
+        }catch (e: Exception){
+            emit(Result.success(userDao.getUser(userId).toEntity()))
+        }
+    }
+        .flowOn(dispatcher)
 }

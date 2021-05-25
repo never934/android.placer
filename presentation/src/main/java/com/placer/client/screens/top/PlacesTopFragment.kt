@@ -98,6 +98,10 @@ internal class PlacesTopFragment : BaseFragment(), PlaceViewTransaction {
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
+    override fun loadingStateChanged(state: Int) {
+        binding?.baseConstraint?.loadConstraint?.visibility = state
+    }
+
     override fun setPlaceViewFragment(place: PlaceView) {
         findNavController().navigate(PlacesTopFragmentDirections.actionPlacesTopFragmentToPlaceViewFragment(place))
     }

@@ -1,8 +1,14 @@
 package com.placer.client.screens
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -12,10 +18,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
+import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseActivity
 import com.placer.client.databinding.ActivityMainBinding
 import com.placer.client.databinding.NavHeaderBinding
+import com.placer.client.screens.city.ChooseCityActivity
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -25,14 +33,20 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var binding: ActivityMainBinding? = null
     private var navHeaderBinding: NavHeaderBinding? = null
+    var chooseCityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            if(result.data?.extras?.get(Constants.CITY_CHOSEN_RESULT_KEY) == true){
+                finish()
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding?.let {
-            initDrawer(it)
-            initNavigation(it)
-        }
+        initAll()
     }
 
     private fun initNavigation(binding: ActivityMainBinding) {
@@ -54,12 +68,21 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         navHeaderBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.nav_header, binding.navView, false)
         viewModel.profile.observe(this, {
-                navHeaderBinding?.let { navHeaderBinding ->
-                    navHeaderBinding.profile = it
-                    binding.navView.addHeaderView(navHeaderBinding.root)
-                }
+            navHeaderBinding?.let { navHeaderBinding ->
+                navHeaderBinding.profile = it
+                binding.navView.addHeaderView(navHeaderBinding.root)
             }
-        )
+            if(it.registrated.not()){
+                chooseCityResult.launch(Intent(this, ChooseCityActivity::class.java))
+            }
+        })
+    }
+
+    private fun initAll(){
+        binding?.let {
+            initDrawer(it)
+            initNavigation(it)
+        }
     }
 
     fun openDrawer() {

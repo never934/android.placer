@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.placer.client.screens.MainMapViewModel" />
+            type="com.placer.client.screens.main.MainMapViewModel" />
     </data>
     <com.placer.client.customview.BaseConstraintLayout
         android:id="@+id/baseConstraint"

@@ -68,6 +68,10 @@ internal class UserViewFragment : BaseFragment(), OnPlaceChosen {
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
+    override fun loadingStateChanged(state: Int) {
+        binding?.baseConstraint?.loadConstraint?.visibility = state
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null

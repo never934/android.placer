@@ -17,6 +17,7 @@ internal data class UserView(
     val cityLng: Double,
     val cityName: String,
     val avatarUrl: String?,
+    val registrated: Boolean,
     val createdDate: String
 ) : Parcelable
 
@@ -31,6 +32,7 @@ internal fun User.toView() : UserView {
         cityLng = cityLng,
         cityName = cityName,
         avatarUrl = avatarUrl,
+        registrated = registrated,
         createdDate = Date(createdDate*1000).daysFromItRepresentation()
     )
 }

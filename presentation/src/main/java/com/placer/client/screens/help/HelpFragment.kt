@@ -32,4 +32,6 @@ class HelpFragment : BaseFragment() {
     override fun initListeners() {}
 
     override fun refreshStateChanged(state: Boolean) {}
+
+    override fun loadingStateChanged(state: Int) {}
 }

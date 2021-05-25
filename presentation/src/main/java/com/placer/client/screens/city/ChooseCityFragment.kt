@@ -1,7 +1,9 @@
-package com.placer.client.screens.places
+package com.placer.client.screens.city
 
+import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -9,20 +11,19 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.tabs.TabLayout
+import com.placer.client.Constants
 import com.placer.client.R
-import com.placer.client.adapters.places.PlaceClickListener
-import com.placer.client.adapters.places.PlacesAdapter
+import com.placer.client.adapters.cities.CitiesAdapter
+import com.placer.client.adapters.cities.CityClickListener
+import com.placer.client.base.BaseActivity
 import com.placer.client.base.BaseFragment
-import com.placer.client.databinding.FragmentPlacesBinding
-import com.placer.client.entity.PlaceView
-import com.placer.client.navigation.PlaceViewTransaction
+import com.placer.client.databinding.FragmentChooseCityBinding
 import com.placer.client.util.extensions.ViewExtensions.close
 
-internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
+internal class ChooseCityFragment : BaseFragment() {
 
-    override val viewModel: PlacesViewModel by viewModels()
-    private var binding: FragmentPlacesBinding? = null
+    override val viewModel: ChooseCityViewModel by viewModels()
+    private var binding: FragmentChooseCityBinding? = null
     private var searchView: SearchView? = null
     private var queryTextListener: SearchView.OnQueryTextListener? = null
 
@@ -31,9 +32,9 @@ internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_places, container, false
+            inflater, R.layout.fragment_choose_city, container, false
         )
-        (requireActivity() as AppCompatActivity?)?.supportActionBar?.elevation = 0f
+        (requireActivity() as AppCompatActivity?)?.supportActionBar?.elevation = Constants.ACTION_BAR_ELEVATION
         (requireActivity() as AppCompatActivity?)?.supportActionBar?.show()
         setHasOptionsMenu(true)
         return binding?.root
@@ -51,7 +52,7 @@ internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.loadPlacesByInput(newText ?: "")
+                viewModel.loadCities(newText ?: "")
                 return true
             }
         }
@@ -73,35 +74,33 @@ internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
     }
 
     override fun initListeners() {
-        val adapter = PlacesAdapter(
-            PlaceClickListener{
-                viewModel.placeClicked(it)
+        val adapter = CitiesAdapter(
+            CityClickListener{
+                viewModel.cityChosen(it)
             }
         )
-        viewModel.places.observe(this, {
+        viewModel.cities.observe(this, {
             adapter.submitList(it)
         })
-        viewModel.goToPlaceView.observe(this, {
+        viewModel.cityUpdated.observe(this, {
             it?.let {
-                setPlaceViewFragment(it)
-                viewModel.navigatedToPlaceView()
+                if (requireActivity() is BaseActivity){
+                    findNavController().navigateUp()
+                }else{
+                    val intent = Intent()
+                    intent.putExtra(Constants.CITY_CHOSEN_RESULT_KEY, true)
+                    requireActivity().setResult(Activity.RESULT_OK, intent)
+                    requireActivity().finish()
+                }
+                viewModel.cityUpdatedTransactionExecuted()
             }
         })
         binding?.let { binding ->
-            binding.placesRecycler.adapter = adapter
+            binding.recycler.adapter = adapter
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener {
                 searchView?.close()
-                viewModel.loadPlaces()
+                viewModel.loadCities("")
             }
-            binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    tab?.let {
-                        viewModel.tabPositionChanged(it.position)
-                    }
-                }
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            })
         }
 
     }
@@ -112,9 +111,5 @@ internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
 
     override fun loadingStateChanged(state: Int) {
         binding?.baseConstraint?.loadConstraint?.visibility = state
-    }
-
-    override fun setPlaceViewFragment(place: PlaceView) {
-        findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToPlaceViewFragment(place))
     }
 }

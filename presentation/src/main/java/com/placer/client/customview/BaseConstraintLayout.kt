@@ -16,6 +16,7 @@ class BaseConstraintLayout @JvmOverloads constructor(
 ) : BaseCustomView(context, attrs, defStyleAttr) {
 
     private lateinit var containerLayout: ConstraintLayout
+    lateinit var loadConstraint: ConstraintLayout
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     init {
@@ -27,11 +28,16 @@ class BaseConstraintLayout @JvmOverloads constructor(
         val view = View.inflate(context, R.layout.customview_base_constraint_layout, this)
         containerLayout = view.findViewById(R.id.containerLayout)
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        loadConstraint = view.findViewById(R.id.loadConstraint)
     }
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams?) {
         if (childCount != 0) {
-            containerLayout.addView(child, index, params)
+            if (id == R.id.loadConstraint){
+                super.addView(child, index, params)
+            }else{
+                containerLayout.addView(child, index, params)
+            }
         }else{
             super.addView(child, index, params)
         }

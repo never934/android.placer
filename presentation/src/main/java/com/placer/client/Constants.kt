@@ -21,4 +21,8 @@ object Constants {
     /** view **/
     const val GOOGLE_MAP_ANIMATION_DURATION = 1000
     const val GOOGLE_MAP_INFO_WINDOW_V_ANCHOR = 0.5f
+    const val GOOGLE_MAP_ZOOM = 8f
+
+    /** bundle keys **/
+    const val CITY_CHOSEN_RESULT_KEY = "CITY_CHOSEN_RESULT_KEY"
 }

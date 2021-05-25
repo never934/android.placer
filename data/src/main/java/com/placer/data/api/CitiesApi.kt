@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface CitiesApi {
     @GET("v1/cities")
-    fun getCities(@Query("input")input: String) : Flow<List<CityResponse>>
+    suspend fun getCities(@Query("input")input: String) : List<CityResponse>
 }

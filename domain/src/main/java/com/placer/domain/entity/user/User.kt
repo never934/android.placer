@@ -10,5 +10,6 @@ data class User(
     val cityLng: Double,
     val cityName: String,
     val avatarUrl: String?,
+    val registrated: Boolean,
     val createdDate: Long
 )

@@ -9,4 +9,5 @@ import com.placer.client.util.SingleLiveEvent
 abstract class BaseViewModel : ViewModel() {
     val showSnackBar: SingleLiveEvent<String> = SingleLiveEvent()
     val isRefreshing: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    val isLoading: SingleLiveEvent<Boolean> = SingleLiveEvent()
 }

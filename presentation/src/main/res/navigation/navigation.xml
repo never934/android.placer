@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainMapFragment"
-        android:name="com.placer.client.screens.MainMapFragment" >
+        android:name="com.placer.client.screens.main.MainMapFragment" >
         <action
             android:id="@+id/action_mainMapFragment_to_placeViewFragment"
             app:destination="@id/placeViewFragment"
@@ -68,4 +68,8 @@
             android:name="user"
             app:argType="com.placer.client.entity.UserView" />
     </fragment>
+    <fragment
+        android:id="@+id/chooseCityFragment"
+        android:name="com.placer.client.screens.city.ChooseCityFragment"
+        android:label="@string/choose_city_app_bar" />
 </navigation>

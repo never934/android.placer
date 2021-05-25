@@ -1,6 +1,7 @@
 package com.placer.client.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
@@ -18,9 +19,17 @@ abstract class BaseFragment : Fragment() {
         viewModel.isRefreshing.observe(this, {
             refreshStateChanged(it)
         })
+        viewModel.isLoading.observe(this,{
+            if (it){
+                loadingStateChanged(View.VISIBLE)
+            }else{
+                loadingStateChanged(View.GONE)
+            }
+        })
         initListeners()
     }
 
     abstract fun initListeners()
     abstract fun refreshStateChanged(state: Boolean)
+    abstract fun loadingStateChanged(state: Int)
 }

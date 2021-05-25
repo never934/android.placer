@@ -1,12 +1,12 @@
-package com.placer.client.screens
+package com.placer.client.screens.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.*
@@ -21,6 +21,8 @@ import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
 import com.placer.client.interfaces.PlacerFabStyle
 import com.placer.client.navigation.PlaceViewTransaction
+import com.placer.client.screens.MainActivity
+import com.placer.client.screens.MainViewModel
 import com.placer.client.screens.places.PlaceViewFragmentArgs
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.InfoWindowAdapter
@@ -30,6 +32,7 @@ import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle, PlaceViewTransaction {
 
     override val viewModel: MainMapViewModel by viewModels()
+    val mainViewModel: MainViewModel by activityViewModels()
     private var binding: FragmentMainMapBinding? = null
 
     override fun onCreateView(
@@ -81,6 +84,10 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
+    override fun loadingStateChanged(state: Int) {
+        binding?.baseConstraint?.loadConstraint?.visibility = state
+    }
+
     override fun onMapReady(map: GoogleMap) {
         map.uiSettings.isCompassEnabled = false
         viewModel.mapPlaces.observe(this, {
@@ -106,6 +113,18 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
         map.setOnInfoWindowClickListener { marker ->
             viewModel.placeClicked(marker.title)
         }
+        mainViewModel.profile.observe(this, {
+            if (mainViewModel.firstStart){
+                val latLng = LatLng(it.cityLat, it.cityLng)
+                map.animateCamera(
+                    CameraUpdateFactory.newLatLng(latLng),
+                    Constants.GOOGLE_MAP_ANIMATION_DURATION,
+                    null
+                )
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, Constants.GOOGLE_MAP_ZOOM), null)
+                mainViewModel.firstStart = false
+            }
+        })
     }
 
     private fun clearMap(map: GoogleMap){

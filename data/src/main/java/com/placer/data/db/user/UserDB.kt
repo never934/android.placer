@@ -16,6 +16,7 @@ data class UserDB(
     val cityLng: Double,
     val cityName: String,
     val avatarUrl: String?,
+    val registrated: Boolean,
     val createdDate: Long
 )
 
@@ -30,6 +31,7 @@ fun UserDB.toEntity() : User {
         cityLng = cityLng,
         cityName = cityName,
         avatarUrl = avatarUrl,
+        registrated = registrated,
         createdDate = createdDate
     )
 }

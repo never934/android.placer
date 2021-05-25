@@ -12,14 +12,14 @@ interface UserApi {
     suspend fun getUsers() : List<UserResponse>
 
     @PUT("v1/users/profile")
-    fun updateProfile(@Body request: ProfileUpdateRequest) : Flow<UserResponse>
+    suspend fun updateProfile(@Body request: ProfileUpdateRequest) : UserResponse
 
     @POST("v1/users/profile/city")
-    fun updateProfileCity(@Body response: CityResponse) : Flow<UserResponse>
+    suspend fun updateProfileCity(@Body response: CityResponse) : UserResponse
 
     @Multipart
     @POST("v1/users/profile/avatar")
-    fun updateProfileAvatar(@Part file: MultipartBody.Part) : Flow<UserResponse>
+    suspend fun updateProfileAvatar(@Part file: MultipartBody.Part) : UserResponse
 
     @GET("v1/users/{userId}")
     suspend fun getUser(@Path("userId")userId: String) : UserResponse

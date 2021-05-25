@@ -9,6 +9,7 @@ import com.placer.data.AppPrefs
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUserUseCase
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,8 @@ class MainViewModel(private val loadUserUseCase: LoadUserUseCase = AppClass.appI
     private var _exitExecute: MutableLiveData<Boolean> = MutableLiveData()
     internal val exitExecute: LiveData<Boolean>
     get() = _exitExecute
+
+    var firstStart: Boolean = true
 
     init {
         loadProfile()

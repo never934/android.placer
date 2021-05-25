@@ -1,4 +1,4 @@
-package com.placer.client.screens
+package com.placer.client.screens.main
 
 import androidx.lifecycle.*
 import com.google.android.gms.maps.model.Marker
