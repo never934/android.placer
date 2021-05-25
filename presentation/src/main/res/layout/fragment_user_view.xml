@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="user"
+            type="com.placer.client.entity.UserView" />
+    </data>
+
+    <com.placer.client.customview.BaseConstraintLayout
+        android:id="@+id/baseConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/scrollableContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/avatarView"
+                    android:layout_width="@dimen/screen_avatar_size"
+                    android:layout_height="@dimen/screen_avatar_size"
+                    android:layout_marginTop="?actionBarSize"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    app:avatarUrl="@{user.avatarUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nameView"
+                    style="@style/headline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@{user.nickname != null ? user.nickname : user.name}"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avatarView" />
+
+                <TextView
+                    android:id="@+id/cityView"
+                    style="@style/item_hint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:text="@{user.cityName}"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nameView" />
+
+                <LinearLayout
+                    android:id="@+id/contentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/default_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cityView">
+
+                    <LinearLayout
+                        android:id="@+id/fieldsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cityView"
+                        app:layout_constraintVertical_bias="0.0">
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/placesField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@{@string/user_places_hint}"
+                            android:content="@{user.placesCount}"
+                            android:icon="@{@drawable/ic_baseline_place_24}"/>
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/topPositionField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@{@string/user_top_position_hint}"
+                            android:content="@{@string/common_user_top_format(user.topPosition)}"
+                            android:icon="@{@drawable/ic_baseline_group_24}"/>
+
+                        <com.placer.client.customview.ViewField
+                            android:id="@+id/createdDateField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@{@string/user_in_placer_hint}"
+                            android:content="@{user.createdDate}"
+                            android:icon="@{@drawable/ic_baseline_insert_invitation_24}"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/placesLabel"
+                        style="@style/headline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:text="@string/user_places_label" />
+
+                    <com.placer.client.customview.places.PlacesComponent
+                        android:id="@+id/placesComponent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/component_scroll_margin" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/appBarMotionLayout"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:layoutDescription="@xml/user_view_app_bar_motion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/backArrow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/default_padding"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_color" />
+
+            <TextView
+                android:id="@+id/titleView"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:alpha="0"
+                android:drawablePadding="@dimen/small_padding"
+                android:maxLines="1"
+                android:text="@{user.nickname != null ? user.nickname : user.name}"
+                android:textColor="@color/text_color"
+                app:urlDrawable="@{user.avatarUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editIcon"
+                app:layout_constraintStart_toEndOf="@+id/backArrow"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/editIcon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/default_padding"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_color" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </com.placer.client.customview.BaseConstraintLayout>
+</layout>

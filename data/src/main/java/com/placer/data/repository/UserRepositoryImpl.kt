@@ -39,13 +39,16 @@ class UserRepositoryImpl @Inject internal constructor(
     }
         .flowOn(dispatcher)
 
-    override suspend fun loadUser(userId: String): Flow<Result<User>> =
-        userApi.getUser(userId)
-            .map { userDao.updateUser(userId, it.toDB()) }
-            .map { Result.success(it.toEntity()) }
-            .catch { Result.success(userDao.getUser(userId).toEntity()) }
-            .catch { Result.failure<User>(Exception("Error while loading user")) }
-            .flowOn(dispatcher)
+    override suspend fun loadUser(userId: String): Flow<Result<User>> = flow {
+        try {
+            val userResponse = userApi.getUser(userId)
+            val daoUser = userDao.updateUser(userId, userResponse.toDB())
+            emit(Result.success(daoUser.toEntity()))
+        }catch (e: Exception){
+            emit(Result.success(userDao.getUser(userId).toEntity()))
+        }
+    }
+        .flowOn(dispatcher)
 
     override suspend fun loadProfile(): Flow<Result<User>> =
         flow {

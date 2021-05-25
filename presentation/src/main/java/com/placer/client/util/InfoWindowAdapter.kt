@@ -35,6 +35,7 @@ class InfoWindowAdapter(private val myContext: FragmentActivity, private val pla
         titleUi.typeface = Typeface.DEFAULT_BOLD
         titleUi.text = place.name
         commentsCountView.setCount(place.commentsCount)
+        commentsCountView.setIcon(ContextCompat.getDrawable(myContext, R.drawable.ic_baseline_forum_24))
         if (place.photos.isNotEmpty()){
             runBlocking {
                 withContext(Dispatchers.IO) {

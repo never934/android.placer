@@ -8,15 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.adapters.places.PlaceClickListener
 import com.placer.client.adapters.places.PlacesAdapter
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentTopBinding
+import com.placer.client.entity.PlaceView
+import com.placer.client.navigation.PlaceViewTransaction
 import com.placer.client.util.extensions.ViewExtensions.close
 
-internal class PlacesTopFragment : BaseFragment() {
+internal class PlacesTopFragment : BaseFragment(), PlaceViewTransaction {
 
     override val viewModel: PlacesTopViewModel by viewModels()
     private var binding: FragmentTopBinding? = null
@@ -49,6 +52,12 @@ internal class PlacesTopFragment : BaseFragment() {
         }
         viewModel.topPlaces.observe(this, {
             adapter.submitList(it)
+        })
+        viewModel.goToPlaceView.observe(this, {
+            it?.let {
+                setPlaceViewFragment(it)
+                viewModel.navigatedToPlaceView()
+            }
         })
     }
 
@@ -87,5 +96,9 @@ internal class PlacesTopFragment : BaseFragment() {
 
     override fun refreshStateChanged(state: Boolean) {
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
+    }
+
+    override fun setPlaceViewFragment(place: PlaceView) {
+        findNavController().navigate(PlacesTopFragmentDirections.actionPlacesTopFragmentToPlaceViewFragment(place))
     }
 }

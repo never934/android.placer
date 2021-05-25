@@ -95,6 +95,7 @@
     <string name="user_places_hint">Places</string>
     <string name="user_top_position_hint">Top position</string>
     <string name="user_in_placer_hint">In placer</string>
+    <string name="user_places_label">Places:</string>
 
     <!-- Settings fragment !-->
     <string name="settings_app_bar">Settings</string>

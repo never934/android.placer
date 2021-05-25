@@ -20,7 +20,11 @@ internal class UsersTopViewModel(
 
     private var _topUsers: MutableLiveData<List<User>> = MutableLiveData()
     val topUsers: LiveData<List<UserView>>
-        get() = _topUsers.map { it.toViews() }
+    get() = _topUsers.map { it.toViews() }
+
+    private var _goToUserView: MutableLiveData<UserView?> = MutableLiveData()
+    internal val goToUserView: LiveData<UserView?>
+    get() = _goToUserView
 
     init {
         reload()
@@ -55,7 +59,11 @@ internal class UsersTopViewModel(
     }
 
     fun userClicked(user: UserView) {
-        Log.e("clicked", "user ${user.name}")
+        _goToUserView.value = user
+    }
+
+    fun goToUserViewExecuted() {
+        _goToUserView.value = null
     }
 
 }

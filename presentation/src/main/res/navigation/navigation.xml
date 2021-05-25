@@ -48,9 +48,24 @@
     <fragment
         android:id="@+id/placesTopFragment"
         android:name="com.placer.client.screens.top.PlacesTopFragment"
-        android:label="@string/top_places_app_bar" />
+        android:label="@string/top_places_app_bar" >
+        <action
+            android:id="@+id/action_placesTopFragment_to_placeViewFragment"
+            app:destination="@id/placeViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/usersTopFragment"
         android:name="com.placer.client.screens.top.UsersTopFragment"
-        android:label="@string/top_users_app_bar" />
+        android:label="@string/top_users_app_bar" >
+        <action
+            android:id="@+id/action_usersTopFragment_to_userViewFragment"
+            app:destination="@id/userViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userViewFragment"
+        android:name="com.placer.client.screens.user.UserViewFragment">
+        <argument
+            android:name="user"
+            app:argType="com.placer.client.entity.UserView" />
+    </fragment>
 </navigation>

@@ -28,4 +28,13 @@
     <dimen name="place_info_window_corner_radius">16dp</dimen>
     <dimen name="comment_field_corner_radius">16dp</dimen>
     <dimen name="place_info_window_round_layout_corner_radius">13dp</dimen>
+
+    <dimen name="smallest_avatar_size">25dp</dimen>
+    <dimen name="small_avatar_size">50dp</dimen>
+    <dimen name="screen_avatar_size">100dp</dimen>
+    <dimen name="place_photo_height">300dp</dimen>
+
+    <dimen name="component_scroll_margin">200dp</dimen>
+
+    <dimen name="app_bar_elevation">10dp</dimen>
 </resources>

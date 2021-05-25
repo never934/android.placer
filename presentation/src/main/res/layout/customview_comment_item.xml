@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/avatarView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/small_avatar_size"
+            android:layout_height="@dimen/small_avatar_size"
             android:layout_margin="@dimen/default_margin"
             app:avatarUrl="@{placeComment.author.avatarUrl}"
             app:layout_constraintStart_toStartOf="parent"

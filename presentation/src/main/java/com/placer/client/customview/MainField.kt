@@ -1,7 +1,6 @@
 package com.placer.client.customview
 
 import android.content.Context
-import android.opengl.Visibility
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -13,12 +12,12 @@ import com.google.android.material.button.MaterialButton
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseCustomView
+import com.placer.client.customview.places.PlaceItem
 import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 import com.placer.client.util.extensions.FragmentExtensions.showKeyBoard
 import com.placer.client.util.extensions.ViewExtensions.getFormatted
-import com.placer.domain.entity.place.Place
 
 internal class MainField @JvmOverloads constructor(
     context: Context,

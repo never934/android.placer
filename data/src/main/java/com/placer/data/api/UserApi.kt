@@ -22,7 +22,7 @@ interface UserApi {
     fun updateProfileAvatar(@Part file: MultipartBody.Part) : Flow<UserResponse>
 
     @GET("v1/users/{userId}")
-    fun getUser(@Path("userId")userId: String) : Flow<UserResponse>
+    suspend fun getUser(@Path("userId")userId: String) : UserResponse
 
     @GET("v1/users/profile")
     suspend fun getProfile() : UserResponse

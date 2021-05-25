@@ -17,7 +17,7 @@
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/motionLayout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/place_photo_height"
             app:layoutDescription="@xml/place_view_photos_motion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/photosView"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="@dimen/place_photo_height"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="200dp" />
+                    android:layout_height="@dimen/component_scroll_margin" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
@@ -141,7 +141,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="200dp" />
+                            android:layout_height="@dimen/component_scroll_margin" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>

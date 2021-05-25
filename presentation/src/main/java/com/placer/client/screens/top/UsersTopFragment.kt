@@ -8,15 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.adapters.users.UserClickListener
 import com.placer.client.adapters.users.UsersAdapter
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentTopBinding
+import com.placer.client.entity.UserView
+import com.placer.client.navigation.UserViewTransaction
 import com.placer.client.util.extensions.ViewExtensions.close
 
-internal class UsersTopFragment : BaseFragment() {
+internal class UsersTopFragment : BaseFragment(), UserViewTransaction {
 
     override val viewModel: UsersTopViewModel by viewModels()
     private var binding: FragmentTopBinding? = null
@@ -49,6 +52,12 @@ internal class UsersTopFragment : BaseFragment() {
         }
         viewModel.topUsers.observe(this, {
             adapter.submitList(it)
+        })
+        viewModel.goToUserView.observe(this, {
+            it?.let {
+                setUserViewFragment(it)
+                viewModel.goToUserViewExecuted()
+            }
         })
     }
 
@@ -87,5 +96,9 @@ internal class UsersTopFragment : BaseFragment() {
 
     override fun refreshStateChanged(state: Boolean) {
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
+    }
+
+    override fun setUserViewFragment(user: UserView) {
+        findNavController().navigate(UsersTopFragmentDirections.actionUsersTopFragmentToUserViewFragment(user))
     }
 }

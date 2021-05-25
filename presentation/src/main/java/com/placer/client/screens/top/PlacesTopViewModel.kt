@@ -22,6 +22,10 @@ internal class PlacesTopViewModel(
     val topPlaces: LiveData<List<PlaceView>>
     get() = _topPlaces.map { it.toViews() }
 
+    private var _goToPlaceView: MutableLiveData<PlaceView?> = MutableLiveData()
+    internal val goToPlaceView: LiveData<PlaceView?>
+    get() = _goToPlaceView
+
     init {
         reload()
     }
@@ -54,8 +58,12 @@ internal class PlacesTopViewModel(
         }
     }
 
+    fun navigatedToPlaceView(){
+        _goToPlaceView.value = null
+    }
+
     fun placeClicked(place: PlaceView) {
-        Log.e("clicked", "place ${place.name}")
+        _goToPlaceView.value = place
     }
 
 }

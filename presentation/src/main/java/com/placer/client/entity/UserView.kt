@@ -31,7 +31,7 @@ internal fun User.toView() : UserView {
         cityLng = cityLng,
         cityName = cityName,
         avatarUrl = avatarUrl,
-        createdDate = Date(createdDate).daysFromItRepresentation()
+        createdDate = Date(createdDate*1000).daysFromItRepresentation()
     )
 }
 
