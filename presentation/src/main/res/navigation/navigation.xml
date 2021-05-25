@@ -26,7 +26,11 @@
         android:label="@string/places_app_bar" >
         <action
             android:id="@+id/action_placesFragment_to_placeViewFragment"
-            app:destination="@id/placeViewFragment" />
+            app:destination="@id/placeViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/placeViewFragment"
@@ -59,7 +63,11 @@
         android:label="@string/top_places_app_bar" >
         <action
             android:id="@+id/action_placesTopFragment_to_placeViewFragment"
-            app:destination="@id/placeViewFragment" />
+            app:destination="@id/placeViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/usersTopFragment"
@@ -67,7 +75,11 @@
         android:label="@string/top_users_app_bar" >
         <action
             android:id="@+id/action_usersTopFragment_to_userViewFragment"
-            app:destination="@id/userViewFragment" />
+            app:destination="@id/userViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/userViewFragment"
@@ -78,7 +90,11 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_userViewFragment_to_profileEditFragment"
-            app:destination="@id/profileEditFragment" />
+            app:destination="@id/profileEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/chooseCityFragment"
@@ -90,7 +106,11 @@
         android:label="@string/edit_profile_app_bar" >
         <action
             android:id="@+id/action_profileEditFragment_to_chooseCityFragment"
-            app:destination="@id/chooseCityFragment" />
+            app:destination="@id/chooseCityFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/helpSecondFragment"
