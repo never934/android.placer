@@ -114,22 +114,28 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/placesLabel"
-                        style="@style/headline"
+                    <LinearLayout
+                        android:id="@+id/places"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:text="@string/user_places_label" />
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/placesLabel"
+                            style="@style/headline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/user_places_label" />
 
-                    <com.placer.client.customview.places.PlacesComponent
-                        android:id="@+id/placesComponent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        <com.placer.client.customview.places.PlacesComponent
+                            android:id="@+id/placesComponent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/component_scroll_margin" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/component_scroll_margin" />
+                    </LinearLayout>
 
                 </LinearLayout>
 

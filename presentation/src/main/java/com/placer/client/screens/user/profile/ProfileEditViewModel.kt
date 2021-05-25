@@ -1,12 +1,11 @@
 package com.placer.client.screens.user.profile
 
-import android.graphics.Bitmap
 import androidx.lifecycle.*
 import com.placer.client.AppClass
+import com.placer.client.R
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
-import com.placer.client.util.extensions.BitmapExtensions.toByteArray
 import com.placer.data.AppPrefs
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUserUseCase
@@ -44,15 +43,19 @@ internal class ProfileEditViewModel(
     }
 
     fun updateProfile(userName: String, userNickname: String) {
-        isLoading.value = true
-        viewModelScope.launch {
-            val result = updateProfileUseCase.updateUser(userName, userNickname).first()
-            if(result.isSuccess){
-                _profile.value = result.getOrNull()
-            }else{
-                showSnackBar.value = result.exceptionOrNull()?.message
+        if (userName.isEmpty() && userNickname.isEmpty()){
+            showSnackBar.value = AppClass.appInstance.getString(R.string.common_err_name_nickname_empty)
+        }else{
+            isLoading.value = true
+            viewModelScope.launch {
+                val result = updateProfileUseCase.updateUser(userName, userNickname).first()
+                if(result.isSuccess){
+                    _profile.value = result.getOrNull()
+                }else{
+                    showSnackBar.value = result.exceptionOrNull()?.message
+                }
+                isLoading.value = false
             }
-            isLoading.value = false
         }
     }
 

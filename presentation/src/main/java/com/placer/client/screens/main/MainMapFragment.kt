@@ -1,10 +1,14 @@
 package com.placer.client.screens.main
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -19,6 +23,7 @@ import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentMainMapBinding
 import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
+import com.placer.client.interfaces.MyLocation
 import com.placer.client.interfaces.PlacerFabStyle
 import com.placer.client.navigation.PlaceViewTransaction
 import com.placer.client.screens.MainActivity
@@ -29,11 +34,12 @@ import com.placer.client.util.InfoWindowAdapter
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
 
-internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle, PlaceViewTransaction {
+internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle, PlaceViewTransaction, MyLocation {
 
     override val viewModel: MainMapViewModel by viewModels()
     val mainViewModel: MainViewModel by activityViewModels()
     private var binding: FragmentMainMapBinding? = null
+    private var map: GoogleMap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,7 +95,21 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
     }
 
     override fun onMapReady(map: GoogleMap) {
+        this.map = map
         map.uiSettings.isCompassEnabled = false
+        map.uiSettings.isMyLocationButtonEnabled = false
+        observeMapPlaces(map)
+        map.setOnMarkerClickListener {
+            openMarker(map, it)
+            true
+        }
+        map.setOnInfoWindowClickListener { marker ->
+            viewModel.placeClicked(marker.title)
+        }
+        enableMyLocation()
+    }
+
+    private fun observeMapPlaces(map: GoogleMap) {
         viewModel.mapPlaces.observe(this, {
             clearMap(map)
             map.setInfoWindowAdapter(InfoWindowAdapter(requireActivity(), it))
@@ -108,33 +128,29 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
             viewModel.updateMapMarkers(markers)
             executeInitPlace(map)
         })
-        map.setOnMarkerClickListener {
-            openMarker(map, it)
-            true
-        }
-        map.setOnInfoWindowClickListener { marker ->
-            viewModel.placeClicked(marker.title)
-        }
+    }
+
+    private fun setFirstStartObserver() {
         mainViewModel.profile.observe(this, {
             if (mainViewModel.firstStart){
                 val latLng = LatLng(it.cityLat, it.cityLng)
-                map.animateCamera(
+                map?.animateCamera(
                     CameraUpdateFactory.newLatLng(latLng),
                     Constants.GOOGLE_MAP_ANIMATION_DURATION,
                     null
                 )
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, Constants.GOOGLE_MAP_ZOOM), null)
+                map?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, Constants.GOOGLE_MAP_ZOOM), null)
                 mainViewModel.firstStart = false
             }
         })
     }
 
-    private fun clearMap(map: GoogleMap){
+    private fun clearMap(map: GoogleMap) {
         map.clear()
         viewModel.updateMapMarkers(arrayListOf())
     }
 
-    private fun executeInitPlace(map: GoogleMap){
+    private fun executeInitPlace(map: GoogleMap) {
         if (arguments != null){
             val initPlace = PlaceViewFragmentArgs.fromBundle(requireArguments()).place
             val initMarker = viewModel.mapMarkers.firstOrNull{ it.title == initPlace.id }
@@ -192,6 +208,33 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
 
     override fun setPlaceViewFragment(place: PlaceView) {
         findNavController().navigate(MainMapFragmentDirections.actionMainMapFragmentToPlaceViewFragment(place))
+    }
+
+    override fun isLocationPermissionsGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun enableMyLocation() {
+        if (isLocationPermissionsGranted()) {
+            map?.isMyLocationEnabled = true
+        }
+        else {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), Constants.REQUEST_LOCATION_PERMISSION)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray) {
+        if (requestCode == Constants.REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.isNotEmpty() && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                enableMyLocation()
+            }
+        }
     }
 
 }

@@ -26,6 +26,9 @@ object Constants {
     /** cities delay **/
     const val CITIES_REQUEST_DELAY = 1000L
 
+    /** permission **/
+    const val REQUEST_LOCATION_PERMISSION = 1
+
     /** bundle keys **/
     const val CITY_CHOSEN_RESULT_KEY = "CITY_CHOSEN_RESULT_KEY"
     const val USER_VIEW_KEY = "USER_VIEW_KEY"

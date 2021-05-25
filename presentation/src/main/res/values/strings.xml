@@ -4,6 +4,7 @@
     <!-- common !-->
     <string name="common_ok">OK</string>
     <string name="common_err_empty">You can`t send empty</string>
+    <string name="common_err_name_nickname_empty">You can`t save empty name and nickname</string>
     <string name="common_user_top_format">#%d</string>
 
     <!-- auth screen !-->
