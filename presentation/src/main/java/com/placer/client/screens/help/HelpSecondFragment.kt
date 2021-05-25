@@ -6,32 +6,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.placer.client.Constants
 import com.placer.client.R
-import com.placer.client.base.BaseFragment
-import com.placer.client.databinding.FragmentHelpBinding
+import com.placer.client.databinding.FragmentHelpSecondBinding
+import com.placer.client.navigation.HelpThirdTransaction
 
-class HelpFragment : BaseFragment() {
-
-    override val viewModel: HelpViewModel by viewModels()
-    private lateinit var binding: FragmentHelpBinding
+internal class HelpSecondFragment : Fragment(), HelpThirdTransaction {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_help, container, false
+        val binding: FragmentHelpSecondBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_help_second, container, false
         )
         (requireActivity() as AppCompatActivity?)?.supportActionBar?.elevation = Constants.ACTION_BAR_ELEVATION
         (requireActivity() as AppCompatActivity?)?.supportActionBar?.show()
+        binding.button.setOnClickListener {
+            setThirdHelpFragment()
+        }
         return binding.root
     }
 
-    override fun initListeners() {}
-
-    override fun refreshStateChanged(state: Boolean) {}
-
-    override fun loadingStateChanged(state: Int) {}
+    override fun setThirdHelpFragment() {
+        findNavController().navigate(HelpSecondFragmentDirections.actionHelpSecondFragmentToHelpThirdFragment())
+    }
 }

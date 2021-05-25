@@ -42,9 +42,17 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/helpFragment"
-        android:name="com.placer.client.screens.help.HelpFragment"
-        android:label="@string/help_app_bar" />
+        android:id="@+id/helpFirstFragment"
+        android:name="com.placer.client.screens.help.HelpFirstFragment"
+        android:label="@string/help_app_bar" >
+        <action
+            android:id="@+id/action_helpFirstFragment_to_helpSecondFragment"
+            app:destination="@id/helpSecondFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/placesTopFragment"
         android:name="com.placer.client.screens.top.PlacesTopFragment"
@@ -84,4 +92,20 @@
             android:id="@+id/action_profileEditFragment_to_chooseCityFragment"
             app:destination="@id/chooseCityFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/helpSecondFragment"
+        android:name="com.placer.client.screens.help.HelpSecondFragment"
+        android:label="@string/help_app_bar" >
+        <action
+            android:id="@+id/action_helpSecondFragment_to_helpThirdFragment"
+            app:destination="@id/helpThirdFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/helpThirdFragment"
+        android:name="com.placer.client.screens.help.HelpThirdFragment"
+        android:label="@string/help_app_bar" />
 </navigation>

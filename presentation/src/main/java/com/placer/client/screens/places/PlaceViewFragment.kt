@@ -21,7 +21,7 @@ import com.placer.client.navigation.MainMapTransaction
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
-internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener, MainMapTransaction {
+internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener, MainMapTransaction.WithPlace {
 
     private var binding: FragmentPlaceViewBinding? = null
     override val viewModel: PlaceViewViewModel by viewModels{

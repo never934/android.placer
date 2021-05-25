@@ -126,6 +126,7 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
                 }
             }
             viewModel.updateMapMarkers(markers)
+            setFirstStartObserver()
             executeInitPlace(map)
         })
     }

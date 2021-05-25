@@ -72,6 +72,12 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
+    <style name="help_headline">
+        <item name="android:textSize">@dimen/help_title_size</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
     <style name="item_title">
         <item name="android:textSize">@dimen/item_title_text_size</item>
         <item name="android:textColor">@color/text_color</item>

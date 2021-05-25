@@ -127,7 +127,7 @@ internal class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSel
             drawerLayout.closeDrawers()
         }
         if (item.itemId == R.id.helpFragment){
-            findNavController(R.id.navHostFragment).navigate(R.id.helpFragment)
+            findNavController(R.id.navHostFragment).navigate(R.id.helpFirstFragment)
             drawerLayout.closeDrawers()
         }
         return false

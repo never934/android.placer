@@ -15,6 +15,7 @@
     
     <dimen name="biggest_text_size">36sp</dimen>
     <dimen name="app_bar_text_size">20sp</dimen>
+    <dimen name="help_title_size">24sp</dimen>
     <dimen name="headline_text_size">18sp</dimen>
     <dimen name="item_title_text_size">16sp</dimen>
     <dimen name="item_hint_text_size">14sp</dimen>

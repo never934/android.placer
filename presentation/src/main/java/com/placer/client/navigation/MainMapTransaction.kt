@@ -3,5 +3,10 @@ package com.placer.client.navigation
 import com.placer.client.entity.PlaceView
 
 internal interface MainMapTransaction {
-    fun setMainMapFragment(place: PlaceView)
+    interface WithPlace{
+        fun setMainMapFragment(place: PlaceView)
+    }
+    interface WithoutPlace{
+        fun setMainMapFragment()
+    }
 }
