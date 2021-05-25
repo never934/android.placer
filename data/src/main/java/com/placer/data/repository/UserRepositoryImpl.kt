@@ -64,13 +64,13 @@ class UserRepositoryImpl @Inject internal constructor(
             .flowOn(dispatcher)
 
 
-    override suspend fun updateUser(user: User): Flow<Result<User>> = flow {
+    override suspend fun updateUser(userName: String, userNickname: String): Flow<Result<User>> = flow {
         try {
-            val userResponse = userApi.updateProfile(ProfileUpdateRequest(user.name, user.nickname))
-            val daoUser = userDao.updateUser(user.id, userResponse.toDB())
+            val userResponse = userApi.updateProfile(ProfileUpdateRequest(userName, userNickname))
+            val daoUser = userDao.updateUser(AppPrefs.getUserId(), userResponse.toDB())
             emit(Result.success(daoUser.toEntity()))
         }catch (e: Exception){
-            emit(Result.success(userDao.getUser(user.id).toEntity()))
+            emit(Result.success(userDao.getUser(AppPrefs.getUserId()).toEntity()))
         }
     }
         .flowOn(dispatcher)

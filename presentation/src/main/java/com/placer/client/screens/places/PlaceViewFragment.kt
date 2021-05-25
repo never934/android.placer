@@ -44,7 +44,7 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
 
     override fun initListeners() {
         binding?.let { binding ->
-            binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
                 val motionProgress = CommonUtils.getMotionProgress(30f, scrollY.toFloat())
                 binding.motionLayout.progress = motionProgress
                 binding.appBarMotionLayout.progress = motionProgress

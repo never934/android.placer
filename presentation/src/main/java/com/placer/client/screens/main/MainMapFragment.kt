@@ -101,7 +101,9 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
                     .title(place.id)
                 markerOptions.infoWindowAnchor(markerOptions.infoWindowAnchorU, Constants.GOOGLE_MAP_INFO_WINDOW_V_ANCHOR)
                 val marker = map.addMarker(markerOptions)
-                markers.add(marker)
+                marker?.let {
+                    markers.add(marker)
+                }
             }
             viewModel.updateMapMarkers(markers)
             executeInitPlace(map)

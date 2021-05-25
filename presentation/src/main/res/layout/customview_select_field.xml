@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:textColorHint="@drawable/edit_field_box_selector"
+        app:boxBackgroundColor="@android:color/white"
+        app:boxStrokeColor="@drawable/edit_field_box_selector"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/edit_field_hint"
+        app:hintTextColor="@drawable/edit_field_box_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/roboto"
+            android:letterSpacing="0.01"
+            android:paddingStart="@dimen/start_margin"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/default_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+</layout>

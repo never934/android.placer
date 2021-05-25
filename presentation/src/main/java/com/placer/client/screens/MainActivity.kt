@@ -10,6 +10,7 @@ import android.view.MenuItem
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -26,7 +27,7 @@ import com.placer.client.databinding.NavHeaderBinding
 import com.placer.client.screens.city.ChooseCityActivity
 
 
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+internal class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override val viewModel: MainViewModel by viewModels()
     private lateinit var drawerLayout: DrawerLayout
@@ -76,6 +77,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 chooseCityResult.launch(Intent(this, ChooseCityActivity::class.java))
             }
         })
+        navHeaderBinding?.constraint?.setOnClickListener {
+            openProfileView()
+        }
+    }
+
+    private fun openProfileView() {
+        val bundle = Bundle()
+        bundle.putParcelable(Constants.USER_VIEW_KEY, viewModel.profileEntity)
+        findNavController(R.id.navHostFragment).navigate(R.id.userViewFragment, bundle)
+        drawerLayout.closeDrawers()
     }
 
     private fun initAll(){

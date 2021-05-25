@@ -103,6 +103,7 @@
     <string name="settings_push_notifications_toggle">Push notifications</string>
 
     <!-- Edit profile fragment !-->
+    <string name="edit_profile_app_bar">Edit profile</string>
     <string name="edit_profile_name_hint">Name</string>
     <string name="edit_profile_nickname_hint">Nickname</string>
     <string name="edit_profile_city_hint">City</string>

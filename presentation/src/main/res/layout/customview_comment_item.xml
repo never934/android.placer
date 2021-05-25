@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="viewStart"
                     android:layout_weight="1"
-                    android:text="@{placeComment.author.name}" />
+                    android:text="@{placeComment.author.nickname != null ? placeComment.author.nickname : placeComment.author.name}" />
                 <TextView
                     android:id="@+id/date"
                     style="@style/item_hint"

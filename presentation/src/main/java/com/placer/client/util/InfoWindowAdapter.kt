@@ -29,7 +29,7 @@ class InfoWindowAdapter(private val myContext: FragmentActivity, private val pla
         val titleUi = view.findViewById(R.id.nameView) as TextView
         val placePhotoView = view.findViewById(R.id.placePhotoView) as ImageView
         val commentsCountView = view.findViewById(R.id.commentsCountView) as CountView
-        val placeId: String = marker.title
+        val placeId: String = marker.title ?: ""
         val place = places.first{ it.id == placeId }
 
         titleUi.typeface = Typeface.DEFAULT_BOLD

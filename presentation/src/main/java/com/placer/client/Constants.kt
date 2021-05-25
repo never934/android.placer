@@ -28,4 +28,5 @@ object Constants {
 
     /** bundle keys **/
     const val CITY_CHOSEN_RESULT_KEY = "CITY_CHOSEN_RESULT_KEY"
+    const val USER_VIEW_KEY = "USER_VIEW_KEY"
 }

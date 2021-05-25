@@ -70,7 +70,7 @@
                             android:animateLayoutChanges="true"
                             android:orientation="vertical">
 
-                            <com.placer.client.customview.ViewField
+                            <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/publishedField"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                                 app:hint="@{@string/place_view_status_hint}"
                                 app:icon="@{@drawable/ic_baseline_public_24}" />
 
-                            <com.placer.client.customview.ViewField
+                            <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/cityField"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                                 app:hint="@{@string/place_view_city_hint}"
                                 app:icon="@{@drawable/ic_baseline_pin_drop_24}" />
 
-                            <com.placer.client.customview.ViewField
+                            <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/descriptionField"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                                 app:hint="@{@string/place_view_description_hint}"
                                 app:icon="@{@drawable/ic_baseline_read_more_24}" />
 
-                            <com.placer.client.customview.ViewField
+                            <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/inTopField"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                                 app:hint="@{@string/place_view_in_top_hint}"
                                 app:icon="@{@drawable/ic_baseline_local_fire_department_24}" />
 
-                            <com.placer.client.customview.ViewField
+                            <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/commentsField"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                                 app:hint="@{@string/place_view_comments_size_hint}"
                                 app:icon="@{@drawable/ic_baseline_forum_24}" />
 
-                            <com.placer.client.customview.ViewField
+                            <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/createdDateField"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

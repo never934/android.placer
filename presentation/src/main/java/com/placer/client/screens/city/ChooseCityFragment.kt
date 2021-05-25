@@ -18,6 +18,7 @@ import com.placer.client.adapters.cities.CityClickListener
 import com.placer.client.base.BaseActivity
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentChooseCityBinding
+import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 import com.placer.client.util.extensions.ViewExtensions.close
 
 internal class ChooseCityFragment : BaseFragment() {
@@ -84,6 +85,7 @@ internal class ChooseCityFragment : BaseFragment() {
         })
         viewModel.cityUpdated.observe(this, {
             it?.let {
+                searchView?.close()
                 if (requireActivity() is BaseActivity){
                     findNavController().navigateUp()
                 }else{

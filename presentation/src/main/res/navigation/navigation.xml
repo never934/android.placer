@@ -66,10 +66,22 @@
         android:name="com.placer.client.screens.user.UserViewFragment">
         <argument
             android:name="user"
-            app:argType="com.placer.client.entity.UserView" />
+            app:argType="com.placer.client.entity.UserView"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_userViewFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseCityFragment"
         android:name="com.placer.client.screens.city.ChooseCityFragment"
         android:label="@string/choose_city_app_bar" />
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.placer.client.screens.user.profile.ProfileEditFragment"
+        android:label="@string/edit_profile_app_bar" >
+        <action
+            android:id="@+id/action_profileEditFragment_to_chooseCityFragment"
+            app:destination="@id/chooseCityFragment" />
+    </fragment>
 </navigation>

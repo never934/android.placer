@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EditField">
+        <attr format="string" name="edit_field_hint"/>
+        <attr format="string" name="inputType"/>
+        <attr format="string" name="digits"/>
+        <attr format="boolean" name="isNextIme"/>
+        <attr format="boolean" name="isDoneIme"/>
+    </declare-styleable>
+</resources>

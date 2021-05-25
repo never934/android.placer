@@ -116,7 +116,7 @@ internal class MainField @JvmOverloads constructor(
                 callback.textInMainFieldChanged(editFieldView.text.toString())
             }
         }
-        editFieldView.setOnFocusChangeListener { v, hasFocus ->
+        editFieldView.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus){
                 setIconDeleteState()
                 filterButton.visibility = View.GONE
@@ -143,7 +143,7 @@ internal class MainField @JvmOverloads constructor(
         filterRadioGroup.visibility = View.VISIBLE
         filterButton.text = context.getString(R.string.map_places_filter_close_label)
         filterButton.setOnClickListener { setFilterClosedState() }
-        filterRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+        filterRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
                 Constants.ALL_FILTER_GROUP -> callback?.showAllPoints()
                 Constants.MY_FILTER_GROUP -> callback?.showMyPoints()

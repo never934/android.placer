@@ -81,118 +81,48 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cityView"
                         app:layout_constraintVertical_bias="0.0">
 
-                        <com.placer.client.customview.fields.ViewField
-                            android:id="@+id/placesField"
+                        <com.placer.client.customview.fields.EditField
+                            android:id="@+id/nameField"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@{@string/user_places_hint}"
-                            android:content="@{user.placesCount}"
-                            android:icon="@{@drawable/ic_baseline_place_24}"/>
+                            app:text="@{user.name}"
+                            app:edit_field_hint="@string/edit_profile_name_hint"
+                            app:isNextIme="true"
+                            app:inputType="text" />
 
-                        <com.placer.client.customview.fields.ViewField
-                            android:id="@+id/topPositionField"
+                        <com.placer.client.customview.fields.EditField
+                            android:id="@+id/nicknameField"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@{@string/user_top_position_hint}"
-                            android:content="@{@string/common_user_top_format(user.topPosition)}"
-                            android:icon="@{@drawable/ic_baseline_group_24}"/>
+                            app:text="@{user.nickname}"
+                            app:edit_field_hint="@string/edit_profile_nickname_hint"
+                            app:isDoneIme="true"
+                            app:inputType="text"/>
 
-                        <com.placer.client.customview.fields.ViewField
-                            android:id="@+id/createdDateField"
+                        <com.placer.client.customview.fields.SelectField
+                            android:id="@+id/cityField"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@{@string/user_in_placer_hint}"
-                            android:content="@{user.createdDate}"
-                            android:icon="@{@drawable/ic_baseline_insert_invitation_24}"/>
+                            app:text="@{user.cityName}"
+                            app:select_field_hint="@string/edit_profile_city_hint" />
 
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/default_btn"
+                            android:id="@+id/saveButton"
+                            android:text="@string/edit_profile_save_button"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/placesLabel"
-                        style="@style/headline"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:text="@string/user_places_label" />
-
-                    <com.placer.client.customview.places.PlacesComponent
-                        android:id="@+id/placesComponent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/component_scroll_margin" />
-
                 </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.core.widget.NestedScrollView>
-
-        <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/appBarMotionLayout"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
-            app:layoutDescription="@xml/user_view_app_bar_motion"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/backArrow"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/default_padding"
-                android:src="@drawable/ic_baseline_arrow_back_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/text_color" />
-
-            <TextView
-                android:id="@+id/titleView"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:alpha="0"
-                android:drawablePadding="@dimen/small_padding"
-                android:maxLines="1"
-                android:text="@{user.nickname != null ? user.nickname : user.name}"
-                android:textColor="@color/text_color"
-                app:urlDrawable="@{user.avatarUrl}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/editIcon"
-                app:layout_constraintStart_toEndOf="@+id/backArrow"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/editIcon"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/default_padding"
-                android:src="@drawable/ic_baseline_edit_24"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/text_color" />
-        </androidx.constraintlayout.motion.widget.MotionLayout>
-
     </com.placer.client.customview.BaseConstraintLayout>
 </layout>

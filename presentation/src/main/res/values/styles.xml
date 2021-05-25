@@ -34,7 +34,7 @@
         <item name="android:background">@drawable/default_gradient</item>
         <item name="android:layout_marginLeft">@dimen/default_margin</item>
         <item name="android:layout_marginRight">@dimen/default_margin</item>
-        <item name="android:padding">@dimen/normal_padding</item>
+        <item name="android:padding">@dimen/small_padding</item>
         <item name="android:textColor">@color/text_on_color</item>
         <item name="backgroundTint">@null</item>
     </style>
@@ -121,6 +121,10 @@
         <item name="android:textSize">@dimen/default_text_size</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="edit_field_hint" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">10sp</item>
     </style>
 
 </resources>

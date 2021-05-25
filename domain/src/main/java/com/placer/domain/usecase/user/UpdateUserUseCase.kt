@@ -10,6 +10,6 @@ class UpdateUserUseCase(
     private val userRepository: UserRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun updateUser(user: User) : Flow<Result<User>> =
-        userRepository.updateUser(user).flowOn(dispatcher)
+    suspend fun updateUser(userName: String, userNickname: String) : Flow<Result<User>> =
+        userRepository.updateUser(userName, userNickname).flowOn(dispatcher)
 }

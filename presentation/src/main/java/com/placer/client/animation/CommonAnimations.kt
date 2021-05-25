@@ -18,12 +18,12 @@ object CommonAnimations {
         objectAnimator.start()
     }
 
-    fun View.playXAnimation(x: Float, y: Float){
-        val animX = ObjectAnimator.ofFloat(this, "x", x).start()
+    fun View.playXAnimation(x: Float){
+        ObjectAnimator.ofFloat(this, "x", x).start()
     }
 
     fun View.playYAnimation(y: Float){
-        val animY = ObjectAnimator.ofFloat(this, "y", y).start()
+        ObjectAnimator.ofFloat(this, "y", y).start()
     }
 
     fun View.expandViewByWidth(width: Int, newWidth: Int) : ValueAnimator {

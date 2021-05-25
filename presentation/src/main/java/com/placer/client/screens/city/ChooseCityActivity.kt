@@ -12,7 +12,7 @@ class ChooseCityActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityChooseCityBinding = DataBindingUtil.setContentView(this, R.layout.activity_choose_city)
+        DataBindingUtil.setContentView(this, R.layout.activity_choose_city) as ActivityChooseCityBinding
         supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.background_color)))
         supportActionBar?.title = getString(R.string.choose_city_app_bar)
     }

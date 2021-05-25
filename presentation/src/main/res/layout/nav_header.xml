@@ -7,7 +7,8 @@
             name="profile"
             type="com.placer.client.entity.UserView" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -29,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
-        android:text="@{profile.name}"
+        android:text="@{profile.nickname != null ? profile.nickname : profile.name}"
         app:layout_constraintBottom_toBottomOf="@+id/avatarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatarView"
