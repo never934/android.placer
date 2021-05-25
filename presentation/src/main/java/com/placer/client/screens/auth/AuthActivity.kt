@@ -58,8 +58,8 @@ class AuthActivity: BaseActivity() {
     }
 
     private fun startMainActivity(){
-        finish()
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

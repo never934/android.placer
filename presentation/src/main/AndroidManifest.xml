@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".screens.auth.AuthActivity">
+        <activity android:name=".screens.auth.AuthActivity" android:theme="@style/StartActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

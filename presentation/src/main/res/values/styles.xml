@@ -9,6 +9,16 @@
         <item name="android:statusBarColor">@android:color/white</item>
     </style>
 
+    <style name="StartActivityTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_light</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowBackground">@drawable/background_start</item>
+    </style>
+
     <style name="AuthTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBar">false</item>
