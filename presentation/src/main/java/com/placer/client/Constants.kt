@@ -23,6 +23,9 @@ object Constants {
     const val GOOGLE_MAP_INFO_WINDOW_V_ANCHOR = 0.5f
     const val GOOGLE_MAP_ZOOM = 8f
 
+    /** cities delay **/
+    const val CITIES_REQUEST_DELAY = 1000L
+
     /** bundle keys **/
     const val CITY_CHOSEN_RESULT_KEY = "CITY_CHOSEN_RESULT_KEY"
 }

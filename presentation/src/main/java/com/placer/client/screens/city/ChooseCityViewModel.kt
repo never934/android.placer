@@ -5,11 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.placer.client.AppClass
+import com.placer.client.Constants
 import com.placer.client.base.BaseViewModel
 import com.placer.data.AppPrefs
 import com.placer.domain.entity.city.City
 import com.placer.domain.usecase.city.LoadCitiesUseCase
 import com.placer.domain.usecase.user.UpdateUserCityUseCase
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -26,13 +29,17 @@ internal class ChooseCityViewModel(
     internal val cityUpdated: LiveData<Boolean?>
         get() = _cityUpdated
 
+    private var searchJob: Job? = null
+
     init {
         loadCities("")
     }
 
     fun loadCities(input: String) {
         isRefreshing.value = true
-        viewModelScope.launch {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(Constants.CITIES_REQUEST_DELAY)
             val result = loadCitiesUseCase.loadCities(input).first()
             if (result.isSuccess){
                 _cities.value = result.getOrNull()
