@@ -72,14 +72,14 @@
     <string name="publish_place_app_bar">Publish place</string>
     <string name="publish_place_name_hint">Name</string>
     <string name="publish_place_description_hint">Description</string>
-    <string name="publish_place_private_toggle_label">Private place</string>
+    <string name="publish_place_private_toggle_label">Publish place</string>
     <string name="publish_place_publish_button">Publish</string>
 
     <!-- update place fragment !-->
     <string name="update_place_app_bar">Update place</string>
     <string name="update_place_name_hint">Name</string>
     <string name="update_place_description_hint">Description</string>
-    <string name="update_place_private_toggle_label">Private place</string>
+    <string name="update_place_private_toggle_label">Publish place</string>
     <string name="update_place_save_button">Save</string>
     <string name="update_place_delete_button">Delete</string>
     <string name="update_place_updated_message">Place updated</string>

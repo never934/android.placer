@@ -69,7 +69,7 @@ internal class PlaceUpdateFragment : BaseFragment(), GalleryTransaction, DeleteD
                 viewModel.updatePlace(
                     name = binding.nameField.getText(),
                     description = binding.descriptionField.getText(),
-                    published = binding.publishSwitch.isChecked.not()
+                    published = binding.publishSwitch.isChecked
                 )
             }
         }
@@ -90,7 +90,7 @@ internal class PlaceUpdateFragment : BaseFragment(), GalleryTransaction, DeleteD
     }
 
     override fun showDeleteDialog() {
-        showDeleteDialog(requireActivity())
+        showDeleteDialog(requireActivity(), this)
     }
 
     override fun deleteFromDialogClicked() {

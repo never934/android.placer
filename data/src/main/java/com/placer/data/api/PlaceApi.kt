@@ -25,7 +25,7 @@ interface PlaceApi {
     suspend fun publishPlace(@Body request: PlaceRequest) : PlaceResponse
 
     @DELETE("v1/places/{placeId}")
-    suspend fun deletePlace(@Path("placeId")placeId: String) : Void
+    suspend fun deletePlace(@Path("placeId")placeId: String)
 
     @PUT("v1/places/{placeId}")
     suspend fun updatePlace(@Path("placeId")placeId: String, @Body request: PlaceRequest) : PlaceResponse

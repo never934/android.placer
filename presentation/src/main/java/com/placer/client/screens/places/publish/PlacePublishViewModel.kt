@@ -63,7 +63,7 @@ internal class PlacePublishViewModel(
                     description = placeDescription.value,
                     lat = latLng.latitude,
                     lng = latLng.longitude,
-                    published = placePrivate.value?.not() ?: false
+                    published = placePrivate.value ?: false
                 )
                 val publishResult = publishPlaceUseCase.publishPlace(request).first()
                 if (publishResult.isSuccess){
