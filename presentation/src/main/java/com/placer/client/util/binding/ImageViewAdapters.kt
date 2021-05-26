@@ -1,5 +1,6 @@
 package com.placer.client.util.binding
 
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
@@ -70,6 +71,13 @@ internal fun bindPlacePhotoPreview(view: ImageView, photos: List<PlacePhotoView>
     }else{
         view.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_photo_placeholder))
         view.visibility = View.VISIBLE
+    }
+}
+
+@BindingAdapter("bitmap")
+internal fun bindBitmap(view: ImageView, bitmap: Bitmap?) {
+    bitmap?.let {
+        view.setImageBitmap(bitmap)
     }
 }
 

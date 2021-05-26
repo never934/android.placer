@@ -35,8 +35,11 @@
     <dimen name="small_avatar_size">50dp</dimen>
     <dimen name="screen_avatar_size">100dp</dimen>
     <dimen name="place_photo_height">300dp</dimen>
+    <dimen name="place_publish_photo_height">200dp</dimen>
 
     <dimen name="component_scroll_margin">200dp</dimen>
 
     <dimen name="app_bar_elevation">10dp</dimen>
+
+    <dimen name="client_marker_margin">42dp</dimen>
 </resources>

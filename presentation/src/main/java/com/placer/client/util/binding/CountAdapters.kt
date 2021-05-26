@@ -12,6 +12,6 @@ fun bindCount(view: CountView, count: String?) {
 }
 
 @BindingAdapter("icon")
-fun bindCount(view: CountView, icon: Drawable?) {
+fun bindIcon(view: CountView, icon: Drawable?) {
     view.setIcon(icon)
 }

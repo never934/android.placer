@@ -18,8 +18,9 @@ import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentProfileEditBinding
 import com.placer.client.navigation.ChooseCityTransaction
+import com.placer.client.navigation.GalleryTransaction
 
-internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction {
+internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction, GalleryTransaction {
 
     private var binding: FragmentProfileEditBinding? = null
     override val viewModel: ProfileEditViewModel by viewModels()
@@ -57,7 +58,7 @@ internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction {
         binding?.let { binding ->
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener { viewModel.loadProfile() }
             binding.saveButton.setOnClickListener { viewModel.updateProfile(binding.nameField.getText(), binding.nicknameField.getText()) }
-            binding.avatarView.setOnClickListener { openAvatarChoosing() }
+            binding.avatarView.setOnClickListener { startGallery(galleryResult) }
             binding.cityField.getEditText().setOnClickListener { setChooseCityFragment() }
         }
         viewModel.profile.observe(this, {
@@ -79,14 +80,14 @@ internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction {
         binding = null
     }
 
-    private fun openAvatarChoosing() {
-        val photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.type = "image/*"
-        galleryResult.launch(photoPickerIntent)
-    }
-
     override fun setChooseCityFragment() {
         findNavController().navigate(ProfileEditFragmentDirections.actionProfileEditFragmentToChooseCityFragment())
+    }
+
+    override fun startGallery(launcher: ActivityResultLauncher<Intent>) {
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.type = "image/*"
+        launcher.launch(photoPickerIntent)
     }
 
 }

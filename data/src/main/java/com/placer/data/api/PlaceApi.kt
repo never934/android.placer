@@ -1,10 +1,9 @@
 package com.placer.data.api
 
 import com.placer.data.api.request.PlaceCommentRequest
-import com.placer.data.api.request.PlaceRequest
 import com.placer.data.api.response.PlaceCommentResponse
 import com.placer.data.api.response.PlaceResponse
-import kotlinx.coroutines.flow.Flow
+import com.placer.domain.entity.place.PlaceRequest
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
@@ -12,7 +11,7 @@ interface PlaceApi {
     /** common **/
 
     @GET("v1/places/user/{userId}")
-    fun getUserPlaces(@Path("userId") userId: String) : Flow<List<PlaceResponse>>
+    suspend fun getUserPlaces(@Path("userId") userId: String) : List<PlaceResponse>
 
     /** base operations **/
 
@@ -23,13 +22,13 @@ interface PlaceApi {
     suspend fun getPlaceById(@Path("placeId")placeId: String) : PlaceResponse
 
     @POST("v1/places")
-    fun publishPlace(@Body request: PlaceRequest) : Flow<PlaceResponse>
+    suspend fun publishPlace(@Body request: PlaceRequest) : PlaceResponse
 
     @DELETE("v1/places/{placeId}")
-    fun deletePlace(@Path("placeId")placeId: String) : Flow<Void>
+    suspend fun deletePlace(@Path("placeId")placeId: String) : Void
 
     @PUT("v1/places/{placeId}")
-    fun updatePlace(@Path("placeId")placeId: String, @Body request: PlaceRequest) : Flow<PlaceResponse>
+    suspend fun updatePlace(@Path("placeId")placeId: String, @Body request: PlaceRequest) : PlaceResponse
 
     /** comments **/
 
@@ -43,9 +42,9 @@ interface PlaceApi {
 
     @Multipart
     @POST("v1/places/{placeId}/photos")
-    fun publishPlacePhoto(@Path("placeId")placeId: String, @Part file: MultipartBody.Part) : Flow<PlaceResponse>
+    suspend fun publishPlacePhoto(@Path("placeId")placeId: String, @Part file: MultipartBody.Part) : PlaceResponse
 
     @DELETE("v1/places/{placeId}/photos")
-    fun deletePlacePhotos(@Path("placeId")placeId: String, @Body photoIds: List<String>) : Flow<PlaceResponse>
+    suspend fun deletePlacePhotos(@Path("placeId")placeId: String, @Body photoIds: List<String>) : PlaceResponse
 
 }

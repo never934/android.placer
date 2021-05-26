@@ -22,6 +22,11 @@ object Constants {
     const val GOOGLE_MAP_ANIMATION_DURATION = 1000
     const val GOOGLE_MAP_INFO_WINDOW_V_ANCHOR = 0.5f
     const val GOOGLE_MAP_ZOOM = 8f
+    const val GOOGLE_MAP_CHOOSE_POINT_ZOOM = 15f
+
+    /** google maps **/
+    const val DEFAULT_LAT = 37.422
+    const val DEFAULT_LNG = -122.08
 
     /** cities delay **/
     const val CITIES_REQUEST_DELAY = 1000L

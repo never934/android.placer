@@ -25,6 +25,7 @@ import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
 import com.placer.client.interfaces.MyLocation
 import com.placer.client.interfaces.PlacerFabStyle
+import com.placer.client.navigation.PlaceChoosePointTransaction
 import com.placer.client.navigation.PlaceViewTransaction
 import com.placer.client.screens.MainActivity
 import com.placer.client.screens.MainViewModel
@@ -34,7 +35,8 @@ import com.placer.client.util.InfoWindowAdapter
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
 
-internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle, PlaceViewTransaction, MyLocation {
+internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle,
+    PlaceViewTransaction, MyLocation, PlaceChoosePointTransaction {
 
     override val viewModel: MainMapViewModel by viewModels()
     val mainViewModel: MainViewModel by activityViewModels()
@@ -77,6 +79,7 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener {
                 viewModel.loadMapPlaces()
             }
+            binding.addButton.setOnClickListener { setPlaceChoosePointFragment() }
         }
         viewModel.goToPlaceView.observe(this, {
             it?.let {
@@ -236,6 +239,10 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
                 enableMyLocation()
             }
         }
+    }
+
+    override fun setPlaceChoosePointFragment() {
+        findNavController().navigate(MainMapFragmentDirections.actionMainMapFragmentToPlaceChoosePointFragment())
     }
 
 }

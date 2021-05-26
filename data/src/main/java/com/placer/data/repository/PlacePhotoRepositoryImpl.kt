@@ -8,10 +8,7 @@ import com.placer.data.utils.Extensions.toMultipartPhoto
 import com.placer.domain.entity.place.Place
 import com.placer.domain.repository.PlacePhotoRepository
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class PlacePhotoRepositoryImpl @Inject internal constructor(
@@ -23,21 +20,29 @@ class PlacePhotoRepositoryImpl @Inject internal constructor(
     override suspend fun deletePlacePhotos(
         placeId: String,
         photoIds: List<String>
-    ): Flow<Result<Place>> =
-        placeApi.deletePlacePhotos(placeId, photoIds)
-            .map { placeDao.savePlace(it.toDB()) }
-            .map { Result.success(placeDao.getPlace(placeId).toEntity()) }
-            .catch { Result.failure<Place>(Exception("Error while photos deleting")) }
-            .flowOn(dispatcher)
+    ): Flow<Result<Place>> = flow {
+        try {
+            val place = placeApi.deletePlacePhotos(placeId, photoIds)
+            val daoPlace = placeDao.updatePlace(place.toDB())
+            emit(Result.success(daoPlace.toEntity()))
+        }catch (e: Exception){
+            emit(Result.failure<Place>(Exception("Error while photos deleting")))
+        }
+    }
+        .flowOn(dispatcher)
 
     override suspend fun uploadPlacePhoto(
         placeId: String,
         photo: ByteArray
-    ): Flow<Result<Place>> =
-        placeApi.publishPlacePhoto(placeId, photo.toMultipartPhoto("file"))
-            .map { placeDao.savePlace(it.toDB()) }
-            .map { Result.success(placeDao.getPlace(placeId).toEntity()) }
-            .catch { Result.failure<Place>(Exception("Error while photo uploading")) }
-            .flowOn(dispatcher)
+    ): Flow<Result<Place>> = flow {
+        try {
+            val place = placeApi.publishPlacePhoto(placeId, photo.toMultipartPhoto("file"))
+            val daoPlace = placeDao.updatePlace(place.toDB())
+            emit(Result.success(daoPlace.toEntity()))
+        }catch (e: Exception){
+            emit(Result.failure<Place>(Exception("Error while photo uploading")))
+        }
+    }
+        .flowOn(dispatcher)
 
 }

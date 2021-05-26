@@ -49,3 +49,7 @@ fun PlaceDB.toEntity() : Place {
         createdDate = createdDate
     )
 }
+
+fun List<PlaceDB>.toEntities() : List<Place> {
+    return map { it.toEntity() }
+}

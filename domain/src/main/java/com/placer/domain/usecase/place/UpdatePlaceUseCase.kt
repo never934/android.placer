@@ -1,6 +1,7 @@
 package com.placer.domain.usecase.place
 
 import com.placer.domain.entity.place.Place
+import com.placer.domain.entity.place.PlaceRequest
 import com.placer.domain.repository.PlaceRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +11,6 @@ class UpdatePlaceUseCase(
     private val placeRepository: PlaceRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun updatePlace(place: Place) : Flow<Result<Place>> =
-        placeRepository.updatePlace(place).flowOn(dispatcher)
+    suspend fun updatePlace(placeId: String, place: PlaceRequest) : Flow<Result<Place>> =
+        placeRepository.updatePlace(placeId, place).flowOn(dispatcher)
 }

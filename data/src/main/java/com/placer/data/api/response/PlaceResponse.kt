@@ -34,3 +34,7 @@ fun PlaceResponse.toDB() : PlaceDB {
         createdDate = createdDate
     )
 }
+
+fun List<PlaceResponse>.toDBs() : List<PlaceDB> {
+    return map { it.toDB() }
+}

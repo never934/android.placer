@@ -1,7 +1,12 @@
 package com.placer.client.util.binding
 
 import android.graphics.drawable.Drawable
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.placer.client.customview.fields.EditField
 import com.placer.client.customview.fields.SelectField
 import com.placer.client.customview.fields.ViewField
@@ -34,4 +39,11 @@ internal fun bindText(view: EditField, text: String?) {
 @BindingAdapter("text")
 internal fun bindText(view: SelectField, text: String?) {
     view.setText(text)
+}
+
+@BindingAdapter("toggleValue")
+internal fun bindToggleValue(view: SwitchMaterial, state: Boolean?) {
+    state?.let {
+        view.isChecked = state
+    }
 }

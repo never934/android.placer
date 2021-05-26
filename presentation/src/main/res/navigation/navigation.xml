@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_mainMapFragment_to_placesFragment"
             app:destination="@id/placesFragment" />
+        <action
+            android:id="@+id/action_mainMapFragment_to_placeChoosePointFragment"
+            app:destination="@id/placeChoosePointFragment" />
     </fragment>
     <fragment
         android:id="@+id/placesFragment"
@@ -128,4 +131,31 @@
         android:id="@+id/helpThirdFragment"
         android:name="com.placer.client.screens.help.HelpThirdFragment"
         android:label="@string/help_app_bar" />
+    <fragment
+        android:id="@+id/placeChoosePointFragment"
+        android:name="com.placer.client.screens.places.publish.PlaceChoosePointFragment"
+        android:label="@string/choose_place_point_app_bar" >
+        <action
+            android:id="@+id/action_placeChoosePointFragment_to_placePublishFragment"
+            app:destination="@id/placePublishFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/placePublishFragment"
+        android:name="com.placer.client.screens.places.publish.PlacePublishFragment"
+        android:label="@string/publish_place_app_bar" >
+        <argument
+            android:name="latLng"
+            app:argType="com.google.android.gms.maps.model.LatLng" />
+        <action
+            android:id="@+id/action_placePublishFragment_to_mainMapFragment"
+            app:destination="@id/mainMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/placePublishSuccessFragment"
+        android:name="com.placer.client.screens.places.publish.PlacePublishSuccessFragment"
+        android:label="@string/place_published_app_bar" />
 </navigation>

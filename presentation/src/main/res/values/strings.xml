@@ -66,11 +66,11 @@
     <string name="choose_place_point_next_btn">Next</string>
 
     <!-- publish place fragment !-->
-    <string name="publish_place_app_bar">Create place</string>
+    <string name="publish_place_app_bar">Publish place</string>
     <string name="publish_place_name_hint">Name</string>
     <string name="publish_place_description_hint">Description</string>
-    <string name="publish_place_private_toggle_label">Publish place</string>
-    <string name="publish_place_create_button">Create</string>
+    <string name="publish_place_private_toggle_label">Private place</string>
+    <string name="publish_place_publish_button">Publish</string>
 
     <!-- update place fragment !-->
     <string name="update_place_app_bar">Create place</string>
@@ -83,7 +83,7 @@
     <!-- Place published fragment !-->
     <string name="place_published_app_bar">Success!</string>
     <string name="place_published_body">You created new place. Share it with your friends</string>
-    <string name="place_published_body_2">Places created: %s</string>
+    <string name="place_published_body_2">Places created:</string>
 
     <!-- Top users fragment !-->
     <string name="top_users_app_bar">Top users</string>
