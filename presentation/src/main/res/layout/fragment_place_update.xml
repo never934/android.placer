@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="place"
+            type="com.placer.client.entity.PlaceView" />
+    </data>
+
+    <com.placer.client.customview.BaseConstraintLayout
+        android:id="@+id/baseConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:isEnabledSwipeRefresh="@{false}">
+
+        <ImageView
+            android:id="@+id/placePhotoView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/place_publish_photo_height"
+            android:src="@drawable/ic_photo_placeholder"
+            android:scaleType="centerCrop"
+            app:placePhotoPreview="@{place.photos}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.placer.client.customview.fields.EditField
+            android:id="@+id/nameField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:text="@{place.name}"
+            app:isNextIme="true"
+            app:inputType="text"
+            app:edit_field_hint="@string/update_place_name_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/placePhotoView" />
+
+        <com.placer.client.customview.fields.EditField
+            android:id="@+id/descriptionField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:text="@{place.description}"
+            app:isDoneIme="true"
+            app:inputType="text"
+            app:edit_field_hint="@string/update_place_description_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameField" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/publishSwitch"
+            style="@style/toggle_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/update_place_private_toggle_label"
+            app:toggleValue="@{place.published}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionField" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            style="@style/default_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/update_place_save_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/publishSwitch" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_place_delete_button"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+    </com.placer.client.customview.BaseConstraintLayout>
+</layout>

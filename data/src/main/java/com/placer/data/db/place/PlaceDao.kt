@@ -29,10 +29,10 @@ interface PlaceDao {
         return getPlaces().filter { it.author.id == userId }
     }
 
-    @Query("SELECT * FROM placedb")
+    @Query("SELECT * FROM placedb ORDER BY createdDate DESC")
     suspend fun getPlaces(): List<PlaceDB>
 
-    @Query("SELECT * FROM placedb where id = :placeId")
+    @Query("SELECT * FROM placedb WHERE id = :placeId")
     suspend fun getPlace(placeId: String) : PlaceDB
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

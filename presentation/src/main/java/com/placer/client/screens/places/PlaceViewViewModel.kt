@@ -20,12 +20,12 @@ internal class PlaceViewViewModel(
     private val loadPlacesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase,
     private val loadPlaceCommentsUseCase: LoadPlaceCommentsUseCase = AppClass.appInstance.placeCommentComponent.loadPlaceCommentUseCase,
     private val publishPlaceCommentUseCase: PublishPlaceCommentUseCase = AppClass.appInstance.placeCommentComponent.publishPlaceCommentUseCase,
-    private var placeId: String = ""
+    private var _placeId: String = ""
     ) : BaseViewModel()
 {
 
     constructor(placeId: String) : this(){
-        this.placeId = placeId
+        this._placeId = placeId
         loadPlace()
         loadPlaceComments()
     }
@@ -46,10 +46,13 @@ internal class PlaceViewViewModel(
     val showPlaceOnMapExecute: LiveData<PlaceView>
     get() = _showPlaceOnMapExecute
 
+    val placeId: String
+    get() = _placeId
+
     fun loadPlace() {
         isRefreshing.value = true
         viewModelScope.launch {
-            val result = loadPlacesUseCase.loadPlaceById(placeId).first()
+            val result = loadPlacesUseCase.loadPlaceById(_placeId).first()
             if(result.isSuccess){
                 _place.value = result.getOrNull()
                 _clientIsPlaceAuthor.value = _place.value?.author?.id == AppPrefs.getUserId()
@@ -60,9 +63,9 @@ internal class PlaceViewViewModel(
         }
     }
 
-    private fun loadPlaceComments() {
+    fun loadPlaceComments() {
         viewModelScope.launch {
-            val result = loadPlaceCommentsUseCase.loadPlaceComments(placeId).first()
+            val result = loadPlaceCommentsUseCase.loadPlaceComments(_placeId).first()
             if(result.isSuccess){
                 _placeComments.value = result.getOrNull()
             }else{
@@ -73,7 +76,7 @@ internal class PlaceViewViewModel(
 
     fun sendPlaceComment(commentText: String) {
         viewModelScope.launch {
-            val result = publishPlaceCommentUseCase.publishPlaceComment(placeId, commentText).first()
+            val result = publishPlaceCommentUseCase.publishPlaceComment(_placeId, commentText).first()
             if(result.isSuccess){
                 _placeComments.value = result.getOrNull()
                 loadPlace()

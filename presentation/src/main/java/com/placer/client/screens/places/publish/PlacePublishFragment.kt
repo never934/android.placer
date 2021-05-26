@@ -80,8 +80,8 @@ internal class PlacePublishFragment : BaseFragment(), GalleryTransaction, MainMa
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
-    override fun loadingStateChanged(state: Int) {
-        binding?.baseConstraint?.loadConstraint?.visibility = state
+    override fun loadingStateChanged(state: Boolean) {
+        binding?.baseConstraint?.setLoading(state)
     }
 
     override fun startGallery(launcher: ActivityResultLauncher<Intent>) {

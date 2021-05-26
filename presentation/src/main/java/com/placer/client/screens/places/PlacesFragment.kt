@@ -39,6 +39,11 @@ internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
         return binding?.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadPlaces()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.places_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
@@ -110,8 +115,8 @@ internal class PlacesFragment : BaseFragment(), PlaceViewTransaction {
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
-    override fun loadingStateChanged(state: Int) {
-        binding?.baseConstraint?.loadConstraint?.visibility = state
+    override fun loadingStateChanged(state: Boolean) {
+        binding?.baseConstraint?.setLoading(state)
     }
 
     override fun setPlaceViewFragment(place: PlaceView) {

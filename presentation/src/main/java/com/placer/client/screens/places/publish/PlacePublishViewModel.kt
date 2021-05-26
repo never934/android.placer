@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
 import com.placer.client.AppClass
+import com.placer.client.R
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
@@ -54,26 +55,30 @@ internal class PlacePublishViewModel(
     }
 
     fun publishPlace() {
-        isLoading.value = true
-        viewModelScope.launch {
-            val request = PlaceRequest(
-                name = placeName.value ?: "",
-                description = placeDescription.value,
-                lat = latLng.latitude,
-                lng = latLng.longitude,
-                published = placePrivate.value?.not() ?: false
-            )
-            val publishResult = publishPlaceUseCase.publishPlace(request).first()
-            if (publishResult.isSuccess){
-                placePhoto.value?.let {
-                    publishPlacePhoto(publishResult.getOrNull())
-                } ?: run {
-                    _placePublished.value = publishResult.getOrNull()?.toView()
+        if (placeName.value?.isNotEmpty() == true) {
+            isLoading.value = true
+            viewModelScope.launch {
+                val request = PlaceRequest(
+                    name = placeName.value ?: "",
+                    description = placeDescription.value,
+                    lat = latLng.latitude,
+                    lng = latLng.longitude,
+                    published = placePrivate.value?.not() ?: false
+                )
+                val publishResult = publishPlaceUseCase.publishPlace(request).first()
+                if (publishResult.isSuccess){
+                    placePhoto.value?.let {
+                        publishPlacePhoto(publishResult.getOrNull())
+                    } ?: run {
+                        _placePublished.value = publishResult.getOrNull()?.toView()
+                    }
+                }else{
+                    showSnackBar.value = publishResult.exceptionOrNull()?.message
                 }
-            }else{
-                showSnackBar.value = publishResult.exceptionOrNull()?.message
+                isLoading.value = false
             }
-            isLoading.value = false
+        }else{
+            showSnackBar.value = AppClass.appInstance.getString(R.string.common_err_name_empty)
         }
     }
 

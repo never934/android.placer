@@ -11,12 +11,13 @@ import com.placer.data.AppPrefs
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.place.LoadPlacesUseCase
+import com.placer.domain.usecase.place.LoadUserPlacesUseCase
 import com.placer.domain.usecase.user.LoadUserUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class UserViewViewModel(
-    private val loadPlacesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase,
+    private val loadPlacesUseCase: LoadUserPlacesUseCase = AppClass.appInstance.placeComponent.loadUserPlacesUseCase,
     private val loadUserUseCase: LoadUserUseCase = AppClass.appInstance.userComponent.loadUserUseCase,
     private var userId: String = ""
 ) : BaseViewModel()
@@ -46,7 +47,7 @@ internal class UserViewViewModel(
 
     private fun loadPlaces() {
         viewModelScope.launch {
-            val result = loadPlacesUseCase.loadPlaces().first()
+            val result = loadPlacesUseCase.loadUserPlaces(userId).first()
             if(result.isSuccess){
                 _places.value = result.getOrNull()
             }else{

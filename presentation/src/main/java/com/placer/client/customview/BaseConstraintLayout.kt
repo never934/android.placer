@@ -31,6 +31,16 @@ class BaseConstraintLayout @JvmOverloads constructor(
         loadConstraint = view.findViewById(R.id.loadConstraint)
     }
 
+    fun setLoading(state: Boolean){
+        if (state){
+            swipeRefreshLayout.visibility = View.INVISIBLE
+            loadConstraint.visibility = View.VISIBLE
+        }else{
+            swipeRefreshLayout.visibility = View.VISIBLE
+            loadConstraint.visibility = View.INVISIBLE
+        }
+    }
+
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams?) {
         if (childCount != 0) {
             if (id == R.id.loadConstraint){

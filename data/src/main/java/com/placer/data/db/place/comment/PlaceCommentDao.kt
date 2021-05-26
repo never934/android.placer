@@ -12,12 +12,12 @@ interface PlaceCommentDao {
         return getPlaceComments(placeId)
     }
 
-    @Query("SELECT * FROM placecommentdb where placeId = :placeId")
+    @Query("SELECT * FROM placecommentdb WHERE placeId = :placeId ORDER BY createdDate DESC")
     suspend fun getPlaceComments(placeId: String): List<PlaceCommentDB>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePlaceComments(placeCommentDB: List<PlaceCommentDB>)
 
-    @Query("DELETE FROM placecommentdb where placeId = :placeId")
+    @Query("DELETE FROM placecommentdb WHERE placeId = :placeId")
     suspend fun deleteAllCommentsFromPlace(placeId: String)
 }

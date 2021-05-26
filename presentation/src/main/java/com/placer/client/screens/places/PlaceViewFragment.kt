@@ -18,10 +18,11 @@ import com.placer.client.customview.comments.CommentField
 import com.placer.client.databinding.FragmentPlaceViewBinding
 import com.placer.client.entity.PlaceView
 import com.placer.client.navigation.MainMapTransaction
+import com.placer.client.navigation.PlaceUpdateTransaction
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
-internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener, MainMapTransaction.WithPlace {
+internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener, MainMapTransaction.WithPlace, PlaceUpdateTransaction {
 
     private var binding: FragmentPlaceViewBinding? = null
     override val viewModel: PlaceViewViewModel by viewModels{
@@ -40,6 +41,12 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
             PlaceViewFragmentArgs.fromBundle(requireArguments()).place.name
         binding?.backArrow?.setOnClickListener{ findNavController().navigateUp() }
         return binding?.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadPlace()
+        viewModel.loadPlaceComments()
     }
 
     override fun initListeners() {
@@ -62,6 +69,7 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
             if (it){
                 binding?.editIcon?.visibility = View.VISIBLE
                 binding?.publishedField?.visibility = View.VISIBLE
+                binding?.editIcon?.setOnClickListener { setPlaceUpdateFragment(viewModel.placeId) }
             }else{
                 binding?.editIcon?.visibility = View.GONE
                 binding?.publishedField?.visibility = View.GONE
@@ -82,8 +90,8 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
-    override fun loadingStateChanged(state: Int) {
-        binding?.baseConstraint?.loadConstraint?.visibility = state
+    override fun loadingStateChanged(state: Boolean) {
+        binding?.baseConstraint?.setLoading(state)
     }
 
     override fun onDestroy() {
@@ -98,5 +106,9 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
 
     override fun setMainMapFragment(place: PlaceView) {
         findNavController().navigate(PlaceViewFragmentDirections.actionPlaceViewFragmentToMainMapFragment(place))
+    }
+
+    override fun setPlaceUpdateFragment(placeId: String) {
+        findNavController().navigate(PlaceViewFragmentDirections.actionPlaceViewFragmentToPlaceUpdateFragment(placeId))
     }
 }

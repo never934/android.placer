@@ -98,8 +98,8 @@ internal class UsersTopFragment : BaseFragment(), UserViewTransaction {
         binding?.baseConstraint?.swipeRefreshLayout?.isRefreshing = state
     }
 
-    override fun loadingStateChanged(state: Int) {
-        binding?.baseConstraint?.loadConstraint?.visibility = state
+    override fun loadingStateChanged(state: Boolean) {
+        binding?.baseConstraint?.setLoading(state)
     }
 
     override fun setUserViewFragment(user: UserView) {

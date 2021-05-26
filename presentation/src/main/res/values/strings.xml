@@ -3,8 +3,11 @@
 
     <!-- common !-->
     <string name="common_ok">OK</string>
+    <string name="common_delete">DELETE</string>
+    <string name="common_cancel">CANCEL</string>
     <string name="common_err_empty">You can`t send empty</string>
     <string name="common_err_name_nickname_empty">You can`t save empty name and nickname</string>
+    <string name="common_err_name_empty">Name can`t be empty</string>
     <string name="common_user_top_format">#%d</string>
 
     <!-- auth screen !-->
@@ -73,14 +76,16 @@
     <string name="publish_place_publish_button">Publish</string>
 
     <!-- update place fragment !-->
-    <string name="update_place_app_bar">Create place</string>
+    <string name="update_place_app_bar">Update place</string>
     <string name="update_place_name_hint">Name</string>
     <string name="update_place_description_hint">Description</string>
-    <string name="update_place_private_toggle_label">Publish place</string>
+    <string name="update_place_private_toggle_label">Private place</string>
     <string name="update_place_save_button">Save</string>
     <string name="update_place_delete_button">Delete</string>
+    <string name="update_place_updated_message">Place updated</string>
 
     <!-- Place published fragment !-->
+    <string name="place_published_title">Place created</string>
     <string name="place_published_app_bar">Success!</string>
     <string name="place_published_body">You created new place. Share it with your friends</string>
     <string name="place_published_body_2">Places created:</string>
@@ -126,4 +131,10 @@
     <string name="days">%d days</string>
     <string name="null_representation">Not entered</string>
     <string name="menu_search">Search</string>
+
+
+    <!-- Delete dialog !-->
+    <string name="delete_dialog_title">Delete</string>
+    <string name="delete_dialog_body">Are you sure?</string>
+
 </resources>

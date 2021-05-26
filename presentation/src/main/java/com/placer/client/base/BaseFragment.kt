@@ -21,9 +21,9 @@ abstract class BaseFragment : Fragment() {
         })
         viewModel.isLoading.observe(this,{
             if (it){
-                loadingStateChanged(View.VISIBLE)
+                loadingStateChanged(true)
             }else{
-                loadingStateChanged(View.GONE)
+                loadingStateChanged(false)
             }
         })
         initListeners()
@@ -31,5 +31,5 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun initListeners()
     abstract fun refreshStateChanged(state: Boolean)
-    abstract fun loadingStateChanged(state: Int)
+    abstract fun loadingStateChanged(state: Boolean)
 }

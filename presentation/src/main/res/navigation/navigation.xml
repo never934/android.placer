@@ -47,6 +47,13 @@
             app:destination="@id/mainMapFragment"
             app:popUpTo="@id/navigation"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_placeViewFragment_to_placeUpdateFragment"
+            app:destination="@id/placeUpdateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/helpFirstFragment"
@@ -152,10 +159,20 @@
             app:argType="com.google.android.gms.maps.model.LatLng" />
         <action
             android:id="@+id/action_placePublishFragment_to_mainMapFragment"
-            app:destination="@id/mainMapFragment" />
+            app:destination="@id/mainMapFragment"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/placePublishSuccessFragment"
         android:name="com.placer.client.screens.places.publish.PlacePublishSuccessFragment"
-        android:label="@string/place_published_app_bar" />
+        android:label="@string/place_published_title" />
+    <fragment
+        android:id="@+id/placeUpdateFragment"
+        android:name="com.placer.client.screens.places.update.PlaceUpdateFragment"
+        android:label="@string/update_place_app_bar" >
+        <argument
+            android:name="placeId"
+            app:argType="string" />
+    </fragment>
 </navigation>

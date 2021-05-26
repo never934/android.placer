@@ -59,15 +59,16 @@
                 android:text="@string/place_published_body_2"
                 android:textAlignment="center" />
 
-            <com.placer.client.customview.comments.CountView
+            <TextView
                 android:id="@+id/placesCountView"
+                style="@style/headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
+                android:text="@{user.placesCount}"
+                app:drawableRightCompat="@drawable/ic_baseline_place_24"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/smallest_margin"
-                app:icon="@{@drawable/ic_baseline_place_24}"
-                app:count="@{user.placesCount}"
                 android:layout_marginHorizontal="@dimen/biggest_margin"/>
 
         </LinearLayout>

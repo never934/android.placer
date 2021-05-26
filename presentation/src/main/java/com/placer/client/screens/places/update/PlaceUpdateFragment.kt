@@ -1,4 +1,4 @@
-package com.placer.client.screens.user.profile
+package com.placer.client.screens.places.update
 
 import android.app.Activity
 import android.content.Intent
@@ -16,22 +16,24 @@ import androidx.navigation.fragment.findNavController
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
-import com.placer.client.databinding.FragmentProfileEditBinding
-import com.placer.client.navigation.ChooseCityTransaction
+import com.placer.client.databinding.FragmentPlaceUpdateBinding
+import com.placer.client.interfaces.DeleteDialog
 import com.placer.client.navigation.GalleryTransaction
 
-internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction, GalleryTransaction {
+internal class PlaceUpdateFragment : BaseFragment(), GalleryTransaction, DeleteDialog, DeleteDialog.OnDelete {
 
-    private var binding: FragmentProfileEditBinding? = null
-    override val viewModel: ProfileEditViewModel by viewModels()
+    override val viewModel: PlaceUpdateViewModel by viewModels{
+        PlaceUpdateViewModel.Factory(PlaceUpdateFragmentArgs.fromBundle(requireArguments()).placeId)
+    }
+    private var binding: FragmentPlaceUpdateBinding? = null
     private var galleryResult: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
             val photoUri = result.data?.data
             photoUri?.let {
                 val imageStream = requireActivity().contentResolver.openInputStream(it)
-                imageStream?.let {
-                    viewModel.updateAvatar(imageStream)
+                imageStream?.let { stream ->
+                    viewModel.uploadPlacePhoto(stream)
                 }
             }
         }
@@ -42,29 +44,35 @@ internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction, Gall
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_profile_edit, container, false
+            inflater, R.layout.fragment_place_update, container, false
         )
-        (requireActivity() as AppCompatActivity).supportActionBar?.elevation = Constants.ACTION_BAR_ELEVATION
+        (requireActivity() as AppCompatActivity?)?.supportActionBar?.elevation = Constants.ACTION_BAR_ELEVATION
         (requireActivity() as AppCompatActivity?)?.supportActionBar?.show()
         return binding?.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.loadProfile()
-    }
-
     override fun initListeners() {
-        binding?.let { binding ->
-            binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener { viewModel.loadProfile() }
-            binding.saveButton.setOnClickListener { viewModel.updateProfile(binding.nameField.getText(), binding.nicknameField.getText()) }
-            binding.avatarView.setOnClickListener { startGallery(galleryResult) }
-            binding.cityField.getEditText().setOnClickListener { setChooseCityFragment() }
-        }
-        viewModel.profile.observe(this, {
-            binding?.user = it
-            binding?.executePendingBindings()
+        viewModel.place.observe(this, {
+            binding?.place = it
         })
+        viewModel.placeDeleteExecuted.observe(this, {
+            if (it){
+                findNavController().navigateUp()
+                findNavController().navigateUp()
+                viewModel.deletePlaceProcessed()
+            }
+        })
+        binding?.let { binding ->
+            binding.deleteButton.setOnClickListener { showDeleteDialog() }
+            binding.placePhotoView.setOnClickListener { startGallery(galleryResult) }
+            binding.saveButton.setOnClickListener {
+                viewModel.updatePlace(
+                    name = binding.nameField.getText(),
+                    description = binding.descriptionField.getText(),
+                    published = binding.publishSwitch.isChecked.not()
+                )
+            }
+        }
     }
 
     override fun refreshStateChanged(state: Boolean) {
@@ -75,19 +83,17 @@ internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction, Gall
         binding?.baseConstraint?.setLoading(state)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
-    }
-
-    override fun setChooseCityFragment() {
-        findNavController().navigate(ProfileEditFragmentDirections.actionProfileEditFragmentToChooseCityFragment())
-    }
-
     override fun startGallery(launcher: ActivityResultLauncher<Intent>) {
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
         launcher.launch(photoPickerIntent)
     }
 
+    override fun showDeleteDialog() {
+        showDeleteDialog(requireActivity())
+    }
+
+    override fun deleteFromDialogClicked() {
+        viewModel.deletePlace()
+    }
 }
