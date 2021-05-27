@@ -62,6 +62,24 @@ internal class FakePlaceRepository(private val places: ArrayList<Place> = arrayL
     }
 
     override suspend fun updatePlace(placeId: String, place: PlaceRequest): Flow<Result<Place>> = flow {
-        // server logic (data val from backend)
+        val placeForUpdate = places.first { it.id == placeId }
+        places.removeIf { it.id == placeId }
+        places.add(
+            Place(
+                id = placeForUpdate.id,
+                name = place.name,
+                description = place.description,
+                lat = place.lat,
+                lng = place.lng,
+                published = place.published,
+                author = placeForUpdate.author,
+                cityName = placeForUpdate.cityName,
+                photos = placeForUpdate.photos,
+                commentsCount = placeForUpdate.commentsCount,
+                topPosition = placeForUpdate.topPosition,
+                createdDate = placeForUpdate.createdDate
+            )
+        )
+        emit(Result.success(places.first { it.id == placeId }))
     }
 }
