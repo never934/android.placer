@@ -6,14 +6,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.client.MainCoroutineRule
 import com.placer.client.TestUtils
 import com.placer.client.entity.toView
-import com.placer.client.fake.FakePlaceRepository
 import com.placer.client.fake.FakeUserRepository
 import com.placer.client.getOrAwaitValue
-import com.placer.client.screens.top.PlacesTopViewModel
 import com.placer.client.screens.user.profile.ProfileEditViewModel
-import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.user.User
-import com.placer.domain.usecase.place.LoadPlacesUseCase
 import com.placer.domain.usecase.user.LoadUserUseCase
 import com.placer.domain.usecase.user.UpdateUserUseCase
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +26,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.Q])
 @ExperimentalCoroutinesApi
-class ProfileEditViewModelTests {
+internal class ProfileEditViewModelTests {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 

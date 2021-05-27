@@ -24,7 +24,7 @@ import java.io.ByteArrayInputStream
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.Q])
 @ExperimentalCoroutinesApi
-class PlacePublishViewModelTests {
+internal class PlacePublishViewModelTests {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 

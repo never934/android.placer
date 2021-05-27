@@ -9,14 +9,10 @@ import com.placer.client.entity.toView
 import com.placer.client.fake.FakePlaceRepository
 import com.placer.client.fake.FakeUserRepository
 import com.placer.client.getOrAwaitValue
-import com.placer.client.screens.top.UsersTopViewModel
 import com.placer.client.screens.user.UserViewViewModel
-import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.user.User
-import com.placer.domain.usecase.place.LoadPlacesUseCase
 import com.placer.domain.usecase.place.LoadUserPlacesUseCase
 import com.placer.domain.usecase.user.LoadUserUseCase
-import com.placer.domain.usecase.user.LoadUsersUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -31,7 +27,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.Q])
 @ExperimentalCoroutinesApi
-class UserViewViewModelTests {
+internal class UserViewViewModelTests {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
