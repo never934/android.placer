@@ -5,6 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.data.MainCoroutineRule
 import com.placer.data.TestUtils
+import com.placer.data.TestUtils.toRequests
 import com.placer.data.fake.FakePlaceRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -40,87 +41,92 @@ class PlaceRepositoryTest {
     fun publishAndLoadPlaces() = runBlocking {
         // Given
         placeRepository.error = false
-        val firstPlace = TestUtils.getRandomPlace()
-        val secondPlace = TestUtils.getRandomPlace()
-        val thirdPlace = TestUtils.getRandomPlace()
+        val firstPlace = TestUtils.getRandomPlaceRequest()
+        val secondPlace = TestUtils.getRandomPlaceRequest()
+        val thirdPlace = TestUtils.getRandomPlaceRequest()
 
         // When
         placeRepository.publishPlace(firstPlace).collect()
         placeRepository.publishPlace(secondPlace).collect()
         placeRepository.publishPlace(thirdPlace).collect()
         val result = placeRepository.loadPlaces().first()
+        val requests = result.getOrNull()?.toRequests()
 
         // Then
         MatcherAssert.assertThat(result.isSuccess, `is`(true))
         MatcherAssert.assertThat(result.getOrNull()?.size, `is`(3))
-        MatcherAssert.assertThat(result.getOrNull()?.contains(firstPlace), `is`(true))
-        MatcherAssert.assertThat(result.getOrNull()?.contains(secondPlace), `is`(true))
-        MatcherAssert.assertThat(result.getOrNull()?.contains(thirdPlace), `is`(true))
+        MatcherAssert.assertThat(requests?.contains(firstPlace), `is`(true))
+        MatcherAssert.assertThat(requests?.contains(secondPlace), `is`(true))
+        MatcherAssert.assertThat(requests?.contains(thirdPlace), `is`(true))
     }
 
     @Test
     fun publishPlaceFailure() = runBlocking {
         // Given
         placeRepository.error = true
-        val place = TestUtils.getRandomPlace()
+        val place = TestUtils.getRandomPlaceRequest()
 
         // When
         val result = placeRepository.publishPlace(place).first()
         val places = placeRepository.loadPlaces().first()
+        val requests = places.getOrNull()?.toRequests()
 
         // Then
         MatcherAssert.assertThat(result.isFailure, `is`(true))
         MatcherAssert.assertThat(places.getOrNull()?.size, `is`(0))
-        MatcherAssert.assertThat(places.getOrNull()?.contains(place), `is`(false))
+        MatcherAssert.assertThat(requests?.contains(place), `is`(false))
     }
 
     @Test
     fun getUserPlaces() = runBlocking {
         // Given
         placeRepository.error = false
-        val place = TestUtils.getRandomPlace()
+        val place = TestUtils.getRandomPlaceRequest()
 
         // When
-        placeRepository.publishPlace(place).collect()
-        val result = placeRepository.loadUserPlaces(place.author.id).first()
+        val placePublished = placeRepository.publishPlace(place).first()
+        val result = placeRepository.loadUserPlaces(placePublished.getOrNull()?.author?.id ?: "").first()
+        val resultRequests = result.getOrNull()?.toRequests()
 
         // Then
         MatcherAssert.assertThat(result.isSuccess, `is`(true))
         MatcherAssert.assertThat(result.getOrNull()?.size, `is`(1))
-        MatcherAssert.assertThat(result.getOrNull()?.contains(place), `is`(true))
+        MatcherAssert.assertThat(resultRequests?.contains(place), `is`(true))
     }
 
     @Test
     fun deletePlaceSuccess() = runBlocking {
         // Given
         placeRepository.error = false
-        val place = TestUtils.getRandomPlace()
+        val place = TestUtils.getRandomPlaceRequest()
 
         // When
-        placeRepository.publishPlace(place).collect()
-        val result = placeRepository.deletePlace(place.id).first()
+        val publishedPlace = placeRepository.publishPlace(place).first()
+        val result = placeRepository.deletePlace(publishedPlace.getOrNull()?.id ?: "").first()
         val places = placeRepository.loadPlaces().first()
+        val placesRequests = places.getOrNull()?.toRequests()
 
         // Then
         MatcherAssert.assertThat(result.isSuccess, `is`(true))
         MatcherAssert.assertThat(result.getOrNull(), `is`(true))
-        MatcherAssert.assertThat(places.getOrNull()?.contains(place), `is`(false))
+        MatcherAssert.assertThat(placesRequests?.contains(place), `is`(false))
     }
 
     @Test
     fun deletePlaceFailure() = runBlocking {
         // Given
         placeRepository.error = false
-        val place = TestUtils.getRandomPlace()
+        val place = TestUtils.getRandomPlaceRequest()
 
         // When
-        placeRepository.publishPlace(place).collect()
+        val publishedPlace = placeRepository.publishPlace(place).first()
         placeRepository.error = true
-        val result = placeRepository.deletePlace(place.id).first()
+        val result = placeRepository.deletePlace(publishedPlace.getOrNull()?.id ?: "").first()
         val places = placeRepository.loadPlaces().first()
+        val placeRequests = places.getOrNull()?.toRequests()
 
         // Then
         MatcherAssert.assertThat(result.isFailure, `is`(true))
-        MatcherAssert.assertThat(places.getOrNull()?.contains(place), `is`(true))
+        MatcherAssert.assertThat(placeRequests?.contains(place), `is`(true))
     }
 }

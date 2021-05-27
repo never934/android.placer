@@ -34,6 +34,7 @@ internal object TestUtils {
             cityLng = randomDouble(),
             cityName = randomString(),
             avatarUrl = randomString(),
+            registrated = true,
             createdDate = System.currentTimeMillis()
         )
     }

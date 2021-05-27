@@ -1,6 +1,7 @@
 package com.placer.data
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceComment
+import com.placer.domain.entity.place.PlaceRequest
 import com.placer.domain.entity.user.User
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
@@ -33,6 +34,7 @@ internal object TestUtils {
             cityLng = randomDouble(),
             cityName = randomString(),
             avatarUrl = randomString(),
+            registrated = true,
             createdDate = System.currentTimeMillis()
         )
     }
@@ -62,5 +64,25 @@ internal object TestUtils {
             photos = listOf(),
             createdDate = System.currentTimeMillis()
         )
+    }
+
+    fun getRandomPlaceRequest() : PlaceRequest {
+        return PlaceRequest(
+            name = randomString(),
+            description = randomString(),
+            lat = randomDouble(),
+            lng = randomDouble(),
+            published = true
+        )
+    }
+
+    fun Place.toRequest() : PlaceRequest {
+        return PlaceRequest(
+            name, description, lat, lng, published
+        )
+    }
+
+    fun List<Place>.toRequests() : List<PlaceRequest> {
+        return map { it.toRequest() }
     }
 }

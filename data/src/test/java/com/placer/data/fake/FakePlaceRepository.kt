@@ -1,9 +1,14 @@
 package com.placer.data.fake
 
+import com.placer.data.TestUtils
 import com.placer.domain.entity.place.Place
+import com.placer.domain.entity.place.PlaceRequest
+import com.placer.domain.entity.user.User
 import com.placer.domain.repository.PlaceRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FakePlaceRepository : PlaceRepository {
 
@@ -18,10 +23,24 @@ class FakePlaceRepository : PlaceRepository {
         emit(Result.success(places))
     }
 
-    override suspend fun publishPlace(place: Place): Flow<Result<Place>>  = flow {
+    override suspend fun publishPlace(place: PlaceRequest): Flow<Result<Place>> = flow {
         if (error.not()){
-            places.add(place)
-            emit(Result.success(place))
+            val placeEntity = Place(
+                id = UUID.randomUUID().toString(),
+                name = place.name,
+                description = place.description,
+                cityName = TestUtils.randomString(),
+                lat = place.lat,
+                lng = place.lng,
+                published = true,
+                author = TestUtils.getRandomUser(),
+                commentsCount = 0,
+                topPosition = (places.size+1).toLong(),
+                photos = listOf(),
+                createdDate = System.currentTimeMillis()
+            )
+            places.add(placeEntity)
+            emit(Result.success(placeEntity))
         }else{
             emit(Result.failure<Place>(Exception("Error while publishing place")))
         }
@@ -40,7 +59,11 @@ class FakePlaceRepository : PlaceRepository {
         }
     }
 
-    override suspend fun updatePlace(place: Place): Flow<Result<Place>> = flow {
+    override suspend fun loadPlaceById(placeId: String): Flow<Result<Place>> = flow {
+        emit(Result.success(places.first { it.id == placeId }))
+    }
+
+    override suspend fun updatePlace(placeId: String, place: PlaceRequest): Flow<Result<Place>> = flow {
         // server logic (data val from backend)
     }
 }

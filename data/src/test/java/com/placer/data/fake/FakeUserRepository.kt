@@ -27,11 +27,11 @@ class FakeUserRepository(private val _users: List<User>) : UserRepository {
         }
     }
 
-    override suspend fun loadProfile(): Flow<Result<User>> {
+    override suspend fun loadProfile(): Flow<Result<User>> = flow{
         // server logic (data val from backend)
     }
 
-    override suspend fun updateUser(user: User): Flow<Result<User>>  = flow {
+    override suspend fun updateUser(userName: String, userNickname: String): Flow<Result<User>> = flow {
         // server logic (data val from backend)
     }
 

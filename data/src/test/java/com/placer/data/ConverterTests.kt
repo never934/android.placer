@@ -41,6 +41,7 @@ class ConverterTests {
             cityLng = TestUtils.randomDouble(),
             cityName = TestUtils.randomString(),
             avatarUrl = TestUtils.randomString(),
+            registrated = true,
             createdDate = System.currentTimeMillis()
         ),
         commentsCount = TestUtils.randomLong(),
@@ -67,6 +68,7 @@ class ConverterTests {
                 cityLng = data.author.cityLng,
                 cityName = data.author.cityName,
                 avatarUrl = data.author.avatarUrl,
+                registrated = data.author.registrated,
                 createdDate = data.author.createdDate
             ),
             commentsCount = data.commentsCount,
@@ -101,6 +103,7 @@ class ConverterTests {
                 cityLng = TestUtils.randomDouble(),
                 cityName = TestUtils.randomString(),
                 avatarUrl = TestUtils.randomString(),
+                registrated = true,
                 createdDate = System.currentTimeMillis()
             )
         )
@@ -120,6 +123,7 @@ class ConverterTests {
                 cityLng = data.author.cityLng,
                 cityName = data.author.cityName,
                 avatarUrl = data.author.avatarUrl,
+                registrated = true,
                 createdDate = data.author.createdDate
             )
         )
@@ -145,6 +149,7 @@ class ConverterTests {
             cityLng = TestUtils.randomDouble(),
             cityName = TestUtils.randomString(),
             avatarUrl = TestUtils.randomString(),
+            registrated = true,
             createdDate = System.currentTimeMillis()
         )
 
@@ -158,6 +163,7 @@ class ConverterTests {
             cityLng = data.cityLng,
             cityName = data.cityName,
             avatarUrl = data.avatarUrl,
+            registrated = data.registrated,
             createdDate = data.createdDate
         )
 
