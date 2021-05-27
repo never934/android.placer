@@ -29,7 +29,11 @@ internal class FakeUserRepository(private val users: ArrayList<User> = arrayList
 
     override suspend fun loadProfile(): Flow<Result<User>> = flow{
         if(error.not()){
-            emit(Result.success(TestUtils.getRandomUser()))
+            if(users.isNotEmpty()){
+                emit(Result.success(users[0]))
+            }else{
+                emit(Result.success(TestUtils.getRandomUser()))
+            }
         }else{
             emit(Result.failure<User>(Exception("Error while loading profile")))
         }

@@ -29,14 +29,11 @@ class AuthViewModelTests {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    // Subject under test
     private lateinit var authViewModel: AuthViewModel
-
-    // Use a fake repository to be injected into the view model.
     private lateinit var authRepository: FakeAuthRepository
 
     @Before
-    fun setupStatisticsViewModel() {
+    fun setupViewModel() {
         authRepository = FakeAuthRepository()
         authViewModel = AuthViewModel(SignInUseCase(authRepository, Dispatchers.IO))
     }

@@ -4,18 +4,15 @@ import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.client.MainCoroutineRule
-import com.placer.client.fake.FakeAuthRepository
 import com.placer.client.fake.FakeCityRepository
 import com.placer.client.getOrAwaitValue
-import com.placer.client.screens.auth.AuthViewModel
 import com.placer.client.screens.city.ChooseCityViewModel
-import com.placer.domain.usecase.auth.SignInUseCase
 import com.placer.domain.usecase.city.LoadCitiesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers
-import org.hamcrest.MatcherAssert
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -32,27 +29,23 @@ class ChooseCityViewModelTests {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    // Subject under test
     private lateinit var chooseCityViewModel: ChooseCityViewModel
-
-    // Use a fake repository to be injected into the view model.
     private lateinit var cityRepository: FakeCityRepository
 
     @Before
-    fun setupStatisticsViewModel() {
+    fun setupViewModel() {
         cityRepository = FakeCityRepository()
         chooseCityViewModel = ChooseCityViewModel(LoadCitiesUseCase(cityRepository, Dispatchers.IO))
     }
 
     @Test
-    fun signInResultSuccess() = mainCoroutineRule.runBlockingTest {
+    fun loadCitiesSuccessResult() = mainCoroutineRule.runBlockingTest {
         // Given
 
         // When
-        authViewModel.signIn("")
+        chooseCityViewModel.loadCities("")
 
         // Then
-        MatcherAssert.assertThat(authViewModel.loginSuccessed.getOrAwaitValue(), CoreMatchers.`is`(true))
-        MatcherAssert.assertThat(authViewModel.userId.getOrAwaitValue(), CoreMatchers.`is`(""))
+        assertThat(chooseCityViewModel.cities.getOrAwaitValue(), CoreMatchers.`is`(listOf()))
     }
 }

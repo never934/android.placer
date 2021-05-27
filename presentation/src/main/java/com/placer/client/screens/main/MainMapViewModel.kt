@@ -41,9 +41,9 @@ internal class MainMapViewModel constructor(
         viewModelScope.launch {
             val result = placesUseCase.loadPlacesByInputFromCacheWithEmptyFilter(input).first()
             if(result.isSuccess){
-                _searchPlaces.value = result.getOrNull()
+                _searchPlaces.postValue(result.getOrNull())
             }else{
-                showSnackBar.value = result.exceptionOrNull()?.message
+                showSnackBar.postValue(result.exceptionOrNull()?.message)
             }
         }
     }
@@ -78,11 +78,11 @@ internal class MainMapViewModel constructor(
         isRefreshing.value = true
         viewModelScope.launch {
             val result = placesUseCase.loadPlaces().single()
-            isRefreshing.value = false
+            isRefreshing.postValue(false)
             if (result.isSuccess){
-                _mapPlaces.value = result.getOrNull()
+                _mapPlaces.postValue(result.getOrNull())
             }else{
-                showSnackBar.value = result.exceptionOrNull()?.message
+                showSnackBar.postValue(result.exceptionOrNull()?.message)
             }
             mapFilter.value = Filters::getAllPointsFilter
         }

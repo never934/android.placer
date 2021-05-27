@@ -34,9 +34,9 @@ internal class ProfileEditViewModel(
         viewModelScope.launch {
             val result = loadUserUseCase.loadProfile().first()
             if(result.isSuccess){
-                _profile.value = result.getOrNull()
+                _profile.postValue(result.getOrNull())
             }else{
-                showSnackBar.value = result.exceptionOrNull()?.message
+                showSnackBar.postValue(result.exceptionOrNull()?.message)
             }
             isRefreshing.value = false
         }
