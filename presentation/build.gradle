@@ -50,6 +50,11 @@ android {
         exclude 'META-INF/LGPL2.1'
         exclude("META-INF/*.kotlin_module")
     }
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+        includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -71,6 +76,7 @@ dependencies {
     testImplementation "org.robolectric:robolectric:$robolectric_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
 
     // instrumentation tests
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
