@@ -8,7 +8,6 @@ import com.placer.data.TestUtils
 import com.placer.data.fake.FakeUserRepository
 import com.placer.domain.entity.user.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers
@@ -41,7 +40,7 @@ class UserRepositoryTest {
         firstUser = TestUtils.getRandomUser()
         secondUser = TestUtils.getRandomUser()
         thirdUser = TestUtils.getRandomUser()
-        userRepository = FakeUserRepository(listOf(firstUser, secondUser, thirdUser))
+        userRepository = FakeUserRepository(arrayListOf(firstUser, secondUser, thirdUser))
     }
 
     @Test

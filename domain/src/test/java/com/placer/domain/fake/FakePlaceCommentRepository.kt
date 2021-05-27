@@ -1,13 +1,13 @@
-package com.placer.data.fake
+package com.placer.domain.fake
 
-import com.placer.data.TestUtils
+import com.placer.domain.TestUtils
 import com.placer.domain.entity.place.PlaceComment
 import com.placer.domain.repository.PlaceCommentRepository
 import kotlinx.coroutines.flow.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FakePlaceCommentRepository(private val comments: ArrayList<PlaceComment> = arrayListOf()) : PlaceCommentRepository {
+internal class FakePlaceCommentRepository(private val comments: ArrayList<PlaceComment> = arrayListOf()) : PlaceCommentRepository {
 
     var error = false
 

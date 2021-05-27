@@ -1,13 +1,13 @@
-package com.placer.data.fake
+package com.placer.domain.fake
 
-import com.placer.data.TestUtils
+import com.placer.domain.TestUtils
 import com.placer.domain.entity.city.City
 import com.placer.domain.entity.user.User
 import com.placer.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeUserRepository(private val users: ArrayList<User> = arrayListOf()) : UserRepository {
+internal class FakeUserRepository(private val users: ArrayList<User> = arrayListOf()) : UserRepository {
 
     var error = false
 

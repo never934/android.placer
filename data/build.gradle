@@ -52,6 +52,7 @@ android {
 dependencies {
     // module dependencies
     implementation project(":domain")
+    testImplementation project(":domain")
 
     // kotlin lang
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
