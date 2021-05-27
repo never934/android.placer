@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.placer.data.db.place.photo.PlacePhotoDB
 
-object PlacePhotoDBConverter {
+internal object PlacePhotoDBConverter {
     @TypeConverter
     fun storedStringToPlacePhotosDB(data: String): List<PlacePhotoDB> {
         val gson = Gson()

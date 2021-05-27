@@ -16,7 +16,7 @@ class RetrofitSettingsModule {
 
     @Provides
     @Singleton
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+    internal fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
         if(BuildConfig.DEBUG) {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -28,7 +28,7 @@ class RetrofitSettingsModule {
 
     @Provides
     @Singleton
-    fun provideUnsafeSocketFactory(trustManager: X509TrustManager): SSLSocketFactory {
+    internal fun provideUnsafeSocketFactory(trustManager: X509TrustManager): SSLSocketFactory {
         val trustAllCerts = arrayOf<TrustManager>(trustManager)
         try {
             val sslContext = SSLContext.getInstance("SSL")
@@ -42,7 +42,7 @@ class RetrofitSettingsModule {
 
     @Provides
     @Singleton
-    fun provideUnsafeTrustManager(): X509TrustManager {
+    internal fun provideUnsafeTrustManager(): X509TrustManager {
         return object : X509TrustManager {
             @Throws(CertificateException::class)
             override fun checkClientTrusted(

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface AuthApi {
+internal interface AuthApi {
     @POST("v1/auth/signIn")
     suspend fun signIn(@Body request: AuthRequest) : AuthResponse
 }

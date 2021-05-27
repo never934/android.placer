@@ -9,7 +9,7 @@ import com.placer.domain.entity.place.PlaceComment
 import com.placer.domain.entity.user.User
 
 @Entity
-data class PlaceCommentDB(
+internal data class PlaceCommentDB(
     @PrimaryKey
     val id: String,
     val text: String,
@@ -18,13 +18,13 @@ data class PlaceCommentDB(
     val author: UserDB
 )
 
-fun List<PlaceCommentDB>.toEntities() : List<PlaceComment> {
+internal fun List<PlaceCommentDB>.toEntities() : List<PlaceComment> {
     return map {
         it.toEntity()
     }
 }
 
-fun PlaceCommentDB.toEntity() : PlaceComment {
+internal fun PlaceCommentDB.toEntity() : PlaceComment {
     return PlaceComment(
         id = id,
         placeId = placeId,

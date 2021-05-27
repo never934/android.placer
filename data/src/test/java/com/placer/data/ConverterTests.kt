@@ -18,7 +18,7 @@ import java.util.*
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Q])
-class ConverterTests {
+internal class ConverterTests {
     @Test
     fun convertPlaceResponseToDbAndToEntity(){
         // Given

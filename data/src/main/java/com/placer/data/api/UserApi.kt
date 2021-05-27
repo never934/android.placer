@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
-interface UserApi {
+internal interface UserApi {
     @GET("v1/users")
     suspend fun getUsers() : List<UserResponse>
 

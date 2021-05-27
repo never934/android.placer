@@ -7,7 +7,7 @@ import com.placer.domain.entity.place.PlaceRequest
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
-interface PlaceApi {
+internal interface PlaceApi {
     /** common **/
 
     @GET("v1/places/user/{userId}")

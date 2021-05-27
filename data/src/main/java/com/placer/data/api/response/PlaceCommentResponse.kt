@@ -2,7 +2,7 @@ package com.placer.data.api.response
 
 import com.placer.data.db.place.comment.PlaceCommentDB
 
-data class PlaceCommentResponse(
+internal data class PlaceCommentResponse(
     val id: String,
     val text: String,
     val placeId: String,
@@ -10,13 +10,13 @@ data class PlaceCommentResponse(
     val author: UserResponse
 )
 
-fun List<PlaceCommentResponse>.toDB() : List<PlaceCommentDB> {
+internal fun List<PlaceCommentResponse>.toDB() : List<PlaceCommentDB> {
     return map {
         it.toDB()
     }
 }
 
-fun PlaceCommentResponse.toDB() : PlaceCommentDB {
+internal fun PlaceCommentResponse.toDB() : PlaceCommentDB {
     return PlaceCommentDB(
         id = id,
         placeId = placeId,

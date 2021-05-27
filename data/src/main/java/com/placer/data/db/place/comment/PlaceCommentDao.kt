@@ -3,7 +3,7 @@ package com.placer.data.db.place.comment
 import androidx.room.*
 
 @Dao
-interface PlaceCommentDao {
+internal interface PlaceCommentDao {
 
     @Transaction
     suspend fun updatePlaceComments(placeId: String, comments: List<PlaceCommentDB>) : List<PlaceCommentDB> {

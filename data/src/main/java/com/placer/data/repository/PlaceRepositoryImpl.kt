@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class PlaceRepositoryImpl @Inject internal constructor(
+internal class PlaceRepositoryImpl @Inject internal constructor(
     private val placeApi: PlaceApi,
     private val placeDao: PlaceDao,
     private val dispatcher: CoroutineDispatcher

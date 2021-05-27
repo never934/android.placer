@@ -20,7 +20,7 @@ class AuthModule {
 
     @Provides
     @Singleton
-    fun providesAuthRepository(authApi: AuthApi): AuthRepository {
+    internal fun providesAuthRepository(authApi: AuthApi): AuthRepository {
         return AuthRepositoryImpl(authApi, Dispatchers.IO)
     }
 }

@@ -20,7 +20,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.Q])
 @ExperimentalCoroutinesApi
-class CityRepositoryTest {
+internal class CityRepositoryTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()

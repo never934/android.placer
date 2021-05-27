@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class CityRepositoryImpl @Inject internal constructor(
+internal class CityRepositoryImpl @Inject internal constructor(
     private val citiesApi: CitiesApi,
     private val dispatcher: CoroutineDispatcher
 ) : CityRepository {

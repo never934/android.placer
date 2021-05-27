@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class UserApiModule {
     @Provides
     @Singleton
-    fun provideUserApi(retrofit: Retrofit): UserApi {
+    internal fun provideUserApi(retrofit: Retrofit): UserApi {
         return retrofit.create(UserApi::class.java)
     }
 }

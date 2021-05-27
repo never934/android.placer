@@ -24,7 +24,7 @@ import java.util.concurrent.Executors
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
-class PlaceDaoTest {
+internal class PlaceDaoTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()

@@ -54,7 +54,7 @@ class UserModule {
 
     @Provides
     @Singleton
-    fun providesUserRepository(
+    internal fun providesUserRepository(
         userApi: UserApi, userDao: UserDao
     ): UserRepository {
         return UserRepositoryImpl(userApi, userDao, Dispatchers.IO)

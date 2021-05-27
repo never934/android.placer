@@ -3,7 +3,7 @@ package com.placer.data.api.response
 import com.placer.data.db.place.PlaceDB
 import com.placer.domain.entity.user.User
 
-data class PlaceResponse(
+internal data class PlaceResponse(
     val id: String,
     val name: String,
     val description: String?,
@@ -18,7 +18,7 @@ data class PlaceResponse(
     val createdDate: Long
 )
 
-fun PlaceResponse.toDB() : PlaceDB {
+internal fun PlaceResponse.toDB() : PlaceDB {
     return PlaceDB(
         id = id,
         name = name,
@@ -35,6 +35,6 @@ fun PlaceResponse.toDB() : PlaceDB {
     )
 }
 
-fun List<PlaceResponse>.toDBs() : List<PlaceDB> {
+internal fun List<PlaceResponse>.toDBs() : List<PlaceDB> {
     return map { it.toDB() }
 }

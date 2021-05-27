@@ -32,7 +32,7 @@ class PlacePhotoModule {
 
     @Provides
     @Singleton
-    fun providesPlacePhotoRepository(
+    internal fun providesPlacePhotoRepository(
         placeApi: PlaceApi, placeDao: PlaceDao
     ): PlacePhotoRepository {
         return PlacePhotoRepositoryImpl(placeApi, placeDao, Dispatchers.IO)

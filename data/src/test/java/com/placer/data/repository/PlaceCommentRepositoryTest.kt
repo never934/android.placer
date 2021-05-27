@@ -22,7 +22,7 @@ import java.util.*
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.Q])
 @ExperimentalCoroutinesApi
-class PlaceCommentRepositoryTest {
+internal class PlaceCommentRepositoryTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()

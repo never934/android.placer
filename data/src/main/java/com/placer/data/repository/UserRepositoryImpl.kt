@@ -18,7 +18,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class UserRepositoryImpl @Inject internal constructor(
+internal class UserRepositoryImpl @Inject internal constructor(
     private val userApi: UserApi,
     private val userDao: UserDao,
     private val dispatcher: CoroutineDispatcher

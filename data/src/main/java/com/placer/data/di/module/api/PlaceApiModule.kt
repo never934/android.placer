@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class PlaceApiModule {
     @Provides
     @Singleton
-    fun providePlaceApi(retrofit: Retrofit): PlaceApi {
+    internal fun providePlaceApi(retrofit: Retrofit): PlaceApi {
         return retrofit.create(PlaceApi::class.java)
     }
 }

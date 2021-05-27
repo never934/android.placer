@@ -8,7 +8,7 @@ import com.placer.data.db.user.UserDB
 import java.lang.reflect.Type
 
 
-object UserDBConverter {
+internal object UserDBConverter {
     @TypeConverter
     fun storedStringToUser(data: String?): UserDB {
         val gson = Gson()

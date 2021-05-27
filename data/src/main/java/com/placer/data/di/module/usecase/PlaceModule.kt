@@ -45,7 +45,7 @@ class PlaceModule {
 
     @Provides
     @Singleton
-    fun providesPlaceRepository(placeApi: PlaceApi, placeDao: PlaceDao): PlaceRepository {
+    internal fun providesPlaceRepository(placeApi: PlaceApi, placeDao: PlaceDao): PlaceRepository {
         return PlaceRepositoryImpl(placeApi, placeDao, Dispatchers.IO)
     }
 }

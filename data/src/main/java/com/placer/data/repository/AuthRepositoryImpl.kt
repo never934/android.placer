@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.*
 import java.lang.Exception
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject internal constructor(
+internal class AuthRepositoryImpl @Inject internal constructor(
     private val authApi: AuthApi,
     private val dispatcher: CoroutineDispatcher
     ) : AuthRepository {

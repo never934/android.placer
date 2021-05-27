@@ -3,7 +3,7 @@ package com.placer.data.db.user
 import androidx.room.*
 
 @Dao
-interface UserDao {
+internal interface UserDao {
 
     @Transaction
     suspend fun updateUsers(users: List<UserDB>) : List<UserDB> {

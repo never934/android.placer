@@ -2,7 +2,7 @@ package com.placer.data.api.response
 
 import com.placer.data.db.user.UserDB
 
-data class UserResponse(
+internal data class UserResponse(
     val id: String,
     val name: String,
     val nickname: String?,
@@ -16,7 +16,7 @@ data class UserResponse(
     val createdDate: Long
 )
 
-fun UserResponse.toDB() : UserDB {
+internal fun UserResponse.toDB() : UserDB {
     return UserDB(
         id = id,
         name = name,
@@ -32,6 +32,6 @@ fun UserResponse.toDB() : UserDB {
     )
 }
 
-fun List<UserResponse>.toDB() : List<UserDB> {
+internal fun List<UserResponse>.toDB() : List<UserDB> {
     return map { it.toDB() }
 }

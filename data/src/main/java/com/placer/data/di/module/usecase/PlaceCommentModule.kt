@@ -32,7 +32,7 @@ class PlaceCommentModule {
 
     @Provides
     @Singleton
-    fun providesPlaceRepository(
+    internal fun providesPlaceRepository(
         placeApi: PlaceApi, placeCommentDao: PlaceCommentDao
     ): PlaceCommentRepository {
         return PlaceCommentRepositoryImpl(placeApi, placeCommentDao, Dispatchers.IO)

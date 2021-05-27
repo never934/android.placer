@@ -17,7 +17,7 @@ import com.placer.domain.entity.place.PlacePhoto
 import com.placer.domain.entity.user.User
 
 @Entity
-data class PlaceDB(
+internal data class PlaceDB(
     @PrimaryKey
     val id: String,
     val name: String,
@@ -33,7 +33,7 @@ data class PlaceDB(
     val createdDate: Long
 )
 
-fun PlaceDB.toEntity() : Place {
+internal fun PlaceDB.toEntity() : Place {
     return Place(
         id = id,
         name = name,
@@ -50,6 +50,6 @@ fun PlaceDB.toEntity() : Place {
     )
 }
 
-fun List<PlaceDB>.toEntities() : List<Place> {
+internal fun List<PlaceDB>.toEntities() : List<Place> {
     return map { it.toEntity() }
 }

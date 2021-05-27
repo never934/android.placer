@@ -6,7 +6,7 @@ import com.placer.domain.entity.user.User
 
 
 @Dao
-interface PlaceDao {
+internal interface PlaceDao {
 
     @Transaction
     suspend fun updatePlaces(places: List<PlaceDB>) : List<PlaceDB> {

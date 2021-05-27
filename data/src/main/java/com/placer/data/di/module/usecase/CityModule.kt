@@ -20,7 +20,7 @@ class CityModule {
 
     @Provides
     @Singleton
-    fun providesCityRepository(citiesApi: CitiesApi): CityRepository {
+    internal fun providesCityRepository(citiesApi: CitiesApi): CityRepository {
         return CityRepositoryImpl(citiesApi, Dispatchers.IO)
     }
 }

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.placer.domain.entity.user.User
 
 @Entity
-data class UserDB(
+internal data class UserDB(
     @PrimaryKey
     val id: String,
     val name: String,
@@ -20,7 +20,7 @@ data class UserDB(
     val createdDate: Long
 )
 
-fun UserDB.toEntity() : User {
+internal fun UserDB.toEntity() : User {
     return User(
         id = id,
         name = name,
@@ -36,6 +36,6 @@ fun UserDB.toEntity() : User {
     )
 }
 
-fun List<UserDB>.toEntities() : List<User> {
+internal fun List<UserDB>.toEntities() : List<User> {
     return map { it.toEntity() }
 }

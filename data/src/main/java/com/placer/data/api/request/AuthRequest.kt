@@ -1,5 +1,5 @@
 package com.placer.data.api.request
 
-data class AuthRequest(
+internal data class AuthRequest(
     val firebaseToken: String
 )

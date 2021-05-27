@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class CitiesApiModule {
     @Provides
     @Singleton
-    fun provideCitiesApi(retrofit: Retrofit): CitiesApi {
+    internal fun provideCitiesApi(retrofit: Retrofit): CitiesApi {
         return retrofit.create(CitiesApi::class.java)
     }
 }
