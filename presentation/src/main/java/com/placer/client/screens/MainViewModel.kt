@@ -5,6 +5,7 @@ import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.data.AppPrefs
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUserUseCase
@@ -13,7 +14,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
-internal class MainViewModel(private val loadUserUseCase: LoadUserUseCase = AppClass.appInstance.userComponent.loadUserUseCase) : BaseViewModel() {
+internal class MainViewModel(private val loadUserUseCase: LoadUserUseCase = ServiceLocator.instance.userComponent.loadUserUseCase) : BaseViewModel() {
     private var _profile: MutableLiveData<User> = MutableLiveData()
     internal val profile: LiveData<UserView>
     get() = _profile.map { it.toView() }

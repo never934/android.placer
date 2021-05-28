@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.placer.client.AppClass
 import com.placer.client.Constants
 import com.placer.client.base.BaseViewModel
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.data.AppPrefs
 import com.placer.domain.entity.city.City
 import com.placer.domain.usecase.city.LoadCitiesUseCase
@@ -17,8 +18,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class ChooseCityViewModel(
-    private val loadCitiesUseCase: LoadCitiesUseCase = AppClass.appInstance.cityComponent.loadCitiesUseCase,
-    private val updateUserCityUseCase: UpdateUserCityUseCase = AppClass.appInstance.userComponent.updateUserCityUseCase
+    private val loadCitiesUseCase: LoadCitiesUseCase = ServiceLocator.instance.cityComponent.loadCitiesUseCase,
+    private val updateUserCityUseCase: UpdateUserCityUseCase = ServiceLocator.instance.userComponent.updateUserCityUseCase
 ) : BaseViewModel() {
 
     private var _cities: MutableLiveData<List<City>> = MutableLiveData(arrayListOf())

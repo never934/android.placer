@@ -12,6 +12,7 @@ import com.placer.client.R
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.client.util.extensions.BitmapExtensions.toByteArray
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceRequest
@@ -23,8 +24,8 @@ import kotlinx.coroutines.launch
 import java.io.InputStream
 
 internal class PlacePublishViewModel(
-    private val publishPlaceUseCase: PublishPlaceUseCase = AppClass.appInstance.placeComponent.publishPlacesUseCase,
-    private val uploadPlacePhotosUseCase: UploadPlacePhotosUseCase = AppClass.appInstance.placePhotoComponent.uploadPlacePhotoUseCase
+    private val publishPlaceUseCase: PublishPlaceUseCase = ServiceLocator.instance.placeComponent.publishPlacesUseCase,
+    private val uploadPlacePhotosUseCase: UploadPlacePhotosUseCase = ServiceLocator.instance.placePhotoComponent.uploadPlacePhotoUseCase
 ) : BaseViewModel() {
 
     var placeName: MutableLiveData<String> = MutableLiveData()
@@ -78,7 +79,7 @@ internal class PlacePublishViewModel(
                 isLoading.value = false
             }
         }else{
-            showSnackBar.value = AppClass.appInstance.getString(R.string.common_err_name_empty)
+            showSnackBar.value = ServiceLocator.instance.context.getString(R.string.common_err_name_empty)
         }
     }
 

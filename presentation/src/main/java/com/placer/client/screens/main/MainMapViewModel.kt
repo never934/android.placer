@@ -6,6 +6,7 @@ import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.client.util.Filters
 import com.placer.domain.entity.place.Place
 import com.placer.domain.usecase.place.LoadPlacesUseCase
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
 internal class MainMapViewModel constructor(
-    private val placesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase
+    private val placesUseCase: LoadPlacesUseCase = ServiceLocator.instance.placeComponent.loadPlacesUseCase
     ) : BaseViewModel() {
 
     private var _searchPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())

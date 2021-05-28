@@ -9,13 +9,14 @@ import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toViews
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.domain.entity.place.Place
 import com.placer.domain.usecase.place.LoadPlacesUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class PlaceChoosePointViewModel(
-    private val loadPlacesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase
+    private val loadPlacesUseCase: LoadPlacesUseCase = ServiceLocator.instance.placeComponent.loadPlacesUseCase
 ) : BaseViewModel() {
 
     private var _mapPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())

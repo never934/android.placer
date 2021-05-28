@@ -5,11 +5,12 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationManager
 import com.placer.client.AppClass
+import com.placer.client.servicelocator.ServiceLocator
 
 object LocationUtils {
     @SuppressLint("MissingPermission")
     fun getBestLocation(): Location? {
-        val mLocationManager = AppClass.appInstance.applicationContext.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
+        val mLocationManager = ServiceLocator.instance.context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
         val providers = mLocationManager!!.getProviders(true)
         var bestLocation: Location? = null
         for (provider in providers) {

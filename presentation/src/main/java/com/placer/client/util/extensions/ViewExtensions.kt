@@ -6,11 +6,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import com.placer.client.AppClass
 import com.placer.client.R
+import com.placer.client.servicelocator.ServiceLocator
 
 object ViewExtensions {
     fun RadioButton.getFormatted() : RadioButton {
-        val context = AppClass.appInstance.applicationContext
-        val resources = AppClass.appInstance.resources
+        val context = ServiceLocator.instance.context
+        val resources = ServiceLocator.instance.application.resources
         this.buttonDrawable = ContextCompat.getDrawable(
             context, R.drawable.radio_btn_background
         )

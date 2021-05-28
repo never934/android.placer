@@ -6,6 +6,7 @@ import com.placer.client.R
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceRequest
 import com.placer.domain.usecase.place.DeletePlaceUseCase
@@ -18,11 +19,11 @@ import kotlinx.coroutines.launch
 import java.io.InputStream
 
 internal class PlaceUpdateViewModel(
-    private val loadPlacesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase,
-    private val updatePlaceUseCase: UpdatePlaceUseCase = AppClass.appInstance.placeComponent.updatePlaceUseCase,
-    private val uploadPlacePhotosUseCase: UploadPlacePhotosUseCase = AppClass.appInstance.placePhotoComponent.uploadPlacePhotoUseCase,
-    private val deletePlacePhotosUseCase: DeletePlacePhotosUseCase = AppClass.appInstance.placePhotoComponent.deletePlacePhotoUseCase,
-    private val deletePlaceUseCase: DeletePlaceUseCase = AppClass.appInstance.placeComponent.deletePlaceUseCase,
+    private val loadPlacesUseCase: LoadPlacesUseCase = ServiceLocator.instance.placeComponent.loadPlacesUseCase,
+    private val updatePlaceUseCase: UpdatePlaceUseCase = ServiceLocator.instance.placeComponent.updatePlaceUseCase,
+    private val uploadPlacePhotosUseCase: UploadPlacePhotosUseCase = ServiceLocator.instance.placePhotoComponent.uploadPlacePhotoUseCase,
+    private val deletePlacePhotosUseCase: DeletePlacePhotosUseCase = ServiceLocator.instance.placePhotoComponent.deletePlacePhotoUseCase,
+    private val deletePlaceUseCase: DeletePlaceUseCase = ServiceLocator.instance.placeComponent.deletePlaceUseCase,
     private var _placeId: String = ""
 ): BaseViewModel() {
 
@@ -79,7 +80,7 @@ internal class PlaceUpdateViewModel(
                         updatePlaceUseCase.updatePlace(_placeId, PlaceRequest(name, description, place.lat, place.lng, published)).first()
                     if (updateResult.isSuccess) {
                         _place.value = updateResult.getOrNull()
-                        showSnackBar.value = AppClass.appInstance.getString(R.string.update_place_updated_message)
+                        showSnackBar.value = ServiceLocator.instance.context.getString(R.string.update_place_updated_message)
                     } else {
                         showSnackBar.value = updateResult.exceptionOrNull()?.message
                     }
@@ -87,7 +88,7 @@ internal class PlaceUpdateViewModel(
                 isLoading.value = false
             }
         }else{
-            showSnackBar.value = AppClass.appInstance.getString(R.string.common_err_name_empty)
+            showSnackBar.value = ServiceLocator.instance.context.getString(R.string.common_err_name_empty)
         }
     }
 

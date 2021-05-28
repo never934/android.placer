@@ -29,6 +29,7 @@ import com.placer.client.navigation.PlaceChoosePointTransaction
 import com.placer.client.navigation.PlaceViewTransaction
 import com.placer.client.screens.MainActivity
 import com.placer.client.screens.MainViewModel
+import com.placer.client.screens.places.PlaceViewFragmentArgs
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.InfoWindowAdapter
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard

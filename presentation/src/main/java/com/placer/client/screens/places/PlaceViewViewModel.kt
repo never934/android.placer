@@ -7,6 +7,7 @@ import com.placer.client.entity.PlaceCommentView
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.toView
 import com.placer.client.entity.toViews
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.data.AppPrefs
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceComment
@@ -17,9 +18,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class PlaceViewViewModel(
-    private val loadPlacesUseCase: LoadPlacesUseCase = AppClass.appInstance.placeComponent.loadPlacesUseCase,
-    private val loadPlaceCommentsUseCase: LoadPlaceCommentsUseCase = AppClass.appInstance.placeCommentComponent.loadPlaceCommentUseCase,
-    private val publishPlaceCommentUseCase: PublishPlaceCommentUseCase = AppClass.appInstance.placeCommentComponent.publishPlaceCommentUseCase,
+    private val loadPlacesUseCase: LoadPlacesUseCase = ServiceLocator.instance.placeComponent.loadPlacesUseCase,
+    private val loadPlaceCommentsUseCase: LoadPlaceCommentsUseCase = ServiceLocator.instance.placeCommentComponent.loadPlaceCommentUseCase,
+    private val publishPlaceCommentUseCase: PublishPlaceCommentUseCase = ServiceLocator.instance.placeCommentComponent.publishPlaceCommentUseCase,
     private var _placeId: String = ""
     ) : BaseViewModel()
 {

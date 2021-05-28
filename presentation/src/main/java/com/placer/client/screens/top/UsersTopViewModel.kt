@@ -9,13 +9,14 @@ import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toViews
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUsersUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class UsersTopViewModel(
-    private val loadUsersUseCase: LoadUsersUseCase = AppClass.appInstance.userComponent.loadUsersUseCase
+    private val loadUsersUseCase: LoadUsersUseCase = ServiceLocator.instance.userComponent.loadUsersUseCase
 ) : BaseViewModel() {
 
     private var _topUsers: MutableLiveData<List<User>> = MutableLiveData()

@@ -8,13 +8,14 @@ import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUserUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class PlacePublishSuccessViewModel(
-    private val loadUserUseCase: LoadUserUseCase = AppClass.appInstance.userComponent.loadUserUseCase
+    private val loadUserUseCase: LoadUserUseCase = ServiceLocator.instance.userComponent.loadUserUseCase
 ) : BaseViewModel() {
 
     private var _profile: MutableLiveData<User> = MutableLiveData()

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Parcelable
 import com.placer.client.AppClass
 import com.placer.client.R
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.client.util.extensions.DateExtensions.toView
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlacePhoto
@@ -33,11 +34,11 @@ internal fun Place.toView() : PlaceView {
         description = description,
         lat = lat,
         lng = lng,
-        cityName = cityName ?: AppClass.appInstance.applicationContext.getString(R.string.null_representation),
+        cityName = cityName ?: ServiceLocator.instance.context.getString(R.string.null_representation),
         published = published,
         author = author.toView(),
         commentsCount = commentsCount.toString(),
-        topPosition = String.format(AppClass.appInstance.getString(R.string.place_view_in_top_content_format), topPosition),
+        topPosition = String.format(ServiceLocator.instance.context.getString(R.string.place_view_in_top_content_format), topPosition),
         photos = photos.toViews(),
         createdDate = Date(createdDate*1000).toView()
     )

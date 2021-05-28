@@ -6,6 +6,7 @@ import com.placer.client.R
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.data.AppPrefs
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.user.LoadUserUseCase
@@ -16,9 +17,9 @@ import kotlinx.coroutines.launch
 import java.io.InputStream
 
 internal class ProfileEditViewModel(
-    private val loadUserUseCase: LoadUserUseCase = AppClass.appInstance.userComponent.loadUserUseCase,
-    private val updateProfileUseCase: UpdateUserUseCase = AppClass.appInstance.userComponent.updateUserUseCase,
-    private val updateAvatarUseCase: UpdateUserAvatarUseCase = AppClass.appInstance.userComponent.updateUserAvatarUseCase
+    private val loadUserUseCase: LoadUserUseCase = ServiceLocator.instance.userComponent.loadUserUseCase,
+    private val updateProfileUseCase: UpdateUserUseCase = ServiceLocator.instance.userComponent.updateUserUseCase,
+    private val updateAvatarUseCase: UpdateUserAvatarUseCase = ServiceLocator.instance.userComponent.updateUserAvatarUseCase
 ) : BaseViewModel()
 {
     init {
@@ -44,7 +45,7 @@ internal class ProfileEditViewModel(
 
     fun updateProfile(userName: String, userNickname: String) {
         if (userName.isEmpty() && userNickname.isEmpty()){
-            showSnackBar.value = AppClass.appInstance.getString(R.string.common_err_name_nickname_empty)
+            showSnackBar.value = ServiceLocator.instance.context.getString(R.string.common_err_name_nickname_empty)
         }else{
             isLoading.value = true
             viewModelScope.launch {

@@ -3,12 +3,13 @@ package com.placer.client.screens.auth
 import androidx.lifecycle.*
 import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.data.AppPrefs
 import com.placer.domain.usecase.auth.SignInUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val signInUseCase: SignInUseCase = AppClass.appInstance.authComponent.signInUseCase) : BaseViewModel() {
+class AuthViewModel(private val signInUseCase: SignInUseCase = ServiceLocator.instance.authComponent.signInUseCase) : BaseViewModel() {
 
     private var _loginSuccessed: MutableLiveData<Boolean> = MutableLiveData(false)
     val loginSuccessed: LiveData<Boolean>

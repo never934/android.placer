@@ -7,6 +7,7 @@ import com.placer.client.entity.*
 import com.placer.client.entity.PlaceView
 import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.data.AppPrefs
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.user.User
@@ -17,8 +18,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 internal class UserViewViewModel(
-    private val loadPlacesUseCase: LoadUserPlacesUseCase = AppClass.appInstance.placeComponent.loadUserPlacesUseCase,
-    private val loadUserUseCase: LoadUserUseCase = AppClass.appInstance.userComponent.loadUserUseCase,
+    private val loadPlacesUseCase: LoadUserPlacesUseCase = ServiceLocator.instance.placeComponent.loadUserPlacesUseCase,
+    private val loadUserUseCase: LoadUserUseCase = ServiceLocator.instance.userComponent.loadUserUseCase,
     private var userId: String = ""
 ) : BaseViewModel()
 {
