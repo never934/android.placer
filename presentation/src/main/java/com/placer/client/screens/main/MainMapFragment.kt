@@ -49,7 +49,7 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main_map, container, false
         )
-        (requireActivity() as AppCompatActivity?)?.supportActionBar?.hide()
+        requireActivity().actionBar?.hide()
         initFabStyle()
         initMap()
         return binding?.root

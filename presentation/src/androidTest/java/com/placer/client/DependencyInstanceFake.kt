@@ -58,7 +58,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupAuthComponent() {
         _authComponent = DaggerAuthComponent.builder()
             .authApiModule(AuthApiModule())
-            .authModule(AuthModule())
+            .authModule(AuthModule(ModuleState.TEST))
             .authRetrofitModule(AuthRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
             .build()
@@ -67,7 +67,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupCityComponent() {
         _cityComponent = DaggerCityComponent.builder()
             .citiesApiModule(CitiesApiModule())
-            .cityModule(CityModule())
+            .cityModule(CityModule(ModuleState.TEST))
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
             .build()
@@ -76,7 +76,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupPlaceCommentComponent() {
         _placeCommentComponent = DaggerPlaceCommentComponent.builder()
             .placeApiModule(PlaceApiModule())
-            .placeCommentModule(PlaceCommentModule())
+            .placeCommentModule(PlaceCommentModule(ModuleState.TEST))
             .placeCommentDaoModule(PlaceCommentDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
@@ -87,7 +87,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupPlaceComponent() {
         _placeComponent = DaggerPlaceComponent.builder()
             .placeApiModule(PlaceApiModule())
-            .placeModule(PlaceModule())
+            .placeModule(PlaceModule(ModuleState.TEST))
             .placeDaoModule(PlaceDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
@@ -109,7 +109,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupUserComponent() {
         _userComponent = DaggerUserComponent.builder()
             .userApiModule(UserApiModule())
-            .userModule(UserModule())
+            .userModule(UserModule(ModuleState.TEST))
             .userDaoModule(UserDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())

@@ -3,6 +3,7 @@ package com.placer.data.di.module.usecase
 import com.placer.data.api.PlaceApi
 import com.placer.data.db.place.PlaceDao
 import com.placer.data.repository.PlaceRepositoryImpl
+import com.placer.data.repository.fake.FakePlaceRepository
 import com.placer.domain.repository.PlaceRepository
 import com.placer.domain.usecase.place.*
 import dagger.Module
@@ -11,7 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-class PlaceModule {
+class PlaceModule(
+    private val state: ModuleState,
+    private val placeRepository: PlaceRepository? = null
+    ) {
 
     @Provides
     @Singleton
@@ -46,6 +50,9 @@ class PlaceModule {
     @Provides
     @Singleton
     internal fun providesPlaceRepository(placeApi: PlaceApi, placeDao: PlaceDao): PlaceRepository {
-        return PlaceRepositoryImpl(placeApi, placeDao, Dispatchers.IO)
+        return when(state){
+            ModuleState.TEST -> placeRepository ?: FakePlaceRepository()
+            ModuleState.RUN -> PlaceRepositoryImpl(placeApi, placeDao, Dispatchers.IO)
+        }
     }
 }

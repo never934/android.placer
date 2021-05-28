@@ -2,6 +2,7 @@ package com.placer.data.di.module.usecase
 
 import com.placer.data.api.AuthApi
 import com.placer.data.repository.AuthRepositoryImpl
+import com.placer.data.repository.fake.FakeAuthRepository
 import com.placer.domain.repository.AuthRepository
 import com.placer.domain.usecase.auth.SignInUseCase
 import dagger.Module
@@ -10,7 +11,10 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-class AuthModule {
+class AuthModule(
+    private val state: ModuleState,
+    private val authRepository: AuthRepository? = null
+) {
 
     @Provides
     @Singleton
@@ -21,6 +25,9 @@ class AuthModule {
     @Provides
     @Singleton
     internal fun providesAuthRepository(authApi: AuthApi): AuthRepository {
-        return AuthRepositoryImpl(authApi, Dispatchers.IO)
+        return when(state){
+            ModuleState.TEST -> authRepository ?: FakeAuthRepository()
+            ModuleState.RUN -> AuthRepositoryImpl(authApi, Dispatchers.IO)
+        }
     }
 }

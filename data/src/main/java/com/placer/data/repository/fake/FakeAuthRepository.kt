@@ -1,6 +1,6 @@
-package com.placer.client.repo
+package com.placer.data.repository.fake
 
-import com.placer.client.wrapEspressoIdlingResource
+import com.placer.data.utils.EspressoIdlingResource.wrapEspressoIdlingResource
 import com.placer.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

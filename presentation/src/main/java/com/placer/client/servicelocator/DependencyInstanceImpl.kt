@@ -57,7 +57,7 @@ class DependencyInstanceImpl(override val application: Application) : Dependency
     private fun setupAuthComponent() {
         _authComponent = DaggerAuthComponent.builder()
             .authApiModule(AuthApiModule())
-            .authModule(AuthModule())
+            .authModule(AuthModule(ModuleState.RUN))
             .authRetrofitModule(AuthRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
             .build()
@@ -66,7 +66,7 @@ class DependencyInstanceImpl(override val application: Application) : Dependency
     private fun setupCityComponent() {
         _cityComponent = DaggerCityComponent.builder()
             .citiesApiModule(CitiesApiModule())
-            .cityModule(CityModule())
+            .cityModule(CityModule(ModuleState.RUN))
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
             .build()
@@ -75,7 +75,7 @@ class DependencyInstanceImpl(override val application: Application) : Dependency
     private fun setupPlaceCommentComponent() {
         _placeCommentComponent = DaggerPlaceCommentComponent.builder()
             .placeApiModule(PlaceApiModule())
-            .placeCommentModule(PlaceCommentModule())
+            .placeCommentModule(PlaceCommentModule(ModuleState.RUN))
             .placeCommentDaoModule(PlaceCommentDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
@@ -86,7 +86,7 @@ class DependencyInstanceImpl(override val application: Application) : Dependency
     private fun setupPlaceComponent() {
         _placeComponent = DaggerPlaceComponent.builder()
             .placeApiModule(PlaceApiModule())
-            .placeModule(PlaceModule())
+            .placeModule(PlaceModule(ModuleState.RUN))
             .placeDaoModule(PlaceDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
@@ -108,7 +108,7 @@ class DependencyInstanceImpl(override val application: Application) : Dependency
     private fun setupUserComponent() {
         _userComponent = DaggerUserComponent.builder()
             .userApiModule(UserApiModule())
-            .userModule(UserModule())
+            .userModule(UserModule(ModuleState.RUN))
             .userDaoModule(UserDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())

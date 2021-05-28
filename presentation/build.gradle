@@ -79,6 +79,7 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
 
     // instrumentation tests
+    androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
     androidTestImplementation "androidx.test:core-ktx:$android_x_test_core_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     androidTestImplementation "androidx.test:rules:$android_x_test_rules_version"

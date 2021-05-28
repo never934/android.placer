@@ -3,6 +3,7 @@ package com.placer.data.di.module.usecase
 import com.placer.data.api.PlaceApi
 import com.placer.data.db.place.comment.PlaceCommentDao
 import com.placer.data.repository.PlaceCommentRepositoryImpl
+import com.placer.data.repository.fake.FakePlaceCommentRepository
 import com.placer.domain.repository.PlaceCommentRepository
 import com.placer.domain.usecase.place.comment.LoadPlaceCommentsUseCase
 import com.placer.domain.usecase.place.comment.PublishPlaceCommentUseCase
@@ -12,7 +13,10 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-class PlaceCommentModule {
+class PlaceCommentModule(
+    private val state: ModuleState,
+    private val placeCommentRepository: PlaceCommentRepository? = null
+    ) {
 
     @Provides
     @Singleton
@@ -35,6 +39,10 @@ class PlaceCommentModule {
     internal fun providesPlaceRepository(
         placeApi: PlaceApi, placeCommentDao: PlaceCommentDao
     ): PlaceCommentRepository {
-        return PlaceCommentRepositoryImpl(placeApi, placeCommentDao, Dispatchers.IO)
+        return when(state) {
+            ModuleState.TEST -> placeCommentRepository ?: FakePlaceCommentRepository()
+            ModuleState.RUN -> PlaceCommentRepositoryImpl(placeApi, placeCommentDao, Dispatchers.IO)
+        }
     }
+
 }

@@ -5,7 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.data.MainCoroutineRule
 import com.placer.data.TestUtils
-import com.placer.data.fake.FakeUserRepository
+import com.placer.data.repository.fake.FakeUserRepository
 import com.placer.domain.entity.user.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first

@@ -76,6 +76,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "androidx.test.espresso.idling:idling-concurrent:$espresso_version"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

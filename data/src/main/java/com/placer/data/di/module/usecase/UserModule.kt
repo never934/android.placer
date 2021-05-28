@@ -3,6 +3,7 @@ package com.placer.data.di.module.usecase
 import com.placer.data.api.UserApi
 import com.placer.data.db.user.UserDao
 import com.placer.data.repository.UserRepositoryImpl
+import com.placer.data.repository.fake.FakeUserRepository
 import com.placer.domain.repository.UserRepository
 import com.placer.domain.usecase.user.*
 import dagger.Module
@@ -11,7 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-class UserModule {
+class UserModule(
+    private val state: ModuleState,
+    private val userRepository: UserRepository? = null
+    ) {
 
     @Provides
     @Singleton
@@ -57,6 +61,9 @@ class UserModule {
     internal fun providesUserRepository(
         userApi: UserApi, userDao: UserDao
     ): UserRepository {
-        return UserRepositoryImpl(userApi, userDao, Dispatchers.IO)
+        return when(state){
+            ModuleState.TEST -> userRepository ?: FakeUserRepository()
+            ModuleState.RUN -> UserRepositoryImpl(userApi, userDao, Dispatchers.IO)
+        }
     }
 }

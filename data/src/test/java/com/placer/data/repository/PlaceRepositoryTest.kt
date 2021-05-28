@@ -6,7 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.data.MainCoroutineRule
 import com.placer.data.TestUtils
 import com.placer.data.TestUtils.toRequests
-import com.placer.data.fake.FakePlaceRepository
+import com.placer.data.repository.fake.FakePlaceRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
