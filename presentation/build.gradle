@@ -79,8 +79,17 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
 
     // instrumentation tests
-    androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
+    androidTestImplementation "androidx.test:core-ktx:$android_x_test_core_version"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    androidTestImplementation "androidx.test:rules:$android_x_test_rules_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$android_arch_core_testing_version"
+    androidTestImplementation "org.robolectric:annotations:$robolectric_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espresso_version"
+    androidTestImplementation "junit:junit:$junit_version"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_ktx_version"
 
     // dagger
     implementation "com.google.dagger:dagger:$dagger_version"
