@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.data.MainCoroutineRule
-import com.placer.data.TestUtils
+import com.placer.domain.TestUtils
 import com.placer.data.repository.fake.FakeUserRepository
 import com.placer.domain.entity.user.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.Q])
+@Config(sdk = [Build.VERSION_CODES.O_MR1])
 @ExperimentalCoroutinesApi
 internal class UserRepositoryTest {
 

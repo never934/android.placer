@@ -4,12 +4,12 @@ import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.client.MainCoroutineRule
-import com.placer.client.TestUtils
 import com.placer.client.entity.toView
-import com.placer.client.fake.FakePlaceRepository
-import com.placer.client.fake.FakeUserRepository
 import com.placer.client.getOrAwaitValue
 import com.placer.client.screens.user.UserViewViewModel
+import com.placer.data.repository.fake.FakePlaceRepository
+import com.placer.data.repository.fake.FakeUserRepository
+import com.placer.domain.TestUtils
 import com.placer.domain.entity.user.User
 import com.placer.domain.usecase.place.LoadUserPlacesUseCase
 import com.placer.domain.usecase.user.LoadUserUseCase
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.Q])
+@Config(sdk = [Build.VERSION_CODES.O_MR1])
 @ExperimentalCoroutinesApi
 internal class UserViewViewModelTests {
     @get:Rule

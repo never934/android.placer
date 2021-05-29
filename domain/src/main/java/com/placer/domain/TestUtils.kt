@@ -1,4 +1,4 @@
-package com.placer.client
+package com.placer.domain
 
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceComment
@@ -7,7 +7,7 @@ import com.placer.domain.entity.user.User
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
-internal object TestUtils {
+object TestUtils {
     fun randomString() : String {
         return UUID.randomUUID().toString()
     }

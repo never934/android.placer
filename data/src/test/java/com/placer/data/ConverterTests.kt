@@ -1,11 +1,13 @@
 package com.placer.data
 
+import android.os.Build
 import android.os.Build.VERSION_CODES.Q
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.data.api.response.*
 import com.placer.data.db.place.comment.toEntity
 import com.placer.data.db.place.toEntity
 import com.placer.data.db.user.toEntity
+import com.placer.domain.TestUtils
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceComment
 import com.placer.domain.entity.user.User
@@ -17,7 +19,7 @@ import org.robolectric.annotation.Config
 import java.util.*
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Q])
+@Config(sdk = [Build.VERSION_CODES.O_MR1])
 internal class ConverterTests {
     @Test
     fun convertPlaceResponseToDbAndToEntity(){

@@ -5,7 +5,7 @@ import com.placer.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-internal class FakeAuthRepository : AuthRepository {
+class FakeAuthRepository : AuthRepository {
 
     var error = false
 

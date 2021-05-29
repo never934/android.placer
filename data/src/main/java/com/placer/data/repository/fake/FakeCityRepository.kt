@@ -6,7 +6,7 @@ import com.placer.domain.repository.CityRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-internal class FakeCityRepository : CityRepository {
+class FakeCityRepository : CityRepository {
 
     var error = false
 

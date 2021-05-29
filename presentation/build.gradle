@@ -89,6 +89,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
     androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espresso_version"
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation "junit:junit:$junit_version"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_ktx_version"
 

@@ -1,14 +1,14 @@
 package com.placer.data.repository.fake
 
-import com.placer.data.TestUtils
 import com.placer.data.utils.EspressoIdlingResource.wrapEspressoIdlingResource
+import com.placer.domain.TestUtils
 import com.placer.domain.entity.city.City
 import com.placer.domain.entity.user.User
 import com.placer.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-internal class FakeUserRepository(private val users: ArrayList<User> = arrayListOf()) : UserRepository {
+class FakeUserRepository(private val users: ArrayList<User> = arrayListOf()) : UserRepository {
 
     var error = false
 

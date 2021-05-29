@@ -1,14 +1,14 @@
 package com.placer.data.repository.fake
 
-import com.placer.data.TestUtils
 import com.placer.data.utils.EspressoIdlingResource.wrapEspressoIdlingResource
+import com.placer.domain.TestUtils
 import com.placer.domain.entity.place.PlaceComment
 import com.placer.domain.repository.PlaceCommentRepository
 import kotlinx.coroutines.flow.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-internal class FakePlaceCommentRepository(private val comments: ArrayList<PlaceComment> = arrayListOf()) : PlaceCommentRepository {
+class FakePlaceCommentRepository(private val comments: ArrayList<PlaceComment> = arrayListOf()) : PlaceCommentRepository {
 
     var error = false
 

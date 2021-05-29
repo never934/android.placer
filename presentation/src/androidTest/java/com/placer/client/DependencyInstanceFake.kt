@@ -16,8 +16,16 @@ import com.placer.data.di.module.retrofit.RetrofitSettingsModule
 import com.placer.data.di.module.retrofit.ServerRetrofitModule
 import com.placer.data.di.module.room.RoomModule
 import com.placer.data.di.module.usecase.*
+import com.placer.domain.repository.*
 
-class DependencyInstanceFake(override val application: Application) : DependencyInstance {
+class DependencyInstanceFake(
+    override val application: Application,
+    private val authRepository: AuthRepository? = null,
+    private val cityRepository: CityRepository? = null,
+    private val placeCommentRepository: PlaceCommentRepository? = null,
+    private val placeRepository: PlaceRepository? = null,
+    private val userRepository: UserRepository? = null
+    ) : DependencyInstance {
 
     private lateinit var _authComponent: AuthComponent
     override val authComponent: AuthComponent
@@ -58,7 +66,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupAuthComponent() {
         _authComponent = DaggerAuthComponent.builder()
             .authApiModule(AuthApiModule())
-            .authModule(AuthModule(ModuleState.TEST))
+            .authModule(AuthModule(ModuleState.TEST, authRepository))
             .authRetrofitModule(AuthRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
             .build()
@@ -67,7 +75,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupCityComponent() {
         _cityComponent = DaggerCityComponent.builder()
             .citiesApiModule(CitiesApiModule())
-            .cityModule(CityModule(ModuleState.TEST))
+            .cityModule(CityModule(ModuleState.TEST, cityRepository))
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
             .build()
@@ -76,7 +84,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupPlaceCommentComponent() {
         _placeCommentComponent = DaggerPlaceCommentComponent.builder()
             .placeApiModule(PlaceApiModule())
-            .placeCommentModule(PlaceCommentModule(ModuleState.TEST))
+            .placeCommentModule(PlaceCommentModule(ModuleState.TEST, placeCommentRepository))
             .placeCommentDaoModule(PlaceCommentDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
@@ -87,7 +95,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupPlaceComponent() {
         _placeComponent = DaggerPlaceComponent.builder()
             .placeApiModule(PlaceApiModule())
-            .placeModule(PlaceModule(ModuleState.TEST))
+            .placeModule(PlaceModule(ModuleState.TEST, placeRepository))
             .placeDaoModule(PlaceDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())
@@ -109,7 +117,7 @@ class DependencyInstanceFake(override val application: Application) : Dependency
     private fun setupUserComponent() {
         _userComponent = DaggerUserComponent.builder()
             .userApiModule(UserApiModule())
-            .userModule(UserModule(ModuleState.TEST))
+            .userModule(UserModule(ModuleState.TEST, userRepository))
             .userDaoModule(UserDaoModule())
             .serverRetrofitModule(ServerRetrofitModule())
             .retrofitSettingsModule(RetrofitSettingsModule())

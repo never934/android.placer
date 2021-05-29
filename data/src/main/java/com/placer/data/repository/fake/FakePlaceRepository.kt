@@ -1,7 +1,7 @@
 package com.placer.data.repository.fake
 
-import com.placer.data.TestUtils
 import com.placer.data.utils.EspressoIdlingResource.wrapEspressoIdlingResource
+import com.placer.domain.TestUtils
 import com.placer.domain.entity.place.Place
 import com.placer.domain.entity.place.PlaceRequest
 import com.placer.domain.repository.PlaceRepository
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import java.util.*
 import kotlin.collections.ArrayList
 
-internal class FakePlaceRepository(private val places: ArrayList<Place> = arrayListOf()) : PlaceRepository {
+class FakePlaceRepository(private val places: ArrayList<Place> = arrayListOf()) : PlaceRepository {
 
     var error = false
 

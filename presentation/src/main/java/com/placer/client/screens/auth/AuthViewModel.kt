@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val signInUseCase: SignInUseCase = ServiceLocator.instance.authComponent.signInUseCase) : BaseViewModel() {
 
-    private var _loginSuccessed: MutableLiveData<Boolean> = MutableLiveData(false)
+    private var _loginSuccessed: MutableLiveData<Boolean> = MutableLiveData()
     val loginSuccessed: LiveData<Boolean>
     get() = _loginSuccessed
 

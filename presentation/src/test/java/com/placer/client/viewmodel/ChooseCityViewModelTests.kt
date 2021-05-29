@@ -4,9 +4,9 @@ import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.placer.client.MainCoroutineRule
-import com.placer.client.fake.FakeCityRepository
 import com.placer.client.getOrAwaitValue
 import com.placer.client.screens.city.ChooseCityViewModel
+import com.placer.data.repository.fake.FakeCityRepository
 import com.placer.domain.usecase.city.LoadCitiesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.Q])
+@Config(sdk = [Build.VERSION_CODES.O_MR1])
 @ExperimentalCoroutinesApi
 internal class ChooseCityViewModelTests {
     @get:Rule
