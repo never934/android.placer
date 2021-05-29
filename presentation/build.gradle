@@ -105,6 +105,7 @@ dependencies {
     // firebase
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
     implementation "com.firebaseui:firebase-ui-auth:$firebase_auth_version"
+    implementation "com.google.firebase:firebase-messaging:$firebase_messaging_version"
 
     // Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigation_version"
