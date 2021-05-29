@@ -18,11 +18,11 @@ internal class MainMapViewModel constructor(
     private val placesUseCase: LoadPlacesUseCase = ServiceLocator.instance.placeComponent.loadPlacesUseCase
     ) : BaseViewModel() {
 
-    private var _searchPlaces: MutableLiveData<List<Place>> = MutableLiveData()
+    private var _searchPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())
     internal val searchPlaces: LiveData<List<PlaceView>>
     get() = _searchPlaces.map { it.map { place -> place.toView() } }
 
-    private var _mapPlaces: MutableLiveData<List<Place>> = MutableLiveData()
+    private var _mapPlaces: MutableLiveData<List<Place>> = MutableLiveData(arrayListOf())
     val mapPlaces: LiveData<List<Place>>
     get() = Transformations.switchMap(mapFilter){ filter ->
         MutableLiveData(_mapPlaces.value?.filter { filter(it) })
@@ -81,7 +81,7 @@ internal class MainMapViewModel constructor(
             val result = placesUseCase.loadPlaces().single()
             isRefreshing.postValue(false)
             if (result.isSuccess){
-                _mapPlaces.postValue(result.getOrNull())
+                _mapPlaces.value = result.getOrNull()
             }else{
                 showSnackBar.postValue(result.exceptionOrNull()?.message)
             }
