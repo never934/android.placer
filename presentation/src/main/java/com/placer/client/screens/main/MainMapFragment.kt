@@ -113,28 +113,26 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
 
     private fun observeMapPlaces(map: GoogleMap) {
         viewModel.mapPlaces.observe(this, {
-      //      it?.let{
-                clearMap(map)
-                map.setInfoWindowAdapter(InfoWindowAdapter(requireActivity(), it))
-                val markers: ArrayList<Marker> = arrayListOf()
-                it.forEach { place ->
-                    val markerOptions = MarkerOptions()
-                            .position(LatLng(place.lat, place.lng))
-                            .icon(CommonUtils.bitmapDescriptorFromVector(requireContext(), R.drawable.ic_map_marker))
-                            .title(place.id)
-                    markerOptions.infoWindowAnchor(
-                            markerOptions.infoWindowAnchorU,
-                            Constants.GOOGLE_MAP_INFO_WINDOW_V_ANCHOR
-                    )
-                    val marker = map.addMarker(markerOptions)
-                    marker?.let {
-                        markers.add(marker)
-                    }
+            clearMap(map)
+            map.setInfoWindowAdapter(InfoWindowAdapter(requireActivity(), it))
+            val markers: ArrayList<Marker> = arrayListOf()
+            it.forEach { place ->
+                val markerOptions = MarkerOptions()
+                        .position(LatLng(place.lat, place.lng))
+                        .icon(CommonUtils.bitmapDescriptorFromVector(requireContext(), R.drawable.ic_map_marker))
+                        .title(place.id)
+                markerOptions.infoWindowAnchor(
+                        markerOptions.infoWindowAnchorU,
+                        Constants.GOOGLE_MAP_INFO_WINDOW_V_ANCHOR
+                )
+                val marker = map.addMarker(markerOptions)
+                marker?.let {
+                    markers.add(marker)
                 }
-                viewModel.updateMapMarkers(markers)
-                setFirstStartObserver()
-                executeInitPlace(map)
-    //        }
+            }
+            viewModel.updateMapMarkers(markers)
+            setFirstStartObserver()
+            executeInitPlace(map)
         })
     }
 
