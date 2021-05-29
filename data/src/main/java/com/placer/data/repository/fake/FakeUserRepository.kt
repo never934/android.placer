@@ -65,4 +65,8 @@ class FakeUserRepository(private val users: ArrayList<User> = arrayListOf()) : U
             // server logic (data val from backend)
         }
     }
+
+    override suspend fun sendFcmToken(token: String): Flow<Result<Any>> = flow {
+        // server logic (data val from backend)
+    }
 }

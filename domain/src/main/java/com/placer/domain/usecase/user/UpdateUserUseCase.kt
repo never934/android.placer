@@ -12,4 +12,7 @@ class UpdateUserUseCase(
 ) {
     suspend fun updateUser(userName: String, userNickname: String) : Flow<Result<User>> =
         userRepository.updateUser(userName, userNickname).flowOn(dispatcher)
+
+    suspend fun updateUserFcmToken(token: String) : Flow<Result<Any>> =
+        userRepository.sendFcmToken(token).flowOn(dispatcher)
 }

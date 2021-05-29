@@ -12,6 +12,7 @@ import com.placer.data.db.user.toEntity
 import com.placer.data.utils.Extensions.toMultipartPhoto
 import com.placer.domain.entity.city.City
 import com.placer.domain.entity.user.User
+import com.placer.domain.entity.user.UserFcmRequest
 import com.placer.domain.repository.PlaceRepository
 import com.placer.domain.repository.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -96,4 +97,13 @@ internal class UserRepositoryImpl @Inject internal constructor(
         }
     }
         .flowOn(dispatcher)
+
+    override suspend fun sendFcmToken(token: String): Flow<Result<Any>> = flow {
+        try {
+            val result = userApi.postFcmToken(UserFcmRequest(token))
+            emit(Result.success(result))
+        }catch (e: Exception){
+            emit(Result.failure<Any>(Exception("Error while posting fcm token")))
+        }
+    }
 }

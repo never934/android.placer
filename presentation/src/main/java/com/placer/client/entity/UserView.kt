@@ -1,6 +1,8 @@
 package com.placer.client.entity
 
 import android.os.Parcelable
+import com.placer.client.R
+import com.placer.client.servicelocator.ServiceLocator
 import com.placer.client.util.extensions.DateExtensions.daysFromItRepresentation
 import com.placer.domain.entity.user.User
 import kotlinx.android.parcel.Parcelize
@@ -28,9 +30,9 @@ internal fun User.toView() : UserView {
         nickname = nickname,
         placesCount = placesCount.toString(),
         topPosition = topPosition,
-        cityLat = cityLat,
-        cityLng = cityLng,
-        cityName = cityName,
+        cityLat = cityLat ?: 0.0,
+        cityLng = cityLng ?: 0.0,
+        cityName = cityName ?: ServiceLocator.instance.context.getString(R.string.null_representation),
         avatarUrl = avatarUrl,
         registrated = registrated,
         createdDate = Date(createdDate*1000).daysFromItRepresentation()

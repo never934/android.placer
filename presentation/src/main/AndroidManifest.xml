@@ -24,6 +24,13 @@
         <activity android:name=".screens.MainActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".screens.city.ChooseCityActivity" />
         <activity android:name=".screens.places.publish.PlacePublishSuccessActivity" />
+        <service
+            android:name=".util.firebase.FirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -14,4 +14,5 @@ internal object Constants {
         //settings id's
         const val SERVER_TOKEN_ID_IN_SETTINGS = "SERVER_TOKEN_ID_IN_SETTINGS"
         const val USER_ID_IN_SETTINGS = "USER_ID_IN_SETTINGS"
+        const val FCM_TOKEN_ID_IN_SETTINGS = "FCM_TOKEN_ID_IN_SETTINGS"
 }
