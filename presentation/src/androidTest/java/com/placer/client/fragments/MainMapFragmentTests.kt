@@ -51,31 +51,4 @@ class MainMapFragmentTests {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
         IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
     }
-
-    @Test
-    fun mainMapViewsShown() {
-        // Given
-        val scenario = launchFragmentInContainer<MainMapFragment>(null, R.style.AppTheme)
-        dataBindingIdlingResource.monitorFragment(scenario)
-
-        // Then
-        onView(withId(R.id.mapView)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        onView(withId(R.id.drawerButton)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        onView(withId(R.id.addButton)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        onView(withId(R.id.mainField)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-    }
-
-    @Test
-    fun inputTextPlacesInMainFieldShown() {
-        // Given
-        val repoPlaces = places
-        val scenario = launchFragmentInContainer<MainMapFragment>(null, R.style.AppTheme)
-        dataBindingIdlingResource.monitorFragment(scenario)
-
-        // Then
-        onView(withId(R.id.editField)).perform(ViewActions.typeText(repoPlaces[0].name))
-
-        // When
-        onView(withId(R.id.placesContainer)).check(ViewAssertions.matches(ViewMatchers.hasChildCount(1)))
-    }
 }

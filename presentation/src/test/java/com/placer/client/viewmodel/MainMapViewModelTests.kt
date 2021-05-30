@@ -44,18 +44,6 @@ internal class MainMapViewModelTests {
     }
 
     @Test
-    fun loadPlacesByInputSuccessResult() = mainCoroutineRule.runBlockingTest {
-        // Given
-        val repoPlaces = places
-
-        // When
-        mainMapViewModel.loadPlaces(repoPlaces[0].name)
-
-        // Then
-        assertThat(mainMapViewModel.searchPlaces.getOrAwaitValue().isNotEmpty(), CoreMatchers.`is`(true))
-    }
-
-    @Test
     fun loadMapPlacesSuccessResult() = mainCoroutineRule.runBlockingTest {
         // Given
         val repoPlaces = places

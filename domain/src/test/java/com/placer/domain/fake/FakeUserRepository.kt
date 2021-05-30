@@ -46,4 +46,8 @@ internal class FakeUserRepository(private val users: ArrayList<User> = arrayList
     override suspend fun updateUserAvatar(userId: String, avatar: ByteArray): Flow<Result<User>> = flow {
         // server logic (data val from backend)
     }
+
+    override suspend fun sendFcmToken(token: String): Flow<Result<Any>> = flow {
+        // server logic
+    }
 }
