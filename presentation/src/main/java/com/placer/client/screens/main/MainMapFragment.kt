@@ -23,19 +23,18 @@ import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentMainMapBinding
 import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
-import com.placer.client.interfaces.MyLocation
+import com.placer.client.interfaces.LocationPermissions
 import com.placer.client.interfaces.PlacerFabStyle
 import com.placer.client.navigation.PlaceChoosePointTransaction
 import com.placer.client.navigation.PlaceViewTransaction
 import com.placer.client.screens.MainActivity
 import com.placer.client.screens.MainViewModel
-import com.placer.client.screens.places.PlaceViewFragmentArgs
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.InfoWindowAdapter
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
 internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldListener, PlacerFabStyle,
-    PlaceViewTransaction, MyLocation, PlaceChoosePointTransaction {
+    PlaceViewTransaction, LocationPermissions, PlaceChoosePointTransaction {
 
     override val viewModel: MainMapViewModel by viewModels()
     val mainViewModel: MainViewModel by activityViewModels()

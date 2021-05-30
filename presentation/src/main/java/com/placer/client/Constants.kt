@@ -33,6 +33,7 @@ object Constants {
 
     /** permission **/
     const val REQUEST_LOCATION_PERMISSION = 1
+    const val REQUEST_PHOTOS_PERMISSIONS = 2
 
     /** bundle keys **/
     const val CITY_CHOSEN_RESULT_KEY = "CITY_CHOSEN_RESULT_KEY"

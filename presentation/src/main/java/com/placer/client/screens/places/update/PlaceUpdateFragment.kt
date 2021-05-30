@@ -1,7 +1,9 @@
 package com.placer.client.screens.places.update
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +20,10 @@ import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentPlaceUpdateBinding
 import com.placer.client.interfaces.DeleteDialog
+import com.placer.client.interfaces.TakePhotosPermissions
 import com.placer.client.navigation.GalleryTransaction
 
-internal class PlaceUpdateFragment : BaseFragment(), GalleryTransaction, DeleteDialog, DeleteDialog.OnDelete {
+internal class PlaceUpdateFragment : BaseFragment(), GalleryTransaction, DeleteDialog, DeleteDialog.OnDelete, TakePhotosPermissions {
 
     override val viewModel: PlaceUpdateViewModel by viewModels{
         PlaceUpdateViewModel.Factory(PlaceUpdateFragmentArgs.fromBundle(requireArguments()).placeId)
@@ -84,9 +87,25 @@ internal class PlaceUpdateFragment : BaseFragment(), GalleryTransaction, DeleteD
     }
 
     override fun startGallery(launcher: ActivityResultLauncher<Intent>) {
-        val photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.type = "image/*"
-        launcher.launch(photoPickerIntent)
+        if (isTakePhotosPermissionsGranted()) {
+            val photoPickerIntent = Intent(Intent.ACTION_PICK)
+            photoPickerIntent.type = "image/*"
+            launcher.launch(photoPickerIntent)
+        }
+        else {
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Constants.REQUEST_PHOTOS_PERMISSIONS)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<String>,
+            grantResults: IntArray) {
+        if (requestCode == Constants.REQUEST_PHOTOS_PERMISSIONS) {
+            if (grantResults.isNotEmpty() && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                startGallery(galleryResult)
+            }
+        }
     }
 
     override fun showDeleteDialog() {

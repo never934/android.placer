@@ -17,19 +17,18 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentPlaceChoosePointBinding
-import com.placer.client.interfaces.MyLocation
-import com.placer.client.interfaces.PlacePublishTransaction
+import com.placer.client.interfaces.LocationPermissions
+import com.placer.client.navigation.PlacePublishTransaction
 import com.placer.client.interfaces.PlacerFabStyle
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.LocationUtils
 
-internal class PlaceChoosePointFragment : BaseFragment(), OnMapReadyCallback, PlacerFabStyle, MyLocation, PlacePublishTransaction {
+internal class PlaceChoosePointFragment : BaseFragment(), OnMapReadyCallback, PlacerFabStyle, LocationPermissions, PlacePublishTransaction {
 
     override val viewModel: PlaceChoosePointViewModel by viewModels()
     private var binding: FragmentPlaceChoosePointBinding? = null

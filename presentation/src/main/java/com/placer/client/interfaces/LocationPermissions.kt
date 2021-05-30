@@ -2,7 +2,7 @@ package com.placer.client.interfaces
 
 import com.google.android.gms.maps.GoogleMap
 
-interface MyLocation {
+interface LocationPermissions {
     fun isLocationPermissionsGranted() : Boolean
     fun enableMyLocation()
 }

@@ -1,7 +1,10 @@
 package com.placer.client.screens.user.profile
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +13,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,10 +21,11 @@ import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.databinding.FragmentProfileEditBinding
+import com.placer.client.interfaces.TakePhotosPermissions
 import com.placer.client.navigation.ChooseCityTransaction
 import com.placer.client.navigation.GalleryTransaction
 
-internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction, GalleryTransaction {
+internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction, GalleryTransaction, TakePhotosPermissions {
 
     private var binding: FragmentProfileEditBinding? = null
     override val viewModel: ProfileEditViewModel by viewModels()
@@ -85,9 +90,25 @@ internal class ProfileEditFragment : BaseFragment(), ChooseCityTransaction, Gall
     }
 
     override fun startGallery(launcher: ActivityResultLauncher<Intent>) {
-        val photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.type = "image/*"
-        launcher.launch(photoPickerIntent)
+        if (isTakePhotosPermissionsGranted()) {
+            val photoPickerIntent = Intent(Intent.ACTION_PICK)
+            photoPickerIntent.type = "image/*"
+            launcher.launch(photoPickerIntent)
+        }
+        else {
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Constants.REQUEST_PHOTOS_PERMISSIONS)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<String>,
+            grantResults: IntArray) {
+        if (requestCode == Constants.REQUEST_PHOTOS_PERMISSIONS) {
+            if (grantResults.isNotEmpty() && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                startGallery(galleryResult)
+            }
+        }
     }
 
 }

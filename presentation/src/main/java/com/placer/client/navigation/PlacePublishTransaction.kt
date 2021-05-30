@@ -1,4 +1,4 @@
-package com.placer.client.interfaces
+package com.placer.client.navigation
 
 import com.google.android.gms.maps.model.LatLng
 
