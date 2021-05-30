@@ -102,6 +102,8 @@ internal class PlacePublishFragment : BaseFragment(), GalleryTransaction, MainMa
 
     override fun setMainMapFragment(place: PlaceView) {
         requireActivity().startActivity(Intent(requireContext(), PlacePublishSuccessActivity::class.java))
-        findNavController().navigate(PlacePublishFragmentDirections.actionPlacePublishFragmentToMainMapFragment(place))
+        val bundle = Bundle()
+        bundle.putString(Constants.KEY_PLACE_ID, place.id)
+        findNavController().navigate(R.id.action_placePublishFragment_to_mainMapFragment, bundle)
     }
 }

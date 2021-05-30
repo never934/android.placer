@@ -2,15 +2,12 @@ package com.placer.client.screens
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -34,6 +31,7 @@ internal class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var binding: ActivityMainBinding? = null
     private var navHeaderBinding: NavHeaderBinding? = null
+    var startPlaceId: String? = null
     var chooseCityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -46,6 +44,7 @@ internal class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initArgs()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         initAll()
     }
@@ -93,6 +92,13 @@ internal class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSel
         binding?.let {
             initDrawer(it)
             initNavigation(it)
+        }
+    }
+
+    private fun initArgs() {
+        if (intent.extras?.containsKey(Constants.FCM_PLACE_ID) == true && viewModel.firstStart){
+            startPlaceId = intent.extras?.getString(Constants.FCM_PLACE_ID)
+            viewModel.firstStart = false
         }
     }
 

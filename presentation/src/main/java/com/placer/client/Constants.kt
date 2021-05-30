@@ -37,4 +37,8 @@ object Constants {
     /** bundle keys **/
     const val CITY_CHOSEN_RESULT_KEY = "CITY_CHOSEN_RESULT_KEY"
     const val USER_VIEW_KEY = "USER_VIEW_KEY"
+    const val KEY_PLACE_ID = "KEY_PLACE_ID"
+
+    /** fcm push data **/
+    const val FCM_PLACE_ID = "placeId"
 }

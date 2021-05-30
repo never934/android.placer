@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import com.placer.client.AppClass
+import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.customview.comments.CommentField
@@ -105,7 +106,9 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
     }
 
     override fun setMainMapFragment(place: PlaceView) {
-        findNavController().navigate(PlaceViewFragmentDirections.actionPlaceViewFragmentToMainMapFragment(place))
+        val bundle = Bundle()
+        bundle.putString(Constants.KEY_PLACE_ID, place.id)
+        findNavController().navigate(R.id.action_placeViewFragment_to_mainMapFragment, bundle)
     }
 
     override fun setPlaceUpdateFragment(placeId: String) {

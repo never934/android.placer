@@ -132,9 +132,13 @@
     <string name="null_representation">Not entered</string>
     <string name="menu_search">Search</string>
 
-
     <!-- Delete dialog !-->
     <string name="delete_dialog_title">Delete</string>
     <string name="delete_dialog_body">Are you sure?</string>
+
+    <!-- push settings !-->
+    <string name="push_channel_id">PlacerPushChannelId</string>
+    <string name="push_channel_name">Placer push channel</string>
+    <string name="push_channel_desc">Channel for clients push notifications</string>
 
 </resources>

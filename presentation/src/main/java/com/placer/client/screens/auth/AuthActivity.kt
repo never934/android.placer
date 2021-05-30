@@ -58,7 +58,9 @@ class AuthActivity: BaseActivity() {
     }
 
     private fun startMainActivity(){
-        startActivity(Intent(this, MainActivity::class.java))
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtras(this.intent)
+        startActivity(intent)
         finish()
     }
 

@@ -158,10 +158,17 @@ internal class MainMapFragment : BaseFragment(), OnMapReadyCallback, MainFieldLi
 
     private fun executeInitPlace(map: GoogleMap) {
         if (arguments != null){
-            val initPlace = PlaceViewFragmentArgs.fromBundle(requireArguments()).place
-            val initMarker = viewModel.mapMarkers.firstOrNull{ it.title == initPlace.id }
-            openMarker(map, initMarker)
+            if (requireArguments().containsKey(Constants.KEY_PLACE_ID)){
+                val placeId = requireArguments().getString(Constants.KEY_PLACE_ID)
+                val initMarker = viewModel.mapMarkers.firstOrNull { it.title == placeId }
+                openMarker(map, initMarker)
+            }
             arguments = null
+        }else if((requireActivity() as? MainActivity)?.startPlaceId != null){
+            val placeId = (requireActivity() as? MainActivity)?.startPlaceId
+            (requireActivity() as? MainActivity)?.startPlaceId = null
+            val initMarker = viewModel.mapMarkers.firstOrNull { it.title == placeId }
+            openMarker(map, initMarker)
         }
     }
 
