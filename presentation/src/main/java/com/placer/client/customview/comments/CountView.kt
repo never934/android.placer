@@ -3,19 +3,22 @@ package com.placer.client.customview.comments
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.placer.client.R
 import com.placer.client.base.BaseCustomView
+import com.placer.client.databinding.CustomviewCountBinding
 
 class CountView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : BaseCustomView(context, attrs, defStyleAttr) {
-    private lateinit var commentsCountView: TextView
-    private lateinit var iconView: ImageView
+
+    private lateinit var binding: CustomviewCountBinding
 
     init {
         init()
@@ -23,16 +26,15 @@ class CountView @JvmOverloads constructor(
 
     private fun init() {
         this.isClickable = true
-        val view = View.inflate(context, R.layout.customview_count, this)
-        commentsCountView = view.findViewById(R.id.countView)
-        iconView = view.findViewById(R.id.iconView)
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        binding = DataBindingUtil.inflate(inflater, R.layout.customview_count, this, true)
     }
 
     fun setCount(count: Long){
-        commentsCountView.text = count.toString()
+        binding.countView.text = count.toString()
     }
 
     fun setIcon(drawable: Drawable?){
-        iconView.setImageDrawable(drawable)
+        binding.iconView.setImageDrawable(drawable)
     }
 }

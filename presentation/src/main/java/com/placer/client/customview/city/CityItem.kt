@@ -30,7 +30,6 @@ internal class CityItem @JvmOverloads constructor(
 
     fun setCity(city: City) {
         binding.city = city
-        binding.invalidateAll()
         binding.executePendingBindings()
     }
 
