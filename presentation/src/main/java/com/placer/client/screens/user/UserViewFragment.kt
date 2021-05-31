@@ -98,7 +98,7 @@ internal class UserViewFragment : BaseFragment(), OnPlaceChosen, EditProfileTran
     }
 
     override fun placeChosen(place: PlaceView) {
-        Log.e("chosen", "place chosen ${place.name}")
+        findNavController().navigate(UserViewFragmentDirections.actionUserViewFragmentToPlaceViewFragment(place))
     }
 
     override fun setEditProfileFragment() {
