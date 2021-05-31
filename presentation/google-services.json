@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "250668237558-lkp9tbddf9aaquuugpl1pgc3jfrrrs9d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.placer.client",
+            "certificate_hash": "41a1243e5ea34f6f98ba87b817578e24c0fa4ba5"
+          }
+        },
+        {
           "client_id": "250668237558-qcpqid8qlqb3me45ehvobror4ckple3b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
