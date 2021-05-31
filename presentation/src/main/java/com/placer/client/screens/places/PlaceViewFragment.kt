@@ -1,29 +1,29 @@
 package com.placer.client.screens.places
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.appbar.AppBarLayout
-import com.placer.client.AppClass
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseFragment
 import com.placer.client.customview.comments.CommentField
 import com.placer.client.databinding.FragmentPlaceViewBinding
 import com.placer.client.entity.PlaceView
+import com.placer.client.entity.UserView
 import com.placer.client.navigation.MainMapTransaction
 import com.placer.client.navigation.PlaceUpdateTransaction
+import com.placer.client.navigation.UserViewTransaction
 import com.placer.client.util.CommonUtils
 import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 
-internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentListener, MainMapTransaction.WithPlace, PlaceUpdateTransaction {
+internal class PlaceViewFragment : BaseFragment(),
+    CommentField.OnSubmitCommentListener, MainMapTransaction.WithPlace, PlaceUpdateTransaction,
+    UserViewTransaction {
 
     private var binding: FragmentPlaceViewBinding? = null
     override val viewModel: PlaceViewViewModel by viewModels{
@@ -60,6 +60,7 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
             binding.baseConstraint.swipeRefreshLayout.setOnRefreshListener { viewModel.loadPlace() }
             binding.commentField.initListener(this)
             binding.showPlaceOnMapBtn.getButton().setOnClickListener { viewModel.showPlaceOnMap() }
+            binding.authorField.getField().setOnClickListener { viewModel.showAuthor() }
         }
         viewModel.place.observe(this, {
             binding?.place = it
@@ -83,6 +84,12 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
             if (it != null){
                 setMainMapFragment(it)
                 viewModel.showPlaceOnExecuted()
+            }
+        })
+        viewModel.showAuthorExecute.observe(this, {
+            it?.let {
+                setUserViewFragment(it)
+                viewModel.showAuthorExecuted()
             }
         })
     }
@@ -113,5 +120,9 @@ internal class PlaceViewFragment : BaseFragment(), CommentField.OnSubmitCommentL
 
     override fun setPlaceUpdateFragment(placeId: String) {
         findNavController().navigate(PlaceViewFragmentDirections.actionPlaceViewFragmentToPlaceUpdateFragment(placeId))
+    }
+
+    override fun setUserViewFragment(user: UserView) {
+        findNavController().navigate(PlaceViewFragmentDirections.actionPlaceViewFragmentToUserViewFragment(user))
     }
 }

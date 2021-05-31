@@ -1,10 +1,10 @@
 package com.placer.client.screens.places
 
 import androidx.lifecycle.*
-import com.placer.client.AppClass
 import com.placer.client.base.BaseViewModel
 import com.placer.client.entity.PlaceCommentView
 import com.placer.client.entity.PlaceView
+import com.placer.client.entity.UserView
 import com.placer.client.entity.toView
 import com.placer.client.entity.toViews
 import com.placer.client.servicelocator.ServiceLocator
@@ -46,6 +46,10 @@ internal class PlaceViewViewModel(
     private var _showPlaceOnMapExecute: MutableLiveData<PlaceView> = MutableLiveData()
     val showPlaceOnMapExecute: LiveData<PlaceView>
     get() = _showPlaceOnMapExecute
+
+    private var _showAuthorExecute: MutableLiveData<UserView> = MutableLiveData()
+    val showAuthorExecute: LiveData<UserView>
+    get() = _showAuthorExecute
 
     val placeId: String
     get() = _placeId
@@ -93,6 +97,14 @@ internal class PlaceViewViewModel(
 
     fun showPlaceOnExecuted(){
         _showPlaceOnMapExecute.value = null
+    }
+
+    fun showAuthor(){
+        _showAuthorExecute.value = _place.value?.author?.toView()
+    }
+
+    fun showAuthorExecuted(){
+        _showAuthorExecute.value = null
     }
 
     class Factory(

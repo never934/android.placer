@@ -7,9 +7,11 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.placer.client.customview.fields.AuthorField
 import com.placer.client.customview.fields.EditField
 import com.placer.client.customview.fields.SelectField
 import com.placer.client.customview.fields.ViewField
+import com.placer.client.entity.UserView
 
 @BindingAdapter("content")
 internal fun bindContent(view: ViewField, content: String?) {
@@ -46,4 +48,9 @@ internal fun bindToggleValue(view: SwitchMaterial, state: Boolean?) {
     state?.let {
         view.isChecked = state
     }
+}
+
+@BindingAdapter("author")
+internal fun bindAuthor(view: AuthorField, author: UserView?) {
+    view.setUser(author)
 }

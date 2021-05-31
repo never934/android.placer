@@ -62,6 +62,7 @@
     <string name="place_view_created_hint">Created</string>
     <string name="place_view_comments_label">Comments:</string>
     <string name="place_view_edit_field_hint">Input text</string>
+    <string name="place_view_author_field_hint">Author</string>
     <string name="place_view_show_place_on_map_btn">Show place on map</string>
 
     <!-- choose place point fragment !-->

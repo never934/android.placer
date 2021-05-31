@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="user"
+            type="com.placer.client.entity.UserView" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <ImageView
+            android:id="@+id/iconView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/normal_padding"
+            android:paddingEnd="@dimen/normal_padding"
+            android:layout_marginStart="@dimen/default_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_star_24"
+            app:tint="@color/color_primary_light"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/iconView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iconView"
+            app:layout_constraintTop_toTopOf="@+id/iconView">
+
+            <TextView
+                android:id="@+id/hintView"
+                style="@style/item_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/place_view_author_field_hint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iconView"
+                app:layout_constraintTop_toTopOf="@+id/iconView" />
+
+            <TextView
+                android:id="@+id/contentView"
+                style="@style/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:drawablePadding="@dimen/small_padding"
+                android:text="@{user.nickname != null ? user.nickname : user.name}"
+                android:textColor="@color/text_color"
+                app:urlDrawable="@{user.avatarUrl}"
+                tools:text="18 july 2020" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

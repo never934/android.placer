@@ -112,6 +112,12 @@
                                 app:hint="@{@string/place_view_comments_size_hint}"
                                 app:icon="@{@drawable/ic_baseline_forum_24}" />
 
+                            <com.placer.client.customview.fields.AuthorField
+                                android:id="@+id/authorField"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:author="@{place.author}"/>
+
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/createdDateField"
                                 android:layout_width="match_parent"
