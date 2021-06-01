@@ -3,15 +3,24 @@ Udacity capstone project
 
 Build presentation layer with certificates android_placer_debug.jks and android_placer_release.jks
 
+
 android_placer_release.jks - for release 
+
 credentials:
+
 key alias - key0
+
 key store password - placer
 
+
 android_placer_debug.jks - for debug
+
 credentials:
+
 key alias - key0
+
 key store password - placer
+
 
 
 App written with clean architecture + mvvm
