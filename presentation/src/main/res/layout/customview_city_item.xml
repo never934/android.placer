@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="city"
@@ -18,12 +18,11 @@
         android:background="?android:attr/selectableItemBackground"
         android:onClick="@{() -> clickListener.onClick(city)}">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fieldsContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,15 +33,24 @@
                 style="@style/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:text="@{city.city}" />
+                app:layout_constraintBottom_toTopOf="@+id/hintView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:text="@{city.city}"
+                tools:text="City" />
 
             <TextView
                 android:id="@+id/hintView"
                 style="@style/item_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:text="@{city.country}" />
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleView"
+                app:text="@{city.country}"
+                tools:text="Country" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:layout_width="0dp"

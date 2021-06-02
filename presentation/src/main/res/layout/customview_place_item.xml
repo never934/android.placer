@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="place"
@@ -29,31 +29,44 @@
             app:placePhotoPreview="@{place.photos}"
             app:shapeAppearanceOverlay="@style/roundedCorners" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fieldsContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/default_margin"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/photoPreview"
-            app:layout_constraintEnd_toStartOf="@+id/commentsCountView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/photoPreview"
             app:layout_constraintTop_toTopOf="@+id/photoPreview">
 
             <TextView
                 android:id="@+id/titleView"
                 style="@style/item_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:text="@{place.name}" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:text="@{place.name}"
+                tools:layout_conversion_absoluteHeight="22dp"
+                tools:layout_conversion_absoluteWidth="83dp"
+                tools:text="place name" />
 
             <TextView
                 android:id="@+id/hintView"
                 style="@style/item_hint"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:text="@{place.cityName}" />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleView"
+                app:text="@{place.cityName}"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="59dp"
+                tools:text="place city" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.placer.client.customview.comments.CountView
             android:id="@+id/commentsCountView"

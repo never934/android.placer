@@ -1,62 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:src="@drawable/ic_top_marker"
-        android:layout_gravity="center"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/small_padding"
-        android:layout_marginBottom="@dimen/smallest_padding"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/map_place_card_background"
         app:cardCornerRadius="16dp"
-        app:cardElevation="5dp">
-        <LinearLayout
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/map_place_card_background"
             android:orientation="vertical">
+
             <com.placer.client.customview.InfoWindowImageLayout
+                android:id="@+id/infoWindowImageLayout2"
                 android:layout_width="250dp"
-                android:layout_height="70dp">
+                android:layout_height="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
                     android:id="@+id/placePhotoView"
-                    android:scaleType="centerCrop"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
             </com.placer.client.customview.InfoWindowImageLayout>
+
             <TextView
                 android:id="@+id/nameView"
                 style="@style/item_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/smallest_padding"
-                android:paddingHorizontal="@dimen/small_padding"
                 android:layout_gravity="start"
-                android:text="name"/>
+                android:paddingHorizontal="@dimen/small_padding"
+                android:paddingTop="@dimen/smallest_padding"
+                android:text="name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoWindowImageLayout2" />
+
             <com.placer.client.customview.comments.CountView
                 android:id="@+id/commentsCountView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"/>
+                android:layout_gravity="start"
+                app:layout_constraintEnd_toStartOf="@+id/buttonView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameView" />
+
             <Button
                 android:id="@+id/buttonView"
                 style="@style/default_small_btn"
                 android:layout_width="wrap_content"
-                android:layout_margin="@dimen/smallest_margin"
                 android:layout_height="@dimen/marker_button_height"
                 android:layout_gravity="end"
-                android:text="details"/>
-        </LinearLayout>
+                android:layout_margin="@dimen/small_margin"
+                android:text="details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

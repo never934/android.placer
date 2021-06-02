@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/checkmarkView"
             android:layout_width="wrap_content"
@@ -12,12 +15,19 @@
             android:paddingHorizontal="@dimen/default_padding"
             android:paddingVertical="@dimen/small_padding"
             android:src="@drawable/ic_baseline_check_24"
-            />
+            app:layout_constraintEnd_toStartOf="@+id/labelView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/labelView"
             style="@style/filter_item_label"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkmarkView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="all" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

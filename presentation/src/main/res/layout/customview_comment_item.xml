@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -27,8 +27,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/default_margin"
@@ -41,35 +41,48 @@
             app:layout_constraintVertical_bias="0.0"
             app:layout_goneMarginBottom="@dimen/default_margin">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                android:id="@+id/authorName"
+                style="@style/item_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/authorName"
-                    style="@style/item_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:layout_weight="1"
-                    android:text="@{placeComment.author.nickname != null ? placeComment.author.nickname : placeComment.author.name}" />
-                <TextView
-                    android:id="@+id/date"
-                    style="@style/item_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewEnd"
-                    android:layout_weight="1"
-                    android:text="@{placeComment.createdDate}"/>
-            </LinearLayout>
+                android:text="@{placeComment.author.nickname != null ? placeComment.author.nickname : placeComment.author.name}"
+                android:textAlignment="viewStart"
+                app:layout_constraintEnd_toStartOf="@+id/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="22dp"
+                tools:layout_conversion_absoluteWidth="188dp"
+                tools:text="author name" />
+
+            <TextView
+                android:id="@+id/date"
+                style="@style/item_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{placeComment.createdDate}"
+                android:textAlignment="viewEnd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="125dp"
+                tools:text="2 may 2015" />
+
 
             <TextView
                 android:id="@+id/commentContent"
                 style="@style/comment_content"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{placeComment.text}" />
-        </LinearLayout>
+                android:text="@{placeComment.text}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/authorName"
+                tools:layout_conversion_absoluteHeight="36dp"
+                tools:layout_conversion_absoluteWidth="314dp"
+                tools:text="Comment test test test\ntest" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/view"
