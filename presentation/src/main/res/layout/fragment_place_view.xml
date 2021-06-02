@@ -98,7 +98,7 @@
                                 app:icon="@{@drawable/ic_baseline_pin_drop_24}"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="@id/publishedField" />
+                                app:layout_constraintTop_toBottomOf="@id/publishedField" />
 
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/descriptionField"
