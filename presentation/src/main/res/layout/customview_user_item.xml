@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -29,12 +29,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedCorners" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fieldsContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/default_margin"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/avatarView"
             app:layout_constraintEnd_toStartOf="@+id/placesCountView"
             app:layout_constraintStart_toEndOf="@+id/avatarView"
@@ -43,17 +42,25 @@
             <TextView
                 android:id="@+id/titleView"
                 style="@style/item_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:text="@{user.nickname != null ? user.nickname : user.name}" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="@{user.nickname != null ? user.nickname : user.name}"
+                tools:text="title" />
 
             <TextView
                 android:id="@+id/hintView"
                 style="@style/item_hint"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:text="@{@string/common_user_top_format(user.topPosition)}" />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleView"
+                app:text="@{@string/common_user_top_format(user.topPosition)}"
+                tools:text="hint" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.placer.client.customview.comments.CountView
             android:id="@+id/placesCountView"

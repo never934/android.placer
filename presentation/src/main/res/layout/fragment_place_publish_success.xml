@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -23,55 +23,83 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35">
+            app:layout_constraintVertical_bias="0.35"
+            android:id="@+id/linearLayout2">
 
             <ImageView
+                android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_success" />
+                android:src="@drawable/ic_success"
+                android:layout_marginTop="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="100dp"
+                tools:layout_conversion_absoluteWidth="100dp" />
 
             <TextView
+                android:id="@+id/textView15"
                 style="@style/help_headline"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginHorizontal="@dimen/default_margin"
                 android:text="@string/place_published_app_bar"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView7"
+                tools:layout_conversion_absoluteHeight="32dp"
+                tools:layout_conversion_absoluteWidth="411dp" />
 
             <TextView
+                android:id="@+id/textView16"
                 style="@style/help_label"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="@dimen/biggest_margin"
                 android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginHorizontal="@dimen/default_margin"
                 android:text="@string/place_published_body"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                tools:layout_conversion_absoluteHeight="40dp"
+                tools:layout_conversion_absoluteWidth="347dp" />
+
             <TextView
+                android:id="@+id/textView17"
                 style="@style/help_label"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginHorizontal="@dimen/biggest_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginHorizontal="@dimen/default_margin"
                 android:text="@string/place_published_body_2"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                tools:layout_conversion_absoluteHeight="22dp"
+                tools:layout_conversion_absoluteWidth="347dp" />
 
             <TextView
                 android:id="@+id/placesCountView"
                 style="@style/headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
+                android:layout_marginVertical="@dimen/default_margin"
                 android:text="@{user.placesCount}"
+                android:visibility="invisible"
                 app:drawableRightCompat="@drawable/ic_baseline_place_24"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/smallest_margin"
-                android:layout_marginHorizontal="@dimen/biggest_margin"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView17"
+                tools:layout_conversion_absoluteHeight="24dp"
+                tools:layout_conversion_absoluteWidth="24dp" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/okButton"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
@@ -44,113 +45,151 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/component_scroll_margin" />
-
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="12dp">
-                    <LinearLayout
+                    android:layout_marginTop="@dimen/component_scroll_margin"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-                        <LinearLayout
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/placeInfoLayout"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/default_margin"
-                            android:visibility="invisible"
                             android:animateLayoutChanges="true"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/publishedField"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:visibility="gone"
-                                app:contentColor="@{place.published ? @color/success_color : @color/fail_color}"
                                 app:content="@{place.published ? @string/place_view_status_published : @string/place_view_status_not_published}"
+                                app:contentColor="@{place.published ? @color/success_color : @color/fail_color}"
                                 app:hint="@{@string/place_view_status_hint}"
-                                app:icon="@{@drawable/ic_baseline_public_24}" />
+                                app:icon="@{@drawable/ic_baseline_public_24}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/cityField"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 app:content="@{place.cityName}"
                                 app:hint="@{@string/place_view_city_hint}"
-                                app:icon="@{@drawable/ic_baseline_pin_drop_24}" />
+                                app:icon="@{@drawable/ic_baseline_pin_drop_24}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/publishedField" />
 
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/descriptionField"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:content="@{place.description}"
                                 app:hint="@{@string/place_view_description_hint}"
-                                app:icon="@{@drawable/ic_baseline_read_more_24}" />
+                                app:icon="@{@drawable/ic_baseline_read_more_24}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/cityField" />
 
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/inTopField"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 app:content="@{place.topPosition}"
                                 app:hint="@{@string/place_view_in_top_hint}"
-                                app:icon="@{@drawable/ic_baseline_local_fire_department_24}" />
+                                app:icon="@{@drawable/ic_baseline_local_fire_department_24}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/descriptionField" />
 
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/commentsField"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 app:content="@{place.commentsCount}"
                                 app:hint="@{@string/place_view_comments_size_hint}"
-                                app:icon="@{@drawable/ic_baseline_forum_24}" />
+                                app:icon="@{@drawable/ic_baseline_forum_24}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/inTopField" />
 
                             <com.placer.client.customview.fields.AuthorField
                                 android:id="@+id/authorField"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                app:author="@{place.author}"/>
+                                app:author="@{place.author}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/commentsField" />
 
                             <com.placer.client.customview.fields.ViewField
                                 android:id="@+id/createdDateField"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 app:content="@{place.createdDate}"
                                 app:hint="@{@string/place_view_created_hint}"
-                                app:icon="@{@drawable/ic_baseline_insert_invitation_24}" />
+                                app:icon="@{@drawable/ic_baseline_insert_invitation_24}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/authorField" />
 
                             <com.placer.client.customview.TextButton
                                 android:id="@+id/showPlaceOnMapBtn"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 app:icon="@{@drawable/ic_baseline_map_24}"
-                                app:text="@{@string/place_view_show_place_on_map_btn}"/>
-                        </LinearLayout>
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/createdDateField"
+                                app:text="@{@string/place_view_show_place_on_map_btn}" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                         <TextView
+                            android:id="@+id/textView9"
                             style="@style/headline"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/default_margin"
-                            android:text="@string/place_view_comments_label" />
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="@string/place_view_comments_label"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/placeInfoLayout" />
 
                         <com.placer.client.customview.comments.CommentsComponent
                             android:id="@+id/commentsComponent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/component_scroll_margin"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/component_scroll_margin" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
         <androidx.constraintlayout.motion.widget.MotionLayout
@@ -162,11 +201,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -175,31 +213,38 @@
                     android:id="@+id/backArrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/default_padding"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_baseline_arrow_back_24" />
+                    android:padding="@dimen/default_padding"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/titleView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/titleView"
                     style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:textColor="@color/text_on_color" />
+                    android:textColor="@color/text_on_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/editIcon"
+                    app:layout_constraintStart_toEndOf="@+id/backArrow"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/editIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/default_padding"
-                    android:visibility="gone"
                     android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_baseline_edit_24" />
+                    android:padding="@dimen/default_padding"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
