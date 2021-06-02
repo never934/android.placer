@@ -10,7 +10,6 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.google.android.material.button.MaterialButton
 import com.placer.client.Constants
 import com.placer.client.R
 import com.placer.client.base.BaseCustomView
@@ -18,9 +17,10 @@ import com.placer.client.customview.places.PlaceItem
 import com.placer.client.databinding.CustomviewMainFieldBinding
 import com.placer.client.entity.PlaceView
 import com.placer.client.interfaces.MainFieldListener
-import com.placer.client.util.extensions.FragmentExtensions.hideKeyBoard
 import com.placer.client.util.extensions.FragmentExtensions.showKeyBoard
 import com.placer.client.util.extensions.ViewExtensions.getFormatted
+import com.placer.client.util.extensions.ViewExtensions.hideKeyboardFromView
+
 
 internal class MainField @JvmOverloads constructor(
     context: Context,
@@ -82,7 +82,7 @@ internal class MainField @JvmOverloads constructor(
         binding.iconView.setOnClickListener {
             binding.editFieldView.text.clear()
             binding.editFieldView.clearFocus()
-            fragment?.hideKeyBoard()
+            binding.editFieldView.hideKeyboardFromView()
         }
     }
 
@@ -94,6 +94,7 @@ internal class MainField @JvmOverloads constructor(
            view.getRoot().setOnClickListener {
                binding.editFieldView.text.clear()
                binding.editFieldView.clearFocus()
+               binding.editFieldView.hideKeyboardFromView()
                callback?.placeSelected(place)
            }
             binding.placesContainer.addView(view)
