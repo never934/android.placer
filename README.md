@@ -3,20 +3,6 @@
 
 ![image_2021-06-01_14-48-12](https://user-images.githubusercontent.com/48915853/120388530-e3f27c00-c333-11eb-8666-871ee411f3bb.png)
 
-#### Signing
-
-Build presentation layer with certificates android_placer_debug.jks and android_placer_release.jks
-
-- android_placer_release.jks - for release 
-	- credentials:
-		- key alias - key0
-		- key store password - placer
-
-- android_placer_debug.jks - for debug
-	- credentials:
-		- key alias - key0
-		- key store password - placer
-
 #### About
 
 App written with clean architecture + mvvm
